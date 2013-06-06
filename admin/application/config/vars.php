@@ -3,9 +3,6 @@
 // 设置系统时间
 date_default_timezone_set('Asia/Shanghai');
 
-// 系统默认参数
-$config['config'] = '1';
-
 // 配置系统路径
 $dir = dirname(FCPATH);
 $config['cache'] = $dir . DIRECTORY_SEPARATOR . 'cache';

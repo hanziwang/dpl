@@ -5,21 +5,18 @@
  */
 class Template extends CI_Model {
 
-	/**
-	 * 新建模板
-	 * @param string $args 请求参数数组
-	 * @return boolean
-	 */
-	public function create ($args) {
+	// 新建模板
+	function create ($args) {
 
 		$this->load->library('dir');
-		$config = $this->config->item('config');
-		$src = $this->config->item('www');
+		$src = $this->config->item('www', 'src');
+		$prototype_id = $this->config->item('id', 'prototype');
+
 		$source_dir = FCPATH . 'assets/tpl/template/';
 		$market_dir = $src . '/'. $args['market'] . '/';
 		$template_dir = $market_dir . $args['name'] . '/';
 
-		// 默认模板配置
+		//默认模板配置
 		$cfg = array(
 			'name' => $args['name'],
 			'nickname' => $args['nickname'],
@@ -30,7 +27,7 @@ class Template extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $config
+			'configid' => $prototype_id
 		);
 
 		// 创建模板目录
@@ -43,7 +40,7 @@ class Template extends CI_Model {
 			@mkdir($template_dir, 0777);
 		}
 
-		//将基础模板拷进当前模板目录
+		// 将基础模板拷进当前模板目录
 		$source_files = array_diff(scandir($source_dir), array('.', '..', '.svn'));
 
 		foreach ($source_files as $v) {
@@ -53,47 +50,17 @@ class Template extends CI_Model {
 				@copy($src, $dst);
 				@chmod($dst, 0777);
 			} else {
-				$this->dir->copy_dir($src, $template_dir . $v);
-				$this->dir->chmod_dir($template_dir . $v, 0777);
+				$this->dir->copy($src, $template_dir . $v);
+				$this->dir->chmod($template_dir . $v, 0777);
 			}
 		}
 
-		//写入模板配置
+		// 写入模板配置
 		if (@file_put_contents($template_dir . 'data.json', json_encode($cfg))) {
 			@chmod($template_dir . 'data.json', 0777);
 			return array(
 				'code' => 200,
 				'message' => '模板新建成功',
-				'data' => $template_dir
-			);
-		}
-
-	}
-
-	/**
-	 * 删除模板
-	 * @param string $args 请求参数数组
-	 * @return boolean
-	 */
-	public function delete ($args) {
-
-		$this->load->library('dir');
-		$src = $this->config->item('www', 'src');
-		$template_dir = $src . '/' . $args['market'] . '/' . $args['name'] . '/';
-
-		//删除模板目录
-		if (file_exists($template_dir)) {
-			if ($this->dir->delete_dir($template_dir)) {
-				return array(
-					'code' => 200,
-					'message' => '模板删除成功',
-					'data' => $template_dir
-				);
-			}
-		} else {
-			return array(
-				'code' => 400,
-				'message' => '模板不存在',
 				'data' => $template_dir
 			);
 		}
