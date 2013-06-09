@@ -4,11 +4,11 @@
 date_default_timezone_set('Asia/Shanghai');
 
 // 配置系统路径
-$dir = dirname(FCPATH);
-$config['db'] = $dir . DIRECTORY_SEPARATOR . 'db';
-$config['src'] = $dir . DIRECTORY_SEPARATOR . 'src';
+$dir = dirname(dirname(BASEPATH));
+$config['db'] = $dir . '/db';
+$config['src'] = $dir . '/src';
 
 // 配置资源路径
 $src = $config['src'];
-$config['modules'] = $src . DIRECTORY_SEPARATOR . 'modules';
-$config['www'] = $src . DIRECTORY_SEPARATOR . 'www';
+$config['modules'] = $src . '/modules';
+$config['www'] = $src . '/www';

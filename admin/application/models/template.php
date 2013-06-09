@@ -8,26 +8,22 @@ class Template extends CI_Model {
 	// 新建模板
 	function create ($args) {
 
-		$this->load->library('dir');
-		$www_dir = $this->config->item('www');
-		$market_dir = $www_dir . DIRECTORY_SEPARATOR . $args['market'] . DIRECTORY_SEPARATOR;
-		$template_dir = $market_dir . $args['name'] . DIRECTORY_SEPARATOR;
-		$raw_dir = FCPATH . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'raw' . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR;
-		$config_id = $this->config->item('config');
+		$this->load->library(array('dir', 'json'));
 
-		// 默认模板配置
-		$defaults = array(
-			'name' => $args['name'],
-			'nickname' => $args['nickname'],
-			'marketid' => $args['market'],
-			'description' => $args['description'],
-			'author' => $args['author'],
-			'imgurl' => $args['imgurl'],
-			'id' => '',
-			'modify_time' => '',
-			'version' => '',
-			'configid' => $config_id
-		);
+		// 配置基础路径
+		$www_dir = $this->config->item('www');
+		$market_dir = $www_dir . '/' . $args['market'] . '/';
+		$template_dir = $market_dir . $args['name'] . '/';
+
+		// 创建市场根目录
+		if (!file_exists($www_dir)) {
+			@mkdir($www_dir, 0777);
+		}
+
+		// 创建市场目录
+		if (!file_exists($market_dir)) {
+			@mkdir($market_dir, 0777);
+		}
 
 		// 创建模板目录
 		if (file_exists($template_dir)) {
@@ -39,28 +35,42 @@ class Template extends CI_Model {
 			@mkdir($template_dir, 0777);
 		}
 
-		// 将基础模板拷进当前模板目录
-		$theme_dir = array_diff(scandir($raw_dir), array('.', '..', '.svn'));
-
-		foreach ($raw_dir as $v) {
-			$src = $raw_dir . $v;
-			if (!is_dir($src)) {
-				$dst = $template_dir . $args['name'] . $v;
-				@copy($src, $dst);
-				@chmod($dst, 0777);
-			} else {
-				$this->dir->copy($src, $template_dir . $v);
-				$this->dir->chmod($template_dir . $v, 0777);
-			}
+		// 拷贝并重命名文件
+		$data_dir = dirname(BASEPATH) . '/data/template/';
+		$this->dir->copy($data_dir, $template_dir);
+		$this->dir->chmod($template_dir, 0777);
+		foreach (array('.css', '.js') as $v) {
+			@rename($template_dir . $v, $template_dir . $args['name'] . $v);
 		}
 
-		// 写入模板配置
-		$data_file = $template_dir . 'data.json';
-		if (@file_put_contents($data_file, json_encode($defaults))) {
-			@chmod($data_file, 0777);
+		// 配置默认属性
+		$defaults = array(
+			'name' => $args['name'],
+			'nickname' => $args['nickname'],
+			'marketid' => $args['market'],
+			'description' => $args['description'],
+			'author' => $args['author'],
+			'imgurl' => $args['imgurl'],
+			'id' => '',
+			'modify_time' => '',
+			'version' => '',
+			'configid' => $this->config->item('config')
+		);
+
+		// 写入属性配置
+		$defaults = $this->json->encode($defaults);
+		$file = $template_dir . 'data.json';
+		if (@file_put_contents($file, $defaults)) {
+			@chmod($file, 0777);
 			return array(
 				'code' => 200,
 				'message' => '模板新建成功',
+				'data' => $template_dir
+			);
+		} else {
+			return array(
+				'code' => 400,
+				'message' => '模板新建失败',
 				'data' => $template_dir
 			);
 		}
@@ -70,10 +80,13 @@ class Template extends CI_Model {
 	// 修改模板
 	function update ($args) {
 
-		$src = $this->config->item('www', 'src');
-		$template_dir = $src . '/' . $args['market'] . '/' . $args['name'] . '/';
+		$this->load->library('json');
 
-		//如果模板不存在，直接跳出
+		// 配置基础路径
+		$www_dir = $this->config->item('www');
+		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
+
+		// 排除模板不存在的情况
 		if (!file_exists($template_dir)) {
 			return array(
 				'code' => 400,
@@ -82,41 +95,50 @@ class Template extends CI_Model {
 			);
 		}
 
-		$cfg = @file_get_contents($template_dir . 'data.json');
-		$cfg = json_decode($cfg);
+		// 读取属性配置
+		$defaults = @file_get_contents($template_dir . 'data.json');
+		$defaults = json_decode($defaults);
 
-		//写入昵称参数
+		// 写入昵称参数
 		if (!empty($args['nickname'])) {
-			$cfg->nickname = $args['nickname'];
+			$defaults->nickname = $args['nickname'];
 		}
 
-		//写入描述参数
+		// 写入描述参数
 		if (!empty($args['description'])) {
-			$cfg->description = $args['description'];
+			$defaults->description = $args['description'];
 		}
 
-		//写入作者参数
+		// 写入作者参数
 		if (!empty($args['author'])) {
-			$cfg->author = $args['author'];
+			$defaults->author = $args['author'];
 		}
 
-		//写入缩略图参数
+		// 写入缩略图参数
 		if (!empty($args['imgurl'])) {
-			$cfg->imgurl = $args['imgurl'];
+			$defaults->imgurl = $args['imgurl'];
 		}
 
-		//写入布局参数
-		$attribute_arr = json_decode($args['attribute'], true);
-		if (!empty($args['attribute']) && is_array($attribute_arr)) {
-			$cfg->attribute = $attribute_arr;
+		// 写入布局参数
+		$attribute = json_decode($args['attribute'], true);
+		if (!empty($args['attribute']) && is_array($attribute)) {
+			$defaults->attribute = $attribute;
 		}
 
-		//修改配置文件
-		if (@file_put_contents($template_dir . 'data.json', json_encode($cfg))) {
-			@chmod($template_dir . 'data.json', 0777);
+		// 写入属性配置
+		$defaults = $this->json->encode($defaults);
+		$file = $template_dir . 'data.json';
+		if (@file_put_contents($file, $defaults)) {
+			@chmod($file, 0777);
 			return array(
 				'code' => 200,
 				'message' => '模板修改成功',
+				'data' => $template_dir
+			);
+		} else {
+			return array(
+				'code' => 400,
+				'message' => '模板修改失败',
 				'data' => $template_dir
 			);
 		}
@@ -127,18 +149,20 @@ class Template extends CI_Model {
 	function select ($args) {
 
 		$www_dir = $this->config->item('www');
-		$template_dir = $www_dir . DIRECTORY_SEPARATOR . $args['market'] . DIRECTORY_SEPARATOR . $args['name'] . DIRECTORY_SEPARATOR;
+		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
 
-		// 读取模板配置
-		$data_file = @file_get_contents($template_dir . 'data.json');
-		return json_decode($data_file);
+		// 读取属性配置
+		$defaults = @file_get_contents($template_dir . 'data.json');
+		return json_decode($defaults);
 
 	}
 
-	// 拷贝模板
+	// 拷贝模板 todo
 	function copy ($args) {
 
 		$this->load->library('dir');
+
+		// 配置基础路径
 		$www_dir = $this->config->item('www');
 
 		// 默认为当前市场
@@ -208,7 +232,7 @@ class Template extends CI_Model {
 
 	}
 
-	// 上传模板
+	// 上传模板 todo
 	function upload ($url, $args) {
 
 		$libs = array('dir', 'zip', 'snoopy');
@@ -310,7 +334,7 @@ class Template extends CI_Model {
 
 	}
 
-	// 下载模板
+	// 下载模板 todo
 	public function download ($url, $args) {
 
 		$libs = array('dir', 'unzip');

@@ -32,26 +32,28 @@ class Dir {
 	// 拷贝目录文件
 	function copy ($source, $dest) {
 
-		if (!is_dir($source)) {
+		if (!file_exists($source)) {
+			echo '目录 ' . $source . ' 不存在';
 			return false;
 		}
 		if (!file_exists($dest)) {
-			if (!mkdir(rtrim($dest, '/'), 0777)) {
-				return false;
-			}
-			@chmod($dest, 0777);
+			@mkdir($dest, 0777);
 		}
-		$handle = dir($source);
-		while ($entry = $handle->read()) {
-			if ($entry != '.' && $entry[0] != '.') {
-				if (is_dir($source . '/' . $entry)) {
-					$this->copy($source . '/' . $entry, $dest . '/' . $entry);
+		$file = opendir($source);
+		while ($filename = readdir($file)) {
+			$file1 = $source . '/' . $filename;
+			$file2 = $dest . '/' . $filename;
+			if ($filename != '.' && $filename != '..') {
+				if (is_dir($file1)) {
+					$this->copy($file1, $file2);
 				} else {
-					@copy($source . '/' . $entry, $dest . '/' . $entry);
+					@copy($file1, $file2);
 				}
 			}
 		}
+		closedir($file);
 		return true;
+
 	}
 
 	// 获取目录的 md5 序列值
