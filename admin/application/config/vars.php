@@ -5,9 +5,9 @@ date_default_timezone_set('Asia/Shanghai');
 
 // 配置系统路径
 $dir = dirname(FCPATH);
-$config['cache'] = $dir . DIRECTORY_SEPARATOR . 'cache';
 $config['db'] = $dir . DIRECTORY_SEPARATOR . 'db';
 $config['src'] = $dir . DIRECTORY_SEPARATOR . 'src';
+$config['tmp'] = $dir . DIRECTORY_SEPARATOR . 'tmp';
 
 // 配置资源路径
 $src = $config['src'];
