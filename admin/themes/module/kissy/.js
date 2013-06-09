@@ -1,12 +1,15 @@
-KISSY.add('{module}', function (S) {
+KISSY.add('{{module}}', function (S) {
 
+	// 模块初始化函数
 	function X (box, module) {
 
-		//insert module js here
+		// code here
 
 	}
 
 	S.dpl = S.dpl || {};
-	return S.dpl['{module}'] = X;
+	return S.dpl['{{module}}'] = X;
 
-}, {attach: false, requires: []});
+}, {
+	requires: []
+});

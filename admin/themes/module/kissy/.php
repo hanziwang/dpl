@@ -1,11 +1,9 @@
 <?php
 /**
- * Ä£¿éÄÚÈİ±ØĞëĞ´ÔÚ _tms_module_begin ºÍ _tms_module_end ±êÇ©Ö®¼ä
+ * æ¨¡å—å†…å®¹å¿…é¡»å†™åœ¨ _tms_module_begin å’Œ _tms_module_end æ ‡ç­¾ä¹‹é—´
  */
-_tms_module_begin('{"name":"{module}"}'); ?>
-<!-- Ä£¿é´úÂë¿ªÊ¼ -->
-<div class="tb-module {module}">
-	<p>ÕâÊÇÒ»¸öÊ¾ÀıÄ£¿é</p>
-</div>
-<!-- Ä£¿é´úÂë½áÊø -->
+_tms_module_begin('{"name":"{{module}}"}'); ?>
+	<div class="tb-module {{module}}">
+		<h1>hello world</h1>
+	</div>
 <?php _tms_module_end(); ?>
