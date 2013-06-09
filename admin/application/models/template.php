@@ -12,7 +12,7 @@ class Template extends CI_Model {
 		$www_dir = $this->config->item('www');
 		$market_dir = $www_dir . DIRECTORY_SEPARATOR . $args['market'] . DIRECTORY_SEPARATOR;
 		$template_dir = $market_dir . $args['name'] . DIRECTORY_SEPARATOR;
-		$theme_dir = FCPATH . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR;
+		$raw_dir = FCPATH . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'raw' . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR;
 		$config_id = $this->config->item('config');
 
 		// 默认模板配置
@@ -40,10 +40,10 @@ class Template extends CI_Model {
 		}
 
 		// 将基础模板拷进当前模板目录
-		$theme_dir = array_diff(scandir($theme_dir), array('.', '..', '.svn'));
+		$theme_dir = array_diff(scandir($raw_dir), array('.', '..', '.svn'));
 
-		foreach ($theme_dir as $v) {
-			$src = $theme_dir . $v;
+		foreach ($raw_dir as $v) {
+			$src = $raw_dir . $v;
 			if (!is_dir($src)) {
 				$dst = $template_dir . $args['name'] . $v;
 				@copy($src, $dst);
