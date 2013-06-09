@@ -5,9 +5,9 @@
  */
 class Home extends CI_Controller {
 
-	public function index () {
+	function index () {
 
-		var_dump(123);
+
 
 	}
 
