@@ -369,7 +369,16 @@ class Template extends CI_Model {
 			$version = 0;
 		}
 
-		// 比较并更新版本
+		// 版本一致无需更新
+		if ($cache_version === $version) {
+			return array(
+				'code' => 400,
+				'message' => '本地模板已是最新版本',
+				'data' => $template_dir
+			);
+		}
+
+		// 版本不一致需要更新
 		if ($cache_version > $version) {
 			$this->dir->copy($cache_dir, $template_dir);
 			$this->dir->chmod($template_dir, 0777);
@@ -379,12 +388,6 @@ class Template extends CI_Model {
 			return array(
 				'code' => 200,
 				'message' => '模板下载成功',
-				'data' => $template_dir
-			);
-		} elseif ($cache_version === $version) {
-			return array(
-				'code' => 400,
-				'message' => '本地模板已是最新版本',
 				'data' => $template_dir
 			);
 		} else {
