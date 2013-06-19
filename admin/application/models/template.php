@@ -253,16 +253,15 @@ class Template extends CI_Model {
 		$this->zip->archive($ufile);
 
 		// 上传压缩包
-		$snoopy = new Snoopy;
 		$submit_vars['type'] = 'template';
 		$submit_vars['method'] = 'post';
 		$submit_vars['alt'] = 'zip';
 		$submit_files['ufile'] = $ufile;
-		$snoopy->_submit_type = 'multipart/form-data';
-		$snoopy->submit($url, $submit_vars, $submit_files);
+		$this->snoopy->_submit_type = 'multipart/form-data';
+		$this->snoopy->submit($url, $submit_vars, $submit_files);
 
 		// 网络传输错误
-		if ($snoopy->status !== '200') {
+		if ($this->snoopy->status !== '200') {
 			return array(
 				'code' => 400,
 				'message' => '模板上传失败（网络传输错误）'
@@ -270,7 +269,7 @@ class Template extends CI_Model {
 		}
 
 		// 服务器接口错误
-		$result = $snoopy->results;
+		$result = $this->snoopy->results;
 		$result = $this->json->decode($result);
 		if ($result->status !== '200') {
 			return array(
