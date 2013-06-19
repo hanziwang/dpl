@@ -244,11 +244,11 @@ class Template extends CI_Model {
 
 		// 配置操作目录
 		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
-		$cache_dir = $db_dir . '/' . md5(time());
+		$cache_dir = $db_dir . '/' . md5(time()) . '/';
 		@mkdir($cache_dir, 0777);
 
 		// 拷贝到缓存目录
-		$cache_dir .= '/' . $args['name'] . '/';
+		$cache_dir .= $args['name'] . '/';
 		$this->dir->copy($template_dir, $cache_dir);
 		$this->dir->chmod($cache_dir, 0777);
 
@@ -311,91 +311,86 @@ class Template extends CI_Model {
 
 	}
 
-	// 下载模板 todo
+	// 下载模板
 	public function download ($url, $args) {
 
-		$libs = array('dir', 'unzip');
-		$this->load->library($libs);
+		$this->load->library(array('dir', 'unzip'));
 
+		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$tmp_dir = $this->config->item('tmp');
+		$db_dir = $this->config->item('db');
 
-		//创建临时缓存目录
-		@mkdir($tmp_dir .= date('/Ymd.His'), 0777);
-		$tmp_dir = $tmp_dir . '/' . $args['id'];
-
-		$context = stream_context_create(array(
-			'http' => array(
-				'method' => 'GET',
-				'timeout' => 5,
-			)
-		));
-
-		//远程读取压缩包
-		if (!$buffer = @file_get_contents($url, false, $context)) {
+		// 读取远程文件
+		if (!$buffer = @file_get_contents($url)) {
 			return array(
 				'code' => 400,
-				'message' => 'tms接口无法访问',
+				'message' => '服务器无法访问',
 				'data' => $url
 			);
 		}
 
-		//写入压缩文件到磁盘
-		@file_put_contents($tmp_dir . '.zip', $buffer);
-		@chmod($tmp_dir . '.zip', 0777);
+		// 写入缓存目录
+		$cache_dir = $db_dir . '/' . md5(time()) . '/';
+		@mkdir($cache_dir, 0777);
+		$ufile = $cache_dir . $args['id'] . '.zip';
+		@file_put_contents($ufile, $buffer);
+		@chmod($ufile, 0777);
 
-		//解压模板包并解析模板名称
-		$files = $this->unzip->extract($cache_dir . '.zip');
-		$template = explode('/', str_replace($cache_src, '', $files[0]));
-		$template = $template[1];
+		// 解析模板名称
+		$ufiles = $this->unzip->extract($ufile);
+		$ufiles[0] = ltrim($ufiles[0], $cache_dir);
+		$template_name = substr($ufiles[0], 0, strpos($ufiles[0], '/'));
+		$cache_dir .= $template_name . '/';
 
-		//读取缓存模板版本
-		$server_cfg = @file_get_contents($cache_src . '/' . $template . '/data.json');
-		$server_cfg = json_decode($server_cfg);
-		$server_version = (float)$server_cfg->version;
+		// 读取缓存模板信息
+		$cache_data = @file_get_contents($cache_dir . 'data.json');
+		$cache_data = json_decode($cache_data);
+		$cache_version = intval($cache_data->version);
 
-		//处理本地模板文件
-		$template_dir = $src . '/' . $server_cfg->marketid . '/' . $template;
-
-		//读取本地模板版本
-		if (file_exists($template_dir)) {
-			$client_cfg = @file_get_contents($template_dir . '/data.json');
-			$client_cfg = json_decode($client_cfg);
-			$client_version = (float)$client_cfg->version;
-		} else {
-			$client_version = 0;
+		// 创建市场根目录
+		if (!file_exists($www_dir)) {
+			@mkdir($www_dir, 0777);
 		}
 
-		//版本过期，强制更新本地模板
-		if ($server_version > $client_version) {
-			if ($this->dir->copy_dir($cache_src . '/' . $template, $template_dir)) {
+		// 创建市场目录
+		$market_dir = $www_dir . '/' . $cache_data->marketid . '/';
+		if (!file_exists($market_dir)) {
+			@mkdir($market_dir, 0777);
+		}
 
-				$this->dir->chmod_dir($template_dir, 0777);
+		// 读取本地模板信息
+		$template_dir = $market_dir . $template_name . '/';
+		if (file_exists($template_dir)) {
+			$data = @file_get_contents($template_dir . 'data.json');
+			$data = json_decode($data);
+			$version = intval($data->version);
+		} else {
+			@mkdir($template_dir, 0777);
+			$version = 0;
+		}
 
-				//写入目录的md5序列值
-				@file_put_contents($template_dir . '/.md5', $this->dir->md5_dir($template_dir));
-				@chmod($template_dir . '/.md5', 0777);
-
-				//删除数据库记录
-				$this->db->delete('template', array('id' => $server_cfg->id));
-				return array(
-					'code' => 200,
-					'message' => '模板下载成功',
-					'data' => $template_dir
-				);
-			}
-		} //版本一致，跳过更新操作
-		elseif ($server_version == $client_version) {
+		// 比较并更新版本
+		if ($cache_version > $version) {
+			$this->dir->copy($cache_dir, $template_dir);
+			$this->dir->chmod($template_dir, 0777);
+			$md5 = $template_dir . '.md5';
+			@file_put_contents($md5, $this->dir->md5($template_dir));
+			@chmod($md5, 0777);
+			return array(
+				'code' => 200,
+				'message' => '模板下载成功',
+				'data' => $template_dir
+			);
+		} elseif ($cache_version === $version) {
 			return array(
 				'code' => 400,
 				'message' => '本地模板已是最新版本',
 				'data' => $template_dir
 			);
-		} //版本信息错误
-		else {
+		} else {
 			return array(
 				'code' => 400,
-				'message' => '模板版本信息错误',
+				'message' => '模板版本错误',
 				'data' => $template_dir
 			);
 		}
