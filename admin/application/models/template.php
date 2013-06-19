@@ -342,7 +342,7 @@ class Template extends CI_Model {
 		$template_name = substr($ufiles[0], 0, strpos($ufiles[0], '/'));
 		$cache_dir .= $template_name . '/';
 
-		// 读取缓存模板信息
+		// 读取缓存信息
 		$cache_data = @file_get_contents($cache_dir . 'data.json');
 		$cache_data = json_decode($cache_data);
 		$cache_version = intval($cache_data->version);
@@ -358,7 +358,7 @@ class Template extends CI_Model {
 			@mkdir($market_dir, 0777);
 		}
 
-		// 读取本地模板信息
+		// 读取模板信息
 		$template_dir = $market_dir . $template_name . '/';
 		if (file_exists($template_dir)) {
 			$data = @file_get_contents($template_dir . 'data.json');
