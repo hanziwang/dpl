@@ -8,16 +8,14 @@ class Home extends CI_Controller {
 	function index () {
 
 		$this->load->model('template');
-		$result = $this->template->copy(array(
-			'name' => 'um-for-test',
-			'new_name' => 'um-test',
+		$result = $this->template->copy('985/um-for-test', array(
+			'name' => time(),
 			'nickname' => '你大爷',
-			'market' => '985',
-			'new_market' => '985',
+			'marketid' => '968',
 			'description' => '我大爷',
 			'author' => '',
 			'imgurl' => '',
-			'id' => 'aac54ed4-93a1-4747-8624-61cb4455b84a',
+			'id' => '',
 			'modify_time' => '',
 			'version' => '',
 			'configid' => '',

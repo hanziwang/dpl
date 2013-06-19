@@ -161,61 +161,74 @@ class Template extends CI_Model {
 	}
 
 	// 拷贝模板
-	function copy ($args) {
+	function copy ($path, $args) {
 
 		$this->load->library(array('dir', 'json'));
 
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
-		$new_dir = $www_dir . '/' . $args['new_market'] . '/' . $args['new_name'] . '/';
+		$market_dir = $www_dir . '/' . $args['marketid'] . '/';
+		$path_dir = $www_dir . '/' . $path . '/';
+		$template_dir = $market_dir . $args['name'] . '/';
 
-		// 默认拷贝至当前市场
-		if (!$args['market']) {
-			$args['new_market'] = $args['market'];
+		// 创建市场根目录
+		if (!file_exists($www_dir)) {
+			@mkdir($www_dir, 0777);
+		}
+
+		// 创建市场目录
+		if (!file_exists($market_dir)) {
+			@mkdir($market_dir, 0777);
 		}
 
 		// 模板已经存在
-		if (!file_exists($new_dir)) {
-			@mkdir($new_dir, 0777);
+		if (!file_exists($template_dir)) {
+			@mkdir($template_dir, 0777);
 		} else {
 			return array(
 				'code' => 400,
 				'message' => '模板已经存在',
-				'data' => $new_dir
+				'data' => $template_dir
 			);
 		}
 
-		// 修改文件名称
-		$file = opendir($new_dir);
-		while ($v = readdir($file)) {
-			if (!is_dir($template_dir . $v)) {
-				$handle = $new_dir . str_replace($args['name'], $args['new_name'], $v);
-				@copy($template_dir . $v, $handle);
-				@chmod($handle, 0777);
-			} else {
-				$this->dir->copy($template_dir . $v, $new_dir . $v);
-				$this->dir->chmod($new_dir . $v, 0777);
+		// 拷贝模板文件
+		$handle = opendir($path_dir);
+		while ($file = readdir($handle)) {
+			if ($file !== '.' && $file !== '..') {
+				$file1 = $path_dir . $file;
+				$file2 = $template_dir . $file;
+				if (!is_dir($file1)) {
+					@copy($file1, $file2);
+					@chmod($file2, 0777);
+				} else {
+					$this->dir->copy($file1, $file2);
+					$this->dir->chmod($file2, 0777);
+				}
 			}
 		}
-		closedir($file);
+		closedir($handle);
 
 		// 清除 tmsId 字段、最后修改时间、版本
-		$data = @file_get_contents($new_dir . 'data.json');
+		$data = @file_get_contents($template_dir . 'data.json');
 		$data = $this->json->decode($data);
 		$data->name = $args['name'];
-		$data->marketid = $args['market'];
+		$data->nickname = $args['nickname'];
+		$data->marketid = $args['marketid'];
+		$data->author = $args['author'];
+		$data->description = $args['description'];
+		$data->imgurl = $args['imgurl'];
 		$data->id = '';
 		$data->modify_time = '';
 		$data->version = '';
 
 		// 写入模板配置信息
-		@file_put_contents($new_dir . 'data.json', $this->json->encode($data));
-		@chmod($new_dir . 'data.json', 0777);
+		@file_put_contents($template_dir . 'data.json', $this->json->encode($data));
+		@chmod($template_dir . 'data.json', 0777);
 		return array(
 			'code' => 200,
 			'message' => '模板拷贝成功',
-			'data' => $new_dir
+			'data' => $template_dir
 		);
 
 	}
