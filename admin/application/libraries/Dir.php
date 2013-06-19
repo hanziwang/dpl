@@ -39,11 +39,11 @@ class Dir {
 		if (!file_exists($dest)) {
 			@mkdir($dest, 0777);
 		}
-		$file = opendir($source);
-		while ($filename = readdir($file)) {
-			$file1 = $source . '/' . $filename;
-			$file2 = $dest . '/' . $filename;
-			if ($filename != '.' && $filename != '..') {
+		$handle = opendir($source);
+		while ($file = readdir($handle)) {
+			$file1 = $source . '/' . $file;
+			$file2 = $dest . '/' . $file;
+			if ($file != '.' && $file != '..') {
 				if (is_dir($file1)) {
 					$this->copy($file1, $file2);
 				} else {
@@ -51,7 +51,7 @@ class Dir {
 				}
 			}
 		}
-		closedir($file);
+		closedir($handle);
 		return true;
 
 	}
