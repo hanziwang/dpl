@@ -232,105 +232,82 @@ class Template extends CI_Model {
 
 	}
 
-	// 上传模板 todo
+	// 上传模板
 	function upload ($url, $args) {
 
-		$libs = array('dir', 'zip', 'snoopy');
-		$this->load->library($libs);
+		$this->load->library(array('dir', 'json', 'zip', 'snoopy'));
 
+		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$tmp_dir = $this->config->item('tmp');
+		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('config');
 
-		// 创建临时目录
-		@mkdir($tmp_dir .= date('/Ymd.His'), 0777);
+		// 配置操作目录
+		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
+		$cache_dir = $db_dir . '/' . md5(time());
+		@mkdir($cache_dir, 0777);
 
-		//配置文件操作目录
-		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'];
-		$cache_dir = $tmp_dir . '/' . $args['name'];
+		// 拷贝到缓存目录
+		$cache_dir .= '/' . $args['name'] . '/';
+		$this->dir->copy($template_dir, $cache_dir);
+		$this->dir->chmod($cache_dir, 0777);
 
-		//检测模板是否存在
-		if (!file_exists($template_dir)) {
-			return array(
-				'code' => 400,
-				'message' => '模板不存在',
-				'data' => $template_dir
-			);
-		}
+		// 写入环境参数
+		$file = $cache_dir . 'data.json';
+		$data = json_decode(@file_get_contents($file));
+		$data->modify_time = date('Y-m-d H:i:s');
+		$data->configid = $config_id;
+		@file_put_contents($file, $this->json->encode($data));
 
-		//拷贝文件至缓存目录
-		if ($this->dir->copy_dir($template_dir, $cache_dir)) {
+		// 打包到缓存目录
+		$ufile = dirname($file) . '.zip';
+		$this->zip->read_dir($cache_dir, false);
+		$this->zip->archive($ufile);
 
-			$this->dir->chmod_dir($cache_dir, 0777);
-
-			//检测是否有私有模块库，没有则创建之
-			if (!file_exists($cache_dir . '/modules')) {
-				@mkdir($cache_dir . '/modules', 0777);
-			}
-
-			//插入最后修改时间字段
-			$cfg = @file_get_contents($cache_dir . '/data.json');
-			$cfg = json_decode($cfg);
-			$cfg->modify_time = date('Y-m-d H:i:s');
-			$cfg->configid = $cfg->configid ? $cfg->configid : $config_id;
-			@file_put_contents($cache_dir . '/data.json', json_encode($cfg));
-			@chmod($cache_dir . '/data.json', 0777);
-		}
-
-		//将模板文件打包到缓存目录（替换是用户修复zip类的路径处理bug）
-		$this->zip->read_dir(str_replace("\\", '/', $cache_dir . '/'), false);
-		$this->zip->archive($cache_dir . '.zip');
-
-		//模拟上传打包后的压缩文件
+		// 上传压缩包
 		$snoopy = new Snoopy;
 		$submit_vars['type'] = 'template';
 		$submit_vars['method'] = 'post';
 		$submit_vars['alt'] = 'zip';
-		$submit_files['ufile'] = $cache_dir . '.zip';
+		$submit_files['ufile'] = $ufile;
 		$snoopy->_submit_type = 'multipart/form-data';
 		$snoopy->submit($url, $submit_vars, $submit_files);
 
-		//请求发送成功后执行操作
-		if ($snoopy->status == '200') {
-
-			$result = json_decode(mb_convert_encoding($snoopy->results, 'utf-8', 'gbk'));
-
-			//判断上传是否成功
-			if ($result->status == '200') {
-
-				//向缓存配置插入tmsId和version字段
-				$cfg = @file_get_contents($cache_dir . '/data.json');
-				$cfg = json_decode($cfg);
-				$cfg->id = $result->tmsId;
-				$cfg->version = $result->version;
-				@file_put_contents($cache_dir . '/data.json', json_encode($cfg));
-
-				//拷贝配置文件，生成模板md5串，旨在能被系统模块检索到
-				@copy($cache_dir . '/data.json', $template_dir . '/data.json');
-				@chmod($template_dir . '/data.json', 0777);
-				@file_put_contents($template_dir . '/.md5', $this->dir->md5_dir($template_dir));
-				@chmod($template_dir . '/.md5', 0777);
-
-				return array(
-					'code' => 200,
-					'message' => '模板上传成功',
-					'data' => $result
-				);
-
-			} else {
-				return array(
-					'code' => 400,
-					'message' => '模板上传失败（tms接口错误）',
-					'data' => $result
-				);
-			}
-
-		} else {
+		// 网络传输错误
+		if ($snoopy->status !== '200') {
 			return array(
 				'code' => 400,
-				'message' => '模板上传失败（HTTP传输错误）'
+				'message' => '模板上传失败（网络传输错误）'
 			);
 		}
+
+		// 服务器接口错误
+		$result = $snoopy->results;
+		$result = $this->json->decode($result);
+		if ($result->status !== '200') {
+			return array(
+				'code' => 400,
+				'message' => '模板上传失败（服务器接口错误）',
+				'data' => $result
+			);
+		}
+
+		// 插入 tmsId 和 version 字段
+		$data = json_decode(@file_get_contents($file));
+		$data->id = $result->tmsId;
+		$data->version = $result->version;
+		@file_put_contents($file, $this->json->encode($data));
+		@copy($file, $template_dir . 'data.json');
+
+		// 生成 md5 标记文件
+		$md5 = $template_dir . '.md5';
+		@file_put_contents($md5, $this->dir->md5($template_dir));
+		@chmod($md5, 0777);
+		return array(
+			'code' => 200,
+			'message' => '模板上传成功',
+			'data' => $result
+		);
 
 	}
 

@@ -8,11 +8,11 @@ class Home extends CI_Controller {
 	function index () {
 
 		$this->load->model('template');
-		$result = $this->template->select(array(
-			'name' => 'test1370802842',
-			'nickname' => '测试你大爷',
+		$result = $this->template->upload('http://cms.taobao.com/dpl/api/module/index.htm', array(
+			'name' => 'um-for-test',
+			'nickname' => '你大爷',
 			'market' => '985',
-			'description' => '测试下',
+			'description' => '我大爷',
 			'author' => '',
 			'imgurl' => '',
 			'id' => '',

@@ -5,7 +5,7 @@
  */
 class Json {
 
-	// 格式化字符串
+	// 格式化 JSON 字符串
 	function format ($json) {
 
 		$result = '';
@@ -44,21 +44,17 @@ class Json {
 
 	}
 
-	// 编码变量
+	// 将数组编码为 JSON 字符串
 	function encode ($value) {
 
-		$value = json_encode($value);
-		$replace = "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))";
-		return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', $replace, $value);
+		return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
 
 	}
 
-	// 编码字符串
+	// 将 JSON 字符串解码为数组
 	function decode ($json, $assoc = false) {
 
-		$encoding = array('ASCII', 'GB2312', 'GBK', 'UTF-8');
-		$json = @mb_convert_encoding($json, 'UTF-8', $encoding);
-		return json_decode($json, $assoc);
+		return json_decode(@mb_convert_encoding($json, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8')), $assoc);
 
 	}
 

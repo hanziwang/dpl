@@ -12,3 +12,6 @@ $config['src'] = $dir . '/src';
 $src = $config['src'];
 $config['modules'] = $src . '/modules';
 $config['www'] = $src . '/www';
+
+// 配置业务规范
+$config['config'] = '1';
