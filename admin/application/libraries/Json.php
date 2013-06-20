@@ -15,7 +15,10 @@ class Json {
 	// 将字符串解码为数组
 	function decode ($json, $assoc = false) {
 
-		return json_decode(@mb_convert_encoding($json, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8')), $assoc);
+		if (@mb_detect_encoding($json) !== 'UTF-8') {
+			$json = @mb_convert_encoding($json, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
+		}
+		return json_decode($json, $assoc);
 
 	}
 
