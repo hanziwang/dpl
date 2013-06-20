@@ -43,7 +43,7 @@ class Template extends CI_Model {
 			@rename($template_dir . $v, $template_dir . $args['name'] . $v);
 		}
 
-		// 配置默认属性
+		// 默认配置信息
 		$defaults = array(
 			'name' => $args['name'],
 			'nickname' => $args['nickname'],
@@ -57,7 +57,7 @@ class Template extends CI_Model {
 			'configid' => $this->config->item('config')
 		);
 
-		// 写入属性配置
+		// 写入默认配置信息
 		$defaults = $this->json->encode($defaults);
 		$file = $template_dir . 'data.json';
 		if (@file_put_contents($file, $defaults)) {
@@ -95,7 +95,7 @@ class Template extends CI_Model {
 			);
 		}
 
-		// 读取属性配置
+		// 读取配置
 		$defaults = @file_get_contents($template_dir . 'data.json');
 		$defaults = $this->json->decode($defaults);
 
@@ -154,7 +154,7 @@ class Template extends CI_Model {
 		$www_dir = $this->config->item('www');
 		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
 
-		// 读取属性配置
+		// 读取配置信息
 		$defaults = @file_get_contents($template_dir . 'data.json');
 		return $this->json->decode($defaults);
 

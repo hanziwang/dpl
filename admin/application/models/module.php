@@ -8,7 +8,7 @@ class Module extends CI_Model {
 	// 获取模块路径
 	function _base_dir ($args) {
 
-		// 如果市场和模板参数都存在，则认为是模板私有模块，否则是公共模块
+		// 处理私有模块和公共模块的路径差异
 		if (!empty($args['market']) && !empty($args['template'])) {
 			$www_dir = $this->config->item('www');
 			return $www_dir . '/' . $args['market'] . '/' . $args['template'] . '/modules/' . $args['name'] . '/';
@@ -26,17 +26,33 @@ class Module extends CI_Model {
 
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
-		$data_dir = dirname(BASEPATH) . '/data/module/';
 		$module_dir = $this->_base_dir($args);
-		$config_id = $this->config->item('config');
 
 		// 创建模块根目录
 		if (!file_exists($modules_dir)) {
 			@mkdir($modules_dir, 0777);
 		}
 
-		//默认模块配置
-		$cfg = array(
+		// 创建模块目录
+		if (file_exists($module_dir)) {
+			return array(
+				'code' => 400,
+				'message' => '模块已经存在'
+			);
+		} else {
+			@mkdir($module_dir, 0777);
+		}
+
+		// 拷贝并重命名文件
+		$data_dir = dirname(BASEPATH) . '/data/module/' . $config['config']['module'];
+		$this->dir->copy($data_dir, $module_dir);
+		$this->dir->chmod($module_dir, 0777);
+		foreach (array('.css', '.js', '.php') as $v) {
+			@rename($module_dir . $v, $module_dir . $args['name'] . $v);
+		}
+
+		// 默认配置信息
+		$defaults = array(
 			'name' => $args['name'],
 			'nickname' => $args['nickname'],
 			'width' => $args['width'],
@@ -48,18 +64,8 @@ class Module extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $prototype_id
+			'configid' => $this->config->item('config')
 		);
-
-		//创建模块目录
-		if (file_exists($module_dir)) {
-			return array(
-				'code' => '400',
-				'message' => '模块已经存在'
-			);
-		} else {
-			@mkdir($module_dir, 0777);
-		}
 
 		//将基础模块拷进当前模块目录
 		$source_files = array_diff(scandir($source_dir), array('.', '..', '.svn'));
