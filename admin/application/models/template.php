@@ -39,7 +39,7 @@ class Template extends CI_Model {
 		$data_dir = dirname(BASEPATH) . '/data/template/';
 		$this->dir->copy($data_dir, $template_dir);
 		$this->dir->chmod($template_dir, 0777);
-		foreach (array('.css', '.js') as $v) {
+		foreach (array('.css', '.js', '.less') as $v) {
 			@rename($template_dir . $v, $template_dir . $args['name'] . $v);
 		}
 
@@ -54,7 +54,7 @@ class Template extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $this->config->item('config')
+			'configid' => $this->config->item('id', 'config')
 		);
 
 		// 写入默认配置信息
@@ -241,7 +241,7 @@ class Template extends CI_Model {
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('config');
+		$config_id = $this->config->item('id', 'config');
 
 		// 配置操作目录
 		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';

@@ -36,4 +36,11 @@ class Client extends CI_Model {
 
 	}
 
+	// 设置目录权限
+	function chmod ($args) {
+
+		// todo
+
+	}
+
 }

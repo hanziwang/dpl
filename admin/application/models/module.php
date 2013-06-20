@@ -44,10 +44,11 @@ class Module extends CI_Model {
 		}
 
 		// 拷贝并重命名文件
-		$data_dir = dirname(BASEPATH) . '/data/module/' . $config['config']['module'];
+		$config_module = $this->config->item('module', 'config');
+		$data_dir = dirname(BASEPATH) . '/data/module/' . $config_module . '/';
 		$this->dir->copy($data_dir, $module_dir);
 		$this->dir->chmod($module_dir, 0777);
-		foreach (array('.css', '.js', '.php') as $v) {
+		foreach (array('.css', '.js', '.php', '.less') as $v) {
 			@rename($module_dir . $v, $module_dir . $args['name'] . $v);
 		}
 
@@ -64,45 +65,35 @@ class Module extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $this->config->item('config')
+			'configid' => $this->config->item('id', 'config')
 		);
 
-		//将基础模块拷进当前模块目录
-		$source_files = array_diff(scandir($source_dir), array('.', '..', '.svn'));
-
-		foreach ($source_files as $v) {
-			$filepath = $source_dir . $v;
-			if (!is_dir($filepath)) {
-				$dst = $module_dir . $args['name'] . $v;
-				@copy($filepath, $dst);
-				@chmod($dst, 0777);
-			} else {
-				$this->dir->copy_dir($filepath, $module_dir . $v);
-				$this->dir->chmod_dir($module_dir . $v, 0777);
-			}
-		}
-
-		//预处理模版占位符
-		$module_singles = array(
+		// 替换模块占位符
+		$module_files = array(
 			'skin/default.less',
 			$args['name'] . '.css',
 			$args['name'] . '.js',
 			$args['name'] . '.php'
 		);
-
-		foreach ($module_singles as $v) {
-			$buffer = @file_get_contents($module_dir . $v);
-			$buffer = str_replace('{module}', $args['name'], $buffer);
-			@file_put_contents($module_dir . $v, $buffer);
-			@chmod($module_dir . $v, 0777);
+		foreach ($module_files as $v) {
+			$data = @file_get_contents($module_dir . $v);
+			$data = str_replace('{{module}}', $args['name'], $data);
+			@file_put_contents($module_dir . $v, $data);
 		}
 
-		//写入模块配置
-		if (@file_put_contents($module_dir . 'data.json', json_encode($cfg))) {
-			@chmod($module_dir . 'data.json', 0777);
+		// 写入模块配置信息
+		$file = $module_dir . 'data.json';
+		if (@file_put_contents($file, $this->json->encode($defaults))) {
+			@chmod($file, 0777);
 			return array(
 				'code' => 200,
 				'message' => '模块新建成功',
+				'data' => $module_dir
+			);
+		} else {
+			return array(
+				'code' => 400,
+				'message' => '模块新建失败',
 				'data' => $module_dir
 			);
 		}

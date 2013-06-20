@@ -15,7 +15,7 @@ function before_action () {
 	$setting = $ci->config->item('db') . '/.setting';
 	if (file_exists($setting)) {
 		$data = @file_get_contents($setting);
-		$ci->config->set_item('config', $ci->json->decode($data));
+		$ci->config->set_item('config', $ci->json->decode($data, true));
 	} else {
 		header('Location: ' . $ci->config->base_url('setting'));
 	}
