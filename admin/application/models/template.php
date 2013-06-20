@@ -194,13 +194,17 @@ class Template extends CI_Model {
 
 		// 拷贝模板文件
 		$handle = opendir($path_dir);
+		$search = substr($path, strpos($path, '/') + 1);
 		while ($file = readdir($handle)) {
 			if ($file !== '.' && $file !== '..') {
 				$file1 = $path_dir . $file;
-				$file2 = $template_dir . $file;
+				$file2 = $template_dir . str_replace($search, $args['name'], $file);
 				if (!is_dir($file1)) {
 					@copy($file1, $file2);
 					@chmod($file2, 0777);
+					$data = @file_get_contents($file2);
+					$data = str_replace($search, $args['name'], $data);
+					@file_put_contents($file2, $data);
 				} else {
 					$this->dir->copy($file1, $file2);
 					$this->dir->chmod($file2, 0777);
@@ -223,8 +227,9 @@ class Template extends CI_Model {
 		$data->version = '';
 
 		// 写入模板配置信息
-		@file_put_contents($template_dir . 'data.json', $this->json->encode($data));
-		@chmod($template_dir . 'data.json', 0777);
+		$file = $template_dir . 'data.json';
+		@file_put_contents($file, $this->json->encode($data));
+		@chmod($file, 0777);
 		return array(
 			'code' => 200,
 			'message' => '模板拷贝成功',

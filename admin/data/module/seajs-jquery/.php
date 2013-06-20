@@ -4,6 +4,6 @@
  */
 _tms_module_begin('{"name":"{{module}}"}'); ?>
 <div class="tb-module {{module}}">
-	<h1>hello world</h1>
+	<p>hello world</p>
 </div>
 <?php _tms_module_end(); ?>
