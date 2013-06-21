@@ -68,20 +68,20 @@ class Module extends CI_Model {
 		);
 
 		// 替换模块占位符
-		$files = array(
+		$module_files = array(
 			$args['name'] . '.css',
 			$args['name'] . '.less',
 			$args['name'] . '.js',
 			$args['name'] . '.php',
 			'skin/default.less'
 		);
-		foreach ($files as $v) {
+		foreach ($module_files as $v) {
 			$data = @file_get_contents($module_dir . $v);
 			$data = str_replace('{{module}}', $args['name'], $data);
 			@file_put_contents($module_dir . $v, $data);
 		}
 
-		// 写入模块配置信息
+		// 写入配置信息
 		$file = $module_dir . 'data.json';
 		if (@file_put_contents($file, $this->json->encode($defaults))) {
 			@chmod($file, 0777);
@@ -117,7 +117,7 @@ class Module extends CI_Model {
 			);
 		}
 
-		// 读取配置
+		// 读取配置信息
 		$defaults = @file_get_contents($module_dir . 'data.json');
 		$defaults = $this->json->decode($defaults);
 
@@ -146,7 +146,7 @@ class Module extends CI_Model {
 			$defaults->imgurl = $args['imgurl'];
 		}
 
-		// 写入配置参数
+		// 写入配置信息
 		$defaults = $this->json->encode($defaults);
 		$file = $module_dir . 'data.json';
 		if (@file_put_contents($file, $defaults)) {
@@ -235,7 +235,7 @@ class Module extends CI_Model {
 		$data->modify_time = '';
 		$data->version = '';
 
-		// 写入模块配置信息
+		// 写入配置信息
 		$file = $module_dir . 'data.json';
 		@file_put_contents($file, $this->json->encode($data));
 		@chmod($file, 0777);
@@ -247,7 +247,7 @@ class Module extends CI_Model {
 
 	}
 
-	// 上传模块 todo test
+	// 上传模块
 	function upload ($url, $args) {
 
 		$this->load->library(array('dir', 'json', 'zip', 'snoopy'));
@@ -324,7 +324,7 @@ class Module extends CI_Model {
 
 	}
 
-	// 下载模块 todo test
+	// 下载模块
 	public function download ($url, $args) {
 
 		$this->load->library(array('dir', 'unzip'));
@@ -351,7 +351,7 @@ class Module extends CI_Model {
 
 		// 解析模块名称
 		$ufiles = $this->unzip->extract($ufile);
-		$ufiles[0] = ltrim($ufiles[0], $cache_dir);
+		$ufiles[0] = str_replace($cache_dir, '', $ufiles[0]);
 		$module_name = substr($ufiles[0], 0, strpos($ufiles[0], '/'));
 		$cache_dir .= $module_name . '/';
 
@@ -365,7 +365,7 @@ class Module extends CI_Model {
 			@mkdir($modules_dir, 0777);
 		}
 
-		// 读取模块信息
+		// 读取配置信息
 		$module_dir = $modules_dir . '/' . $module_name . '/';
 		if (file_exists($module_dir)) {
 			$data = @file_get_contents($module_dir . 'data.json');

@@ -95,7 +95,7 @@ class Template extends CI_Model {
 			);
 		}
 
-		// 读取配置
+		// 读取配置信息
 		$defaults = @file_get_contents($template_dir . 'data.json');
 		$defaults = $this->json->decode($defaults);
 
@@ -125,7 +125,7 @@ class Template extends CI_Model {
 			$defaults->attribute = $attribute;
 		}
 
-		// 写入属性配置
+		// 写入配置信息
 		$defaults = $this->json->encode($defaults);
 		$file = $template_dir . 'data.json';
 		if (@file_put_contents($file, $defaults)) {
@@ -226,7 +226,7 @@ class Template extends CI_Model {
 		$data->modify_time = '';
 		$data->version = '';
 
-		// 写入模板配置信息
+		// 写入配置信息
 		$file = $template_dir . 'data.json';
 		@file_put_contents($file, $this->json->encode($data));
 		@chmod($file, 0777);
@@ -343,7 +343,7 @@ class Template extends CI_Model {
 
 		// 解析模板名称
 		$ufiles = $this->unzip->extract($ufile);
-		$ufiles[0] = ltrim($ufiles[0], $cache_dir);
+		$ufiles[0] = str_replace($cache_dir, '', $ufiles[0]);
 		$template_name = substr($ufiles[0], 0, strpos($ufiles[0], '/'));
 		$cache_dir .= $template_name . '/';
 
@@ -363,7 +363,7 @@ class Template extends CI_Model {
 			@mkdir($market_dir, 0777);
 		}
 
-		// 读取模板信息
+		// 读取配置信息
 		$template_dir = $market_dir . $template_name . '/';
 		if (file_exists($template_dir)) {
 			$data = @file_get_contents($template_dir . 'data.json');
