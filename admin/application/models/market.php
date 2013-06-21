@@ -5,7 +5,7 @@
  */
 class Market extends CI_Model {
 
-	// 创建市场
+	// 新建市场
 	function create ($args) {
 
 		$this->load->library('dir');
@@ -24,8 +24,28 @@ class Market extends CI_Model {
 			@mkdir($market_dir, 0777);
 		}
 
-		// 写入页面组件
-		http://www.taobao.com/go/market/5341/__header.php
+		// 写入页头、导航、页尾文件
+		$base_url = 'http://www.taobao.com/go/';
+		$market_files = array(
+			'__nav.php' => 'rgn/nav/' . $args['name'],
+			'__header.php' => 'market/' . $args['name'] . '/',
+			'__footer.php' => 'market/' . $args['name'] . '/'
+		);
+		foreach ($market_files as $k => $v) {
+			$buffer = @file_get_contents($base_url . $v);
+			if ($k === 'nav') {
+				$nav = $buffer;
+			}
+			if ($k === 'header' && strpos($buffer, $nav)) {
+				$buffer = str_replace($nav, '', $buffer);
+			}
+			@file_put_contents($market_dir . '__' . $k . '.php', $buffer);
+		}
+		return array(
+			'code' => 200,
+			'message' => '市场新建成功',
+			'data' => $market_dir
+		);
 
 	}
 

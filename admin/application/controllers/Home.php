@@ -9,7 +9,8 @@ class Home extends CI_Controller {
 
 		$this->load->model('get');
 		$result = $this->get->_template_common(array(
-			'filter' => 'server'
+			'filter' => 'client',
+			'key' => 'mei-index'
 		));
 		var_dump($result);
 
