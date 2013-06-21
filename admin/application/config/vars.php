@@ -4,7 +4,7 @@
 date_default_timezone_set('Asia/Shanghai');
 
 // 配置服务接口
-$tms = 'http://cms.taobao.com/dpl/';
+$tms = 'http://tms.taobao.com/dpl/';
 $config['tms']['api_template'] = $tms . 'api/template/';
 $config['tms']['api_module'] = $tms . 'api/module/';
 $config['tms']['get_config_list'] = $tms . 'client/getConfigList.htm';

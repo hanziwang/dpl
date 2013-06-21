@@ -33,6 +33,7 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
+		$config_id = $this->config->item('id', 'config');
 		$market = $db_dir . '/.market';
 
 		// 读取市场数据
@@ -43,11 +44,19 @@ class Get extends CI_Model {
 			@file_put_contents($market, $data);
 			@chmod($market, 0777);
 		}
-		return $this->json->decode($data);
+
+		// 读取当前规范下的市场数据
+		$data = $this->json->decode($data);
+		foreach ($data as $k => &$v) {
+			if ($v->configId !== $config_id) {
+				unset($data[$k]);
+			}
+		}
+		return $data;
 
 	}
 
-	// 查询本地模板
+	// 查询全部模板、我的模板
 	function _template_common ($args) {
 
 		$this->load->library(array('dir', 'json'));
@@ -114,7 +123,7 @@ class Get extends CI_Model {
 
 	}
 
-	// 查询未下载模板
+	// 查询更多模板
 	function _template_update () {
 
 		$this->load->library('json');
