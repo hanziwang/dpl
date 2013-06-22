@@ -3,7 +3,7 @@
 /**
  * 查询模型
  */
-class Get extends CI_Model {
+class Get_model extends CI_Model {
 
 	// 查询规范
 	function config () {
@@ -14,14 +14,13 @@ class Get extends CI_Model {
 		$db_dir = $this->config->item('db');
 		$config = $db_dir . '/.config';
 
-		// 读取规范数据
-		if (file_exists($config)) {
-			$data = @file_get_contents($config);
-		} else {
-			$data = @file_get_contents($this->config->item('get_config_list', 'tms'));
-			@file_put_contents($config, $data);
-			@chmod($config, 0777);
+		// 检查离线数据
+		if (!file_exists($config)) {
+			header('Location: ' . $this->config->base_url('offline'));
 		}
+
+		// 读取规范数据
+		$data = @file_get_contents($config);
 		return $this->json->decode($data);
 
 	}
@@ -36,16 +35,13 @@ class Get extends CI_Model {
 		$config_id = $this->config->item('id', 'config');
 		$market = $db_dir . '/.market';
 
-		// 读取市场数据
-		if (file_exists($market)) {
-			$data = @file_get_contents($market);
-		} else {
-			$data = @file_get_contents($this->config->item('get_market_list', 'tms'));
-			@file_put_contents($market, $data);
-			@chmod($market, 0777);
+		// 检查离线数据
+		if (!file_exists($market)) {
+			header('Location: ' . $this->config->base_url('offline'));
 		}
 
-		// 读取当前规范下的市场数据
+		// 读取市场数据
+		$data = @file_get_contents($market);
 		$data = $this->json->decode($data);
 		foreach ($data as $k => &$v) {
 			if ($v->configId !== $config_id) {

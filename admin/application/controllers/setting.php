@@ -7,9 +7,8 @@ class Setting extends CI_Controller {
 
 	function index () {
 
-		$this->load->model('client');
-		$args = array('id' => '1');
-		$result = $this->client->setting($args);
+		$this->load->model('get_model', 'get');
+		$result = $this->get->config();
 		var_dump($result);
 
 	}

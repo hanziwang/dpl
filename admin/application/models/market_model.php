@@ -3,7 +3,7 @@
 /**
  * 市场模型
  */
-class Market extends CI_Model {
+class Market_model extends CI_Model {
 
 	// 新建市场
 	function create ($args) {
