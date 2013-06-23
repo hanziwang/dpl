@@ -3,7 +3,7 @@
 /**
  * 模板模型
  */
-class Template_model extends CI_Model {
+class Template extends CI_Model {
 
 	// 新建模板
 	function create ($args) {

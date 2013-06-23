@@ -3,7 +3,7 @@
 /**
  * 模块模型
  */
-class Module_model extends CI_Model {
+class Module extends CI_Model {
 
 	// 获取模块路径
 	function _base_dir ($args) {

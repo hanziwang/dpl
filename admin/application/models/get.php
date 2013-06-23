@@ -3,7 +3,7 @@
 /**
  * 查询模型
  */
-class Get_model extends CI_Model {
+class Get extends CI_Model {
 
 	// 查询规范
 	function config () {
@@ -120,7 +120,7 @@ class Get_model extends CI_Model {
 	}
 
 	// 查询更多模板
-	function _template_update () {
+	function _template_more () {
 
 		$this->load->library('json');
 
@@ -147,8 +147,8 @@ class Get_model extends CI_Model {
 			case 'client' :
 			case 'server' :
 				return $this->_template_common($args);
-			case 'update' :
-				return $this->_template_update();
+			case 'more' :
+				return $this->_template_more();
 		}
 
 	}
