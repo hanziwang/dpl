@@ -350,6 +350,50 @@ class Get extends CI_Model {
 
 	}
 
+	// 查询模块类型
+	function _module_type () {
+
+		$this->load->library('json');
+
+		// 配置基础路径
+		$db_dir = $this->config->item('db');
+		$config_id = $this->config->item('id', 'config');
+		$type = $db_dir . '/.type';
+
+		// 读取类型数据
+		$data = @file_get_contents($type);
+		$data = $this->json->decode($data);
+		foreach ($data as $k => &$v) {
+			if ($v->id !== $config_id) {
+				unset($data[$k]);
+			}
+		}
+		return $data;
+
+	}
+
+	// 查询模块作者
+	function _module_author () {
+
+		$this->load->library('json');
+
+		// 配置基础路径
+		$db_dir = $this->config->item('db');
+		$config_id = $this->config->item('id', 'config');
+		$author = $db_dir . '/.author';
+
+		// 读取作者数据
+		$data = @file_get_contents($author);
+		$data = $this->json->decode($data);
+		foreach ($data as $k => &$v) {
+			if ($v->id !== $config_id) {
+				unset($data[$k]);
+			}
+		}
+		return $data;
+
+	}
+
 	// 查询模块
 	function module ($args) {
 
@@ -359,6 +403,10 @@ class Get extends CI_Model {
 				return $this->_module_common($args);
 			case 'more':
 				return $this->_module_more($args);
+			case 'type':
+				return $this->_module_type();
+			case 'author':
+				return $this->_module_author();
 		}
 
 	}
