@@ -336,8 +336,8 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$modules_dir = $www_dir . '/' . $args['market'] . '/' . $args['template'] . '/modules/';
-		$files = glob($modules_dir . '*/data.json');
+		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['template'] . '/';
+		$files = glob($template_dir . 'modules/*/data.json');
 
 		// 收集模块数据
 		$modules = array();
