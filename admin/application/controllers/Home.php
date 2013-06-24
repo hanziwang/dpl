@@ -7,12 +7,9 @@ class Home extends CI_Controller {
 
 	function index () {
 
-		$this->load->model('get');
-		$result = $this->get->_module_private(array(
-			'market' => 843,
-			'template' => 'mei-index-2012'
-		));
-		var_dump($result);
+		$this->load->view('header');
+		$this->load->view('home');
+		$this->load->view('footer');
 
 	}
 

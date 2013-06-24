@@ -1,0 +1,177 @@
+/**
+ * ____________ _          _____
+ * |  _  \ ___ \ |        |____ |
+ * | | | | |_/ / |  __   __   / /
+ * | | | |  __/| |  \ \ / /   \ \
+ * | |/ /| |   | |___\ V /.___/ /
+ * |___/ \_|   \_____/\_/ \____/
+ *
+ * @author 邦彦<tinyhill@163.com>
+ */
+/* = 基础样式
+----------------------------------------------- */
+html {
+	margin-top: 45px;
+}
+
+body {
+	background-color: #fff;
+	color: #333;
+	font: 12px/1.5 tahoma;
+}
+
+a:link, a:visited {
+	color: #21759b;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	color: #d54e21;
+	text-decoration: underline;
+}
+
+.clearfix:after {
+	content: '.';
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+/* = 页头样式
+----------------------------------------------- */
+.header {
+	background-color: #464646;
+	background-image: -moz-linear-gradient(bottom, #373737, #464646 8px);
+	background-image: -webkit-linear-gradient(bottom, #3A3A3A, #464646 8px);
+	background-image: linear-gradient(bottom, #373737, #464646 8px);
+	height: 45px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2147483647;
+}
+
+.header .logo {
+	float: left;
+}
+
+.header .logo a {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAATCAYAAADBGB7WAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdtJREFUeNrkmD9Lw0AYxhOJiIMY3NwqDjpW0Ml/cVFw6dJVMHOX6Bdo3dzqN7AdXFzU2aH1C2gVHNziBxCKDkpRz+fgLch5d81d00boCz/S5q5v8uSe9+5SlzHmjEJ4dPRBPkH/FmgnzJ0jkkRMmOQyuRfH4SMKAmYWDVAFefq9jDIzD543An6CXIHm2n8Ys3RCACJwBxr0PY3geaqUNz8I68qiTfboZe2ACEHNwvoyW+boAc4Z2dNSKL+pLeEcF1ug0fSFtlOqs6Ym54GinT+oCyEn/7wPTtIQampdLv4ILP0abVGsTTQVggppWde2RmOyqmx2tK0tX1E+mQrtjm5LYUNTgREhxs1/EKp64tOa/p+ScyWaaWWuqaUl1BvyBuUdzIB1sAZWwKrCLWGa1u1XqKwenzX9uagzsKAphStwOagtoE2UFROIbnl5AItZ7nVNYgocgopCZDykey+aLF+e4XTfvUBFMTGFQxykEqHcxtPxESx7CerPBbNgG2yAHc3kETvZxzf4ohmecw06vay7SwKKmh1NPc1loI9gJPADvJLDzsExb3PpxXse7IFxMEl1yNfDWzAhJLynJM0EbyKbwrm65ajLcsmEdsAbeKI3oJduozsq/zD8CDAAjhkxIZwLoTQAAAAASUVORK5CYII=) no-repeat center center;
+	display: block;
+	width: 58px;
+	height: 45px;
+	margin: 0 15px;
+}
+
+.header .quick-menu {
+	font-size: 13px;
+	float: left;
+}
+
+.header .item {
+	border-left: 1px solid #333;
+	display: inline-block;
+	float: left;
+	line-height: 0;
+	position: relative;
+}
+
+.header .item .current {
+	color: #f0f0f0;
+}
+
+.header .explore {
+	border-left: 1px solid #555;
+	border-right: 1px dashed transparent;
+	color: #ccc;
+	display: inline-block;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 12px;
+	text-decoration: none;
+}
+
+.header .explore:hover {
+	background-color: #3a3a3a;
+	background-image: -moz-linear-gradient(center bottom, #3a3a3a, #222);
+	background-image: -webkit-linear-gradient(bottom, #3a3a3a, #222);
+	background-image: linear-gradient(center bottom, #3a3a3a, #222);
+	color: #fafafa;
+}
+
+.header .submenu {
+	background: #fff;
+	border-color: #dfdfdf;
+	border-style: solid;
+	border-width: 0 1px 1px;
+	padding: 6px 0;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	left: 0;
+	top: 45px;
+	display: none;
+}
+
+.header .submenu a {
+	display: block;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 12px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.header .submenu a:hover {
+	background: #eaf2fa;
+	color: #21759b;
+}
+
+.header .parent:hover .explore {
+	background: #fff;
+	border-left: 1px solid #dfdfdf;
+	border-right: 1px solid #dfdfdf;
+	color: #333;
+}
+
+.header .parent:hover .submenu {
+	display: block;
+}
+
+.header .quick-link {
+	font-size: 13px;
+	float: right;
+}
+
+.header .icon {
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	display: inline-block;
+	width: 16px;
+	height: 44px;
+}
+
+.header .icon-offline {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAANCAYAAACZ3F9/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAkxJREFUeNpMUk2oElEUntEZ08DpJYHhLyjSjysDXaSokEHUqjIXghqE4iazFgpB79EiH6kI5UawhYZEKGIJIghGi3Ch4jI3BirpIwi0p2Tvzfimc0UfXjhz517ud77zfefgLMtiAoGAwDDsnNPpNBsMhidCoVBLkuQFmqZ/z+fz761W600ul/sKbw4XiwUDO4bz+XxCrVZf9Hg8e0ql8iGHw0FJTheO4xgkZ/r9/vtEIrE3mUx+AZjmEgRBhsPhgEKheIYeHhwcFJvN5qtoNLoLlTQgMUZR1FWRSHRNp9Opa7Vao1gs8hHjDrw/GwwGbcvl8iSZTNZQSRA0BAlBeb3eB1ar9S2wc3q93juo7DaezWYblUplv1wut9eAf1DKclMqsPJgU8Tj8ddSqfTeqQSgZZGG8Xj8uVAoRMCIH3A/R2AA4WDWeYfDsS+RSJB+3gbIWX3AEJlMdj8QCHyJRCJP4erMtkGQ+C9sDDJqE8TmZ+0gCUFpNBouOgMrC6yHYNZLs9n80W6374rF4ltIK14qldiN7YPB4AM4/AKOPwF0vKUTJeKjXrtcrus2my2E5/P50XA4rALLIyjpuF6vP06n05/g0R9UHgTqK4Vch6HgxWIx5PqCO51O85lM5pvFYrkME3NJpVLdMRqNarlcznY6nSNoxQ232x3SarXPwYe7JpPpqFqt1lEfkUASGKV+vz8CAMdKw1r31joZjUaFVCoV6na7YxzN6lrHqtk+n++mXq8PwLRcganaYRhmOpvNuu12Owmg2npe6f8CDABHJ/DaDzObAAAAAABJRU5ErkJggg==);
+}
+
+.header .icon-setting {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAe9JREFUeNqMU81LAlEQd9dVF79DsTwkBV7Um6eUDl6DDgl9/wXdiq6Fl6Cgi13sGp3MEPy4iSR4EPLiUQ9meApqk5TVFPOjGdknT1PowezO+73fb3bezKxMNmcNh8NtsDfJDubxWEqgAfOTfaFQcBO/WCx6KJ4fjJ8IgOJ+vx8GNwT+NWIKhWKJ+tCixLuSOBEShMFHo9HY0uv1t5SgBmaaynYCa7fbR2q1OjnKwGazvWYymReKbJpx3TGGXKvVWp2ohdFo3G82m1VSuHq9XonH409o6BMcOcgl1+cA3MDovV5vmeM4JYJA6ni93gco3jPunU7nWj6fP9BqtbxGo1EKgrAK3MPRtahWjS0cDifhUEdlqENsFped1Vu73f4BL5GCRAn7s7hgMJh3OBwLBoNB6fF4VhB0uVzrEN3CMMyH1D4LVH2diHK5XFUUxW6pVPrCNnqxzyqVSlur1S7wjpJIgAARyd8BfzQLrVarazabzzqdzjds3xkSFQbphmXZXdk/1mAweJTL5Sf0JG7SYkj3Z1pEY8hFzTiAz+cTKpXKJxkSqMddIpEoEUE6nS4jRoatXC4LqKE/wMM0ngYCgUee5/cwcCqVCpFWZbPZe8TwDDkwhceomc4SATfJKhqNnpMAsVjskvr5kKMkol8BBgAVcDUGXQNHYAAAAABJRU5ErkJggg==);
+}
+
+/* = 页尾样式
+----------------------------------------------- */
+.footer {
+	background-image: -moz-linear-gradient(top, #f8f9fa, #fefefe 6px, #fff);
+	background-image: -webkit-linear-gradient(top, #f8f9fa, #fefefe 6px, #fff);
+	background-image: linear-gradient(top, #f8f9fa, #fefefe 6px, #fff);
+	border-top: 1px solid #e4e8f1;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
