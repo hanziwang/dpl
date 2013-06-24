@@ -7,7 +7,9 @@ class Home extends CI_Controller {
 
 	function index () {
 
-		echo '首页控制器';
+		$this->load->model('get');
+		$result = $this->get->_template_more(array('index'=>1));
+		var_dump($result);
 
 	}
 

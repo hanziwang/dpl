@@ -3,7 +3,7 @@
 /**
  * 离线模型
  */
-class Offline_model extends CI_Model {
+class Api_offline extends CI_Model {
 
 	// 离线远程数据
 	function _fetch ($args) {
