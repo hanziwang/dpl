@@ -131,6 +131,13 @@ class Get extends CI_Model {
 				continue;
 			}
 
+			// 市场查询
+			if (!empty($args['market'])) {
+				if ($v['marketid'] !== $args['market']) {
+					continue;
+				}
+			}
+
 			// 过滤模板数据
 			$file = $www_dir . '/' . $v['marketid'] . '/' . $v['name'] . '/data.json';
 			if (file_exists($file)) {
@@ -141,6 +148,14 @@ class Get extends CI_Model {
 				}
 			} else {
 				$templates[] = $v;
+			}
+
+			// 关键字查询
+			if (!empty($args['q'])) {
+				$haystack = $v['name'] . $v['nickname'] . $v['description'];
+				if (strpos($haystack, $args['q']) === false) {
+					continue;
+				}
 			}
 
 			// 收集模板数据
@@ -214,7 +229,7 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (!empty($args['width'])) {
-				if ($args['width'] === 0 || $args['width'] === $data->width) {
+				if ($args['width'] === $data->width) {
 					continue;
 				}
 			}
@@ -277,6 +292,28 @@ class Get extends CI_Model {
 				$modules[] = $v;
 			}
 
+			// 模块作者查询
+			if (!empty($args['author'])) {
+				if ($args['author'] === $v['author']) {
+					continue;
+				}
+			}
+
+			// 模块宽度查询
+			if (!empty($args['width'])) {
+				if ($args['width'] === $v['width']) {
+					continue;
+				}
+			}
+
+			// 关键字查询
+			if (!empty($args['q'])) {
+				$haystack = $v['name'] . $v['nickname'] . $v['description'];
+				if (strpos($haystack, $args['q']) === false) {
+					continue;
+				}
+			}
+
 			// 收集模块数据
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
@@ -293,16 +330,36 @@ class Get extends CI_Model {
 	}
 
 	// 查询私有模块
-	function _module_private () {
+	function _module_private ($args) {
 
-		// todo
+		$this->load->library('json');
+
+		// 配置基础路径
+		$www_dir = $this->config->item('www');
+		$modules_dir = $www_dir . '/' . $args['market'] . '/' . $args['template'] . '/modules/';
+		$files = glob($modules_dir . '*/data.json');
+
+		// 收集模块数据
+		$modules = array();
+		foreach ($files as $v) {
+			$data = @file_get_contents($v);
+			$data = $this->json->decode($data, true);
+			$modules[] = $data;
+		}
+		return $modules;
 
 	}
 
 	// 查询模块
-	function module () {
+	function module ($args) {
 
-		// todo
+		switch ($args['filter']) {
+			case 'client':
+			case 'server':
+				return $this->_module_common($args);
+			case 'more':
+				return $this->_module_more($args);
+		}
 
 	}
 
