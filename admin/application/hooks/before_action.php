@@ -7,7 +7,7 @@ function before_action () {
 	$ci->load->library('json');
 
 	// 排除用户参数设置页面
-	$filter = array('setting', 'offline');
+	$filter = array('import', 'setting');
 	if (in_array($ci->uri->rsegment(1), $filter)) {
 		return;
 	}

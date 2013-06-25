@@ -70,7 +70,7 @@ class Get extends CI_Model {
 				}
 
 				// 过滤修改过的模板
-				if ($args['filter'] === 'client') {
+				if ($args['filter'] === 'my') {
 					if (file_exists($v . '/.md5')) {
 						$str = @file_get_contents($v . '/.md5');
 						$md5 = $this->dir->md5($v);
@@ -177,8 +177,8 @@ class Get extends CI_Model {
 	function template ($args) {
 
 		switch ($args['filter']) {
-			case 'client' :
-			case 'server' :
+			case 'my' :
+			case 'all' :
 				return $this->_template_common($args);
 			case 'more' :
 				return $this->_template_more($args);
@@ -206,7 +206,7 @@ class Get extends CI_Model {
 			}
 
 			// 过滤修改过的模块
-			if ($args['filter'] === 'client') {
+			if ($args['filter'] === 'my') {
 				if (file_exists($v . '/.md5')) {
 					$str = @file_get_contents($v . '/.md5');
 					$md5 = $this->dir->md5($v);
@@ -398,8 +398,8 @@ class Get extends CI_Model {
 	function module ($args) {
 
 		switch ($args['filter']) {
-			case 'client':
-			case 'server':
+			case 'my':
+			case 'all':
 				return $this->_module_common($args);
 			case 'more':
 				return $this->_module_more($args);

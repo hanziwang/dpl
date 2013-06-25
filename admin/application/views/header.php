@@ -35,10 +35,10 @@
 			</ul>
 		</li>
 		<li class="item">
-			<a class="explore" href="<?= base_url('offline') ?>" title="业务数据下载"><b class="icon icon-offline"></b></a>
+			<a class="explore" href="<?= base_url('import') ?>" title="业务数据导入"><b class="icon icon-offline"></b></a>
 		</li>
 	</ul>
-	<ul class="quick-link clearfix">
+	<ul class="quick-action clearfix">
 		<li class="item parent">
 			<a class="explore" href="javascript:;">帮助中心</a>
 			<ul class="submenu">
