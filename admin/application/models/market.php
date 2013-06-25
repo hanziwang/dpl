@@ -12,7 +12,7 @@ class Market extends CI_Model {
 
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$market_dir = $www_dir . '/' . $args['market'] . '/';
+		$market_dir = $www_dir . '/' . $args['id'] . '/';
 
 		// 创建市场根目录
 		if (!file_exists($www_dir)) {
@@ -26,20 +26,16 @@ class Market extends CI_Model {
 
 		// 写入页头、导航、页尾文件
 		$base_url = 'http://www.taobao.com/go/';
-		$market_files = array(
-			'__nav.php' => 'rgn/nav/' . $args['name'],
-			'__header.php' => 'market/' . $args['name'] . '/',
-			'__footer.php' => 'market/' . $args['name'] . '/'
+		$parts = array(
+			'__header.php' => 'market/' . $args['id'] . '/',
+			'__nav.php' => 'rgn/nav/' . $args['id'],
+			'__footer.php' => 'market/' . $args['id'] . '/'
 		);
-		foreach ($market_files as $k => $v) {
-			$buffer = @file_get_contents($base_url . $v);
-			if ($k === 'nav') {
-				$nav = $buffer;
-			}
-			if ($k === 'header' && strpos($buffer, $nav)) {
-				$buffer = str_replace($nav, '', $buffer);
-			}
-			@file_put_contents($market_dir . '__' . $k . '.php', $buffer);
+		foreach ($parts as $k => $v) {
+			$buffer = @file_get_contents($base_url . $v . $k);
+			$file = $market_dir . $k;
+			@file_put_contents($file, $buffer);
+			@chmod($file, 0777);
 		}
 		return array(
 			'code' => 200,

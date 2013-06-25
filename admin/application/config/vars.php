@@ -14,6 +14,9 @@ $config['tms_module'] = $tms . 'client/getModuleList.htm';
 $config['tms_types'] = $tms . 'client/getModuleTypes.htm';
 $config['tms_authors'] = $tms . 'client/getModuleAuthors.htm';
 
+// 配置系统参数
+$config['version'] = '20130625';
+
 // 配置系统路径
 $dir = dirname(dirname(BASEPATH));
 $config['db'] = $dir . '/db';

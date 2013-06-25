@@ -1,9 +1,9 @@
 <?php
 
 /**
- * 离线控制器
+ * 更新控制器
  */
-class Offline extends CI_Controller {
+class Update extends CI_Controller {
 
 	function index () {
 

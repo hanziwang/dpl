@@ -1,61 +1,33 @@
-<div class="content">
-	<fieldset class="fieldset">
-		<legend>系统概况</legend>
-		<div class="form">
-			<div class="field">
-				程序版本：
-				<span id="version">多业务规范版（<span id="revision">20130106</span>）</span>
-				<a id="message" href="http://www.taobao.com/go/market/dpl/version.php" target="_blank"></a>
-			</div>
-			<div class="field">
-				业务规范：
-				淘宝垂直市场统一规范（taobao）
-				<a href="http://127.0.0.1:8000/admin/setting">点此修改</a>
-			</div>
+<div class="content home">
+	<div class="fieldset">
+		<div class="hd"><span>系统概况</span></div>
+		<div class="bd">
+			<ul class="clearfix">
+				<li>程序版本：多业务规范版（<span id="version"><?= $version ?></span>）<a id="message" href="javascript:;"></a></li>
+				<li>业务规范：<?= $config['name'] ?>（<?= $config['company'] ?>）<a href="<?= base_url('setting') ?>">点此修改</a></li>
+			</ul>
 		</div>
-	</fieldset>
-	<fieldset class="fieldset">
-		<legend>快捷导航</legend>
-		<div class="form">
-			<div class="field">
-				常用地址：
-				<a href="http://tms.taobao.com/" target="_blank">TMS</a>
-				<a href="http://tps.tms.taobao.com/" target="_blank">TPS</a>
-				<a href="http://daogou.tms.taobao.com/" target="_blank">新版导购平台</a>
-				<a href="http://tg.taobao.net/cml/" target="_blank">CML</a>
-			</div>
-			<div class="field">
-				帮助中心：
-				<a href="http://wiki.ued.taobao.net/doku.php?id=tms:dpl:start" target="_blank">使用文档</a>
-				<a href="http://wiki.ued.taobao.net/doku.php?id=tms:php:start" target="_blank">标签参考</a>
-			</div>
+	</div>
+	<div class="fieldset">
+		<div class="hd"><span>快捷导航</span></div>
+		<div class="bd">
+			<ul class="clearfix">
+				<li>常用地址：<a href="//daogou.tms.taobao.com" target="_blank">新版管理系统</a><a href="//wiki.tms.taobao.net" target="_blank">维基百科</a></li>
+				<li>帮助中心：<a href="//dpl.taobao.net" target="_blank">使用手册</a><a href="//wiki.tms.taobao.net/dpl:issues" target="_blank">意见反馈</a></li>
+			</ul>
 		</div>
-	</fieldset>
+	</div>
 </div>
 <script>
-	(function (S) {
-
-		S.io({
-			type : 'get',
-			url : 'http://www.taobao.com/go/market/dpl/version.php',
-			success : function (d) {
-
-				var client = S.one('#revision').html(),
-					server = d.shift().revision,
-					message = S.one('#message');
-
-				if (client < server) {
-					message.html('有新版本，请更新代码');
-					message.css('color', 'red');
-				} else {
-					message.html('没有新版本');
-					message.css('color', 'green');
-				}
-
-			},
-			dataType : 'jsonp',
-			cache : false
-		});
-
-	})(KISSY);
+	$.ajax({
+		dataType: 'jsonp',
+		url: 'http://www.taobao.com/go/market/dpl/version.php',
+		success: function (d) {
+			if ($('#version').html() !== d.shift().revision) {
+				$('#message').html('发现新版本').css('color', 'red');
+			} else {
+				$('#message').html('没有新版本').css('color', 'green');
+			}
+		}
+	});
 </script>
