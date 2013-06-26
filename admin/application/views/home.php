@@ -21,7 +21,7 @@
 <script>
 	$.ajax({
 		dataType: 'jsonp',
-		url: '//www.taobao.com/market/dpl/v3.php',
+		url: '//www.taobao.com/go/market/dpl/v3.php',
 		success: function (d) {
 			if ($('#version').html() !== d) {
 				$('#message').html('发现新版本').css('color', 'red');

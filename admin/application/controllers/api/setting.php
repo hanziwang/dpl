@@ -13,8 +13,8 @@ class setting extends CI_Controller {
 		);
 		$this->load->library('json');
 		$this->load->model('api');
-		$data = $this->api->setting($args);
-		echo $this->json->encode($data);
+		$this->api->setting($args);
+		header('Location: ' . base_url('setting'));
 
 	}
 
