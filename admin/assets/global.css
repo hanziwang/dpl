@@ -42,6 +42,8 @@ a:hover, a:active {
 	zoom: 1;
 }
 
+/* = 加载样式
+----------------------------------------------- */
 .loading {
 	background: rgba(0, 0, 0, 0.6);
 	width: 100%;
@@ -548,6 +550,27 @@ a.button-small {
 
 .market .updated {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADExLzA1LzA33bqJ2wAAAmFJREFUeJyNk89L1FEUxT/vfcfRkdG0yRZqIYiCgmVorloUhCAkKLQxguwvSKiVUJYgFLSwZW3Kje7S3AgRiNQiTDQVhyhE0RkzTPwx4zjfmXnvtpgaZyCss3vvnXPPvedxlYiQjbql6+e8Ku+RI7rZQVcaa3BtIuTa5IxrE33rTRML2XyVXaAxeGPUUbpjzd1kx0QwGAAcNH58BKSYpE2NrbVMdOYUuBcaLJiKzH77mdqtXE1scBwCpgif8YYqDk7WfLw6EtcA7/anR/5HDLDtRIiqw8rlgs0RANUcvHnRItOzsS//FHcH2llJhJmKzHLqwI+1tkXHbWJgzd08Vni5qImVhnEEYerHJ3AtUW+cpDID2qfy63dMJEOu8pbTWFibOQ+euctk7XMGw8MMLb1OX+ZrXI9BJaVei0jFn7QBXlb10V3aTon4Ga1+yp3TXYxtTfJsYQj8DhQ6AIgSrLEV6sJCl8wlvgLQWFjLXN0wADupfUo9xeymIlS9bWXPE4NAXs5ovi2NTlkTdtAA3ApcyzyWeooB6Fl4wp6JQmmuWAkYa8I6amNBPz4AHm684NX38QxpNbbB0PobKPHw2+OoQByMxwZ1nnV6A5J22zNRbof66V66z24yQs/iY/CozNzZ0BGDTZpeJSKcnW4bjRHv2HaOfuO8qmY+HEy37su11/sWiZsx2zbfqQFq3PIun/GGSpKFGdK8LEOZ9+/imAnJymFXOousZSr7cGUUKx1RbxzXYxAlmcBUPN22wY7ZtvncZcrGifeXGjDSL0aaJWUrjVgMJmSUnbFKHtjWz4vZ/F9iIi867oQHZwAAAABJRU5ErkJggg%3D%3D);
+}
+
+/* = 更新样式
+----------------------------------------------- */
+.update .hint {
+	padding-bottom: 16px;
+}
+
+.update .progress {
+	border: 1px solid #ddd;
+	padding: 1px;
+	width: 300px;
+	height: 26px;
+	margin-bottom: 18px;
+	display: none;
+}
+
+.update .progress span {
+	background: #ddd;
+	display: inline-block;
+	height: 26px;
 }
 
 /* = 设置样式

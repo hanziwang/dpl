@@ -11,7 +11,6 @@ class setting extends CI_Controller {
 		$args = array(
 			'id' => $this->input->get('id')
 		);
-		$this->load->library('json');
 		$this->load->model('api');
 		$this->api->setting($args);
 		header('Location: ' . base_url('setting'));

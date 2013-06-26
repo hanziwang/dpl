@@ -16,7 +16,6 @@
 		loading: function () {
 
 			var loading = $('<div class="loading"><span></span></div>');
-
 			if ($('.loading').length === 0) {
 				$('body').append(loading.hide().fadeIn('fast'));
 			}

@@ -21,13 +21,13 @@ class Api extends CI_Model {
 			@chmod($file, 0777);
 			return array(
 				'code' => 200,
-				'message' => $args['name'] . '数据更新成功',
+				'message' => '数据更新成功',
 				'data' => $file
 			);
 		} else {
 			return array(
 				'code' => 400,
-				'message' => $args['name'] . '数据更新失败',
+				'message' => '数据更新失败',
 				'data' => $file
 			);
 		}
