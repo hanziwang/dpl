@@ -8,9 +8,9 @@ class Home extends CI_Controller {
 	function index () {
 
 		$data = array(
-			'title' => 'DPL &lsaquo; 多业务规范版',
+			'title' => '多业务规范版 &lsaquo; DPL',
 			'version' => $this->config->item('version'),
-			'config' => $this->config->item('config')
+			'setting' => $this->config->item('setting')
 		);
 
 		$this->load->view('header', $data);

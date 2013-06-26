@@ -246,7 +246,7 @@ class Template extends CI_Model {
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 
 		// 配置操作目录
 		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';

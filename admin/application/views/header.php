@@ -6,15 +6,16 @@
 	<link rel="stylesheet" href="<?= base_url('assets/reset.css?v=' . $version) ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/global.css?v=' . $version) ?>">
 	<script src="<?= base_url('assets/jquery.js?v=' . $version) ?>"></script>
+	<script src="<?= base_url('assets/global.js?v=' . $version) ?>"></script>
 </head>
 <body>
 <div class="header clearfix">
 	<h1 class="logo"><a href="<?= base_url() ?>" title="返回首页"></a></h1>
 	<ul class="quick-menu clearfix">
 		<li class="item parent">
-			<a class="explore" href="javascript:;">站点管理</a>
+			<a class="explore" href="javascript:;">市场管理</a>
 			<ul class="submenu">
-				<li><a href="<?= base_url('market/all') ?>">所有站点</a></li>
+				<li><a href="<?= base_url('market/all') ?>">所有市场</a></li>
 			</ul>
 		</li>
 		<li class="item parent">

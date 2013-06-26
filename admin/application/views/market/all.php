@@ -1,11 +1,11 @@
 <div class="content market">
 	<div class="fieldset">
-		<div class="hd"><span>所有站点</span></div>
+		<div class="hd"><span>所有市场</span></div>
 		<div class="bd">
 			<table>
 				<tr>
 					<th width="10%">编号</th>
-					<th width="30%">站点名称</th>
+					<th width="30%">市场名称</th>
 					<th width="20%">皮肤色卡</th>
 					<th width="20%">基础组件</th>
 					<th width="20%">操作</th>
@@ -40,23 +40,16 @@
 </div>
 <script>
 	$('.update').on('click', function () {
-		var trigger = $(this),
-			updating = trigger.hasClass('updating');
-		!updating && $.ajax({
+		var target = $(this),
+			id = target.attr('data-id');
+		!target.hasClass('updating') && $.ajax({
 			dataType: 'json',
-			url: '<?= base_url('api/market_create') ?>',
-			data: {
-				id: trigger.attr('data-id')
-			},
+			url: '<?= base_url('api/market_create?id=') ?>' + id,
 			beforeSend: function () {
-				trigger.addClass('updating');
+				target.addClass('updating');
 			},
 			success: function (d) {
-				if (d.code === 200) {
-					trigger.addClass('updated');
-				} else {
-					alert(d.message);
-				}
+				d.code === 200 ? target.addClass('updated') : alert(d.message);
 			}
 		});
 	});

@@ -27,7 +27,7 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 		$market = $db_dir . '/.market';
 
 		// 读取市场数据
@@ -357,7 +357,7 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 		$type = $db_dir . '/.type';
 
 		// 读取类型数据
@@ -379,7 +379,7 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 		$author = $db_dir . '/.author';
 
 		// 读取作者数据

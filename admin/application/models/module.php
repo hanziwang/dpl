@@ -255,7 +255,7 @@ class Module extends CI_Model {
 		// 配置基础路径
 		$module_dir = $this->_base_dir($args);
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 
 		// 配置操作目录
 		$cache_dir = $db_dir . '/' . md5(time()) . '/';

@@ -4,7 +4,7 @@
 		<div class="bd">
 			<ul class="clearfix">
 				<li>程序版本：多业务规范版（<span id="version"><?= $version ?></span>）<a id="message" href="javascript:;"></a></li>
-				<li>业务规范：<?= $config['name'] ?>（<?= $config['company'] ?>）<a href="<?= base_url('setting') ?>">点此修改</a></li>
+				<li>业务规范：<?= $setting['name'] ?>（<?= $setting['company'] ?>）<a href="<?= base_url('setting') ?>">点此修改</a></li>
 			</ul>
 		</div>
 	</div>
@@ -21,9 +21,9 @@
 <script>
 	$.ajax({
 		dataType: 'jsonp',
-		url: 'http://www.taobao.com/go/market/dpl/version.php',
+		url: '//www.taobao.com/market/dpl/v3.php',
 		success: function (d) {
-			if ($('#version').html() !== d.shift().revision) {
+			if ($('#version').html() !== d) {
 				$('#message').html('发现新版本').css('color', 'red');
 			} else {
 				$('#message').html('没有新版本').css('color', 'green');
