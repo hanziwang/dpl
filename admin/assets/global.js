@@ -8,32 +8,26 @@
  *
  * @author 邦彦<tinyhill@163.com>
  */
-(function ($) {
+var page = {
 
-	var page = {
+	// 添加加载状态
+	loading: function () {
 
-		// 添加加载状态
-		loading: function () {
-
-			var loading = $('<div class="loading"><span></span></div>');
-			if ($('.loading').length === 0) {
-				$('body').append(loading.hide().fadeIn('fast'));
-			}
-
-		},
-
-		// 解除加载状态
-		unloading: function () {
-
-			$('.loading').fadeOut('fast', function () {
-				$(this).remove();
-			});
-
+		var loading = $('<div class="loading"><span></span></div>');
+		if ($('.loading').length === 0) {
+			$('body').append(loading.hide().fadeIn('fast'));
 		}
 
+	},
 
-	};
+	// 解除加载状态
+	unloading: function () {
 
-	window.page = page;
+		$('.loading').fadeOut('fast', function () {
+			$(this).remove();
+		});
 
-})(jQuery);
+	}
+
+
+};

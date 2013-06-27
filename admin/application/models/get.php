@@ -12,7 +12,7 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config = $db_dir . '/.config';
+		$config = $db_dir . '/config.json';
 
 		// 读取规范数据
 		$data = @file_get_contents($config);
@@ -28,7 +28,7 @@ class Get extends CI_Model {
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('id', 'setting');
-		$market = $db_dir . '/.market';
+		$market = $db_dir . '/market.json';
 
 		// 读取市场数据
 		$data = @file_get_contents($market);
@@ -96,14 +96,14 @@ class Get extends CI_Model {
 				$templates[] = $data;
 				if (isset($args['index']) && count($templates) === 10) {
 					return array(
-						'code' => $index,
+						'index' => $index,
 						'data' => $templates
 					);
 				}
 			}
 		}
 		return array(
-			'code' => $index,
+			'index' => $index,
 			'data' => $templates
 		);
 
@@ -117,7 +117,7 @@ class Get extends CI_Model {
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
 		$db_dir = $this->config->item('db');
-		$template = $db_dir . '/.template';
+		$template = $db_dir . '/template.json';
 
 		// 读取模板数据
 		$templates = array();
@@ -133,7 +133,15 @@ class Get extends CI_Model {
 
 			// 市场查询
 			if (!empty($args['market'])) {
-				if ($v['marketid'] !== $args['market']) {
+				if (intval($v['marketid']) !== intval($args['market'])) {
+					continue;
+				}
+			}
+
+			// 关键字查询
+			if (!empty($args['q'])) {
+				$haystack = $v['name'] . $v['nickname'] . $v['description'];
+				if (strpos($haystack, $args['q']) === false) {
 					continue;
 				}
 			}
@@ -150,24 +158,16 @@ class Get extends CI_Model {
 				$templates[] = $v;
 			}
 
-			// 关键字查询
-			if (!empty($args['q'])) {
-				$haystack = $v['name'] . $v['nickname'] . $v['description'];
-				if (strpos($haystack, $args['q']) === false) {
-					continue;
-				}
-			}
-
 			// 收集模板数据
 			if (isset($args['index']) && count($templates) === 10) {
 				return array(
-					'code' => $index,
+					'index' => $index,
 					'data' => $templates
 				);
 			}
 		}
 		return array(
-			'code' => $index,
+			'index' => $index,
 			'data' => $templates
 		);
 
@@ -246,13 +246,13 @@ class Get extends CI_Model {
 			$modules[] = $data;
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
-					'code' => $index,
+					'index' => $index,
 					'data' => $modules
 				);
 			}
 		}
 		return array(
-			'code' => $index,
+			'index' => $index,
 			'data' => $modules
 		);
 
@@ -266,7 +266,7 @@ class Get extends CI_Model {
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
 		$db_dir = $this->config->item('db');
-		$module = $db_dir . '/.module';
+		$module = $db_dir . '/module.json';
 
 		// 读取模块数据
 		$modules = array();
@@ -278,18 +278,6 @@ class Get extends CI_Model {
 			// 从指定页码读取
 			if (isset($args['index']) && $args['index'] > $index++) {
 				continue;
-			}
-
-			// 过滤模块数据
-			$file = $modules_dir . '/' . $v['name'] . '/data.json';
-			if (file_exists($file)) {
-				$file = @file_get_contents($file);
-				$file = $this->json->decode($file);
-				if (intval($v['version']) > intval($file->version)) {
-					$modules[] = $v;
-				}
-			} else {
-				$modules[] = $v;
 			}
 
 			// 模块作者查询
@@ -314,16 +302,28 @@ class Get extends CI_Model {
 				}
 			}
 
+			// 过滤模块数据
+			$file = $modules_dir . '/' . $v['name'] . '/data.json';
+			if (file_exists($file)) {
+				$file = @file_get_contents($file);
+				$file = $this->json->decode($file);
+				if (intval($v['version']) > intval($file->version)) {
+					$modules[] = $v;
+				}
+			} else {
+				$modules[] = $v;
+			}
+
 			// 收集模块数据
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
-					'code' => $index,
+					'index' => $index,
 					'data' => $modules
 				);
 			}
 		}
 		return array(
-			'code' => $index,
+			'index' => $index,
 			'data' => $modules
 		);
 
@@ -350,37 +350,43 @@ class Get extends CI_Model {
 
 	}
 
+	// 查询模块
+	function module ($args) {
+
+		switch ($args['filter']) {
+			case 'my':
+			case 'all':
+				return $this->_module_common($args);
+			case 'more':
+				return $this->_module_more($args);
+		}
+
+	}
+
 	// 查询模块类型
-	function _module_type () {
+	function types () {
 
 		$this->load->library('json');
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'setting');
-		$type = $db_dir . '/.type';
+		$type = $db_dir . '/type.json';
 
 		// 读取类型数据
 		$data = @file_get_contents($type);
-		$data = $this->json->decode($data);
-		foreach ($data as $k => &$v) {
-			if ($v->id !== $config_id) {
-				unset($data[$k]);
-			}
-		}
-		return $data;
+		return $this->json->decode($data);
 
 	}
 
 	// 查询模块作者
-	function _module_author () {
+	function authors () {
 
 		$this->load->library('json');
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('id', 'setting');
-		$author = $db_dir . '/.author';
+		$author = $db_dir . '/author.json';
 
 		// 读取作者数据
 		$data = @file_get_contents($author);
@@ -391,23 +397,6 @@ class Get extends CI_Model {
 			}
 		}
 		return $data;
-
-	}
-
-	// 查询模块
-	function module ($args) {
-
-		switch ($args['filter']) {
-			case 'my':
-			case 'all':
-				return $this->_module_common($args);
-			case 'more':
-				return $this->_module_more($args);
-			case 'type':
-				return $this->_module_type();
-			case 'author':
-				return $this->_module_author();
-		}
 
 	}
 

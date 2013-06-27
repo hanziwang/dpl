@@ -5,7 +5,7 @@
  */
 class Pinyin {
 
-	// 拼音对照表
+	// 拼音码表
 	private $table = array(
 		array('a', -20319),
 		array('ai', -20317),
@@ -406,7 +406,7 @@ class Pinyin {
 	);
 
 	// 获取首字母
-	function initial ($str) {
+	function first ($str) {
 
 		$ret = '';
 		$table = $this->table;
@@ -432,7 +432,7 @@ class Pinyin {
 	}
 
 	// 获取拼音
-	function escape ($str) {
+	function letter ($str) {
 
 		$ret = '';
 		$table = $this->table;

@@ -8,8 +8,8 @@ class All extends CI_Controller {
 	function index () {
 
 		$this->load->model('get');
-		$market = $this->get->market();
-		foreach ($market as &$v1) {
+		$market_all = $this->get->market();
+		foreach ($market_all as &$v1) {
 			$v1->color = explode(';', $v1->color);
 			foreach ($v1->color as $k => &$v2) {
 				if (!empty($v2)) {
@@ -20,13 +20,13 @@ class All extends CI_Controller {
 				}
 			}
 		}
-		$data = array(
+		$args = array(
 			'title' => '所有站点 &lsaquo; 站点管理',
 			'version' => $this->config->item('version'),
-			'market' => $market
+			'market_all' => $market_all
 		);
 
-		$this->load->view('header', $data);
+		$this->load->view('header', $args);
 		$this->load->view('market/all');
 		$this->load->view('footer');
 

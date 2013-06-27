@@ -13,7 +13,7 @@ class Api extends CI_Model {
 		// 配置基础路径
 		$url = $this->config->item('tms_' . $args['id']);
 		$db_dir = $this->config->item('db');
-		$file = $db_dir . '/.' . $args['id'];
+		$file = $db_dir . '/' . $args['id'] . '.json';
 
 		// 读取业务数据
 		if ($buffer = @file_get_contents($url)) {
@@ -43,12 +43,16 @@ class Api extends CI_Model {
 		$db_dir = $this->config->item('db');
 
 		// 写入用户参数
-		$data = @file_get_contents($db_dir . '/.config');
+		$data = @file_get_contents($db_dir . '/config.json');
 		$data = $this->json->decode($data);
 		foreach ($data as $v) {
 			if (intval($v->id) === intval($args['id'])) {
+				$src = $this->config->item('src') . '/' . $v->code;
+				if (!file_exists($src)) {
+					@mkdir($src, 0777);
+				}
 				$v = $this->json->encode($v);
-				@file_put_contents($db_dir . '/.setting', $v);
+				@file_put_contents($db_dir . '/setting.json', $v);
 				break;
 			}
 		}

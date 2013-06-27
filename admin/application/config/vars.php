@@ -11,8 +11,8 @@ $config['tms_config'] = $tms . 'client/getConfigList.htm';
 $config['tms_market'] = $tms . 'client/getMarketList.htm';
 $config['tms_template'] = $tms . 'client/getTemplateList.htm';
 $config['tms_module'] = $tms . 'client/getModuleList.htm';
-$config['tms_types'] = $tms . 'client/getModuleTypes.htm';
-$config['tms_authors'] = $tms . 'client/getModuleAuthors.htm';
+$config['tms_type'] = $tms . 'client/getModuleTypes.htm';
+$config['tms_author'] = $tms . 'client/getModuleAuthors.htm';
 
 // 配置系统参数
 $config['version'] = '20130627';

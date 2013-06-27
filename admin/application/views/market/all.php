@@ -10,7 +10,7 @@
 					<th width="20%">基础组件</th>
 					<th width="20%">操作</th>
 				</tr>
-<?php foreach ($market as $v) : ?>
+<?php foreach ($market_all as $v) : ?>
 				<tr>
 					<td><?= $v->id ?></td>
 					<td><?= $v->fullName ?>（<?= $v->shortName ?>）</td>

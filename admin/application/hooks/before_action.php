@@ -13,17 +13,17 @@ function before_action () {
 
 	// 检查本地数据
 	$db_dir = $ci->config->item('db');
-	$files = array('config', 'setting', 'template', 'module', 'type', 'author');
+	$files = array('config', 'setting', 'template', 'module', 'types', 'authors');
 	foreach ($files as $v) {
-		if (!file_exists($db_dir . '/.' . $v)) {
+		if (!file_exists($db_dir . '/' . $v . '.json')) {
 			header('Location: ' . base_url('update'));
 		}
 	}
 
 	// 读取用户参数
-	$data = @file_get_contents($db_dir . '/.setting');
+	$data = @file_get_contents($db_dir . '/setting.json');
 	$data = $ci->json->decode($data, true);
-	$src = $ci->config->item('src') . '/' . $data['company'];
+	$src = $ci->config->item('src') . '/' . $data['code'];
 	$ci->config->set_item('setting', $data);
 	$ci->config->set_item('modules', $src . '/modules');
 	$ci->config->set_item('www', $src . '/www');

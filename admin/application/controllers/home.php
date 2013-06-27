@@ -7,13 +7,13 @@ class Home extends CI_Controller {
 
 	function index () {
 
-		$data = array(
+		$args = array(
 			'title' => '多业务规范版 &lsaquo; DPL',
 			'version' => $this->config->item('version'),
 			'setting' => $this->config->item('setting')
 		);
 
-		$this->load->view('header', $data);
+		$this->load->view('header', $args);
 		$this->load->view('home');
 		$this->load->view('footer');
 
