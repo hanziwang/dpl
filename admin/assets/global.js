@@ -27,7 +27,29 @@ var page = {
 			$(this).remove();
 		});
 
-	}
+	},
 
+	// 简易图片上传
+	upload: function (url, file, callback) {
+
+		var self = this, formdata = new FormData();
+		formdata.append('nick', '邦彦');
+		formdata.append('session_id', new Date().getTime());
+		formdata.append('photo', file);
+		$.ajax({
+			type: 'post',
+			url: url,
+			data: formdata,
+			processData: false,
+			contentType: false,
+			beforeSend: self.loading,
+			complete: self.unloading,
+			success: function (d) {
+				d.status === '1' ? callback(d.url) : alert(d.msg);
+			},
+			dataType: 'json'
+		});
+
+	}
 
 };

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 模块搜索控制器
+ * 搜索模块控制器
  */
 class Search extends CI_Controller {
 
@@ -22,6 +22,8 @@ class Search extends CI_Controller {
 			$args['title'] = '所有模块 &lsaquo; 模块管理';
 		} elseif ($args['filter'] === 'more') {
 			$args['title'] = '更多模块 &lsaquo; 模块管理';
+		} else {
+			$args['filter'] = 'all';
 		}
 
 		// 设置查询参数

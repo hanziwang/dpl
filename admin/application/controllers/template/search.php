@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 模板搜索控制器
+ * 搜索模板控制器
  */
 class Search extends CI_Controller {
 
@@ -21,6 +21,8 @@ class Search extends CI_Controller {
 			$args['title'] = '所有模板 &lsaquo; 模板管理';
 		} elseif ($args['filter'] === 'more') {
 			$args['title'] = '更多模板 &lsaquo; 模板管理';
+		} else {
+			$args['filter'] = 'all';
 		}
 
 		// 设置查询参数

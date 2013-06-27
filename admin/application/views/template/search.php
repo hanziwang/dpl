@@ -17,7 +17,7 @@
 			<button class="button button-small" type="submit">搜索一下</button>
 		</form>
 	</div>
-	<div class="result">
+	<div class="result <?= $filter ?>">
 		<ul class="list clearfix"></ul>
 		<div class="load">加载中</div>
 	</div>
@@ -54,7 +54,7 @@
 <?php endif; ?>
 <script src="<?= base_url('assets/search.js?v=' . $version) ?>"></script>
 <script>
-	search.init('<?= base_url("api/template/search") ?>', {
+	search.init('<?= base_url("api/template_search") ?>', {
 		filter: '<?= $filter ?>',
 		market: '<?= $market ?>',
 		q: '<?= $q ?>'

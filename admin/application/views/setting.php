@@ -7,9 +7,9 @@
 					<label class="label">使用业务规范：</label>
 					<div class="clearfix">
 						<select class="select" name="id">
-							<?php foreach ($config as $v) : ?>
-								<option value="<?= $v->id ?>" data-src="<?= $src . '/' . $v->code ?>"<?= $v->id === $setting['id'] ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
-							<?php endforeach; ?>
+<?php foreach ($config as $v) : ?>
+							<option value="<?= $v->id ?>" data-src="<?= $src . '/' . $v->code ?>"<?= $v->id === $setting['id'] ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
+<?php endforeach; ?>
 						</select>
 					</div>
 				</div>

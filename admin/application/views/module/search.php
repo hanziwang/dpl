@@ -60,7 +60,7 @@
 <?php endif; ?>
 <script src="<?= base_url('assets/search.js?v=' . $version) ?>"></script>
 <script>
-	search.init('<?= base_url("api/module/search") ?>', {
+	search.init('<?= base_url("api/module_search") ?>', {
 		filter: '<?= $filter ?>',
 		author: '<?= $author ?>',
 		width: '<?= $width ?>',

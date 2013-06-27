@@ -1,12 +1,11 @@
 <?php
 
 /**
- * 模板接口控制器
+ * 搜索模板接口控制器
  */
-class Template extends CI_Controller {
+class Template_search extends CI_Controller {
 
-	// 模板搜索
-	function search () {
+	function index () {
 
 		$args = array(
 			'filter' => $this->input->get('filter'),

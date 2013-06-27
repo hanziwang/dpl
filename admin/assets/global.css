@@ -8,7 +8,7 @@
  *
  * @author 邦彦<tinyhill@163.com>
  */
-/* = 基础样式
+/* = 基础
 ----------------------------------------------- */
 html {
 	margin-top: 45px;
@@ -42,7 +42,7 @@ a:hover, a:active {
 	zoom: 1;
 }
 
-/* = 加载样式
+/* = 加载
 ----------------------------------------------- */
 .loading {
 	background: rgba(0, 0, 0, 0.6);
@@ -73,7 +73,7 @@ a:hover, a:active {
 	border-radius: 5px;
 }
 
-/* = 页头样式
+/* = 页头
 ----------------------------------------------- */
 .header {
 	background-color: #464646;
@@ -128,8 +128,7 @@ a:hover, a:active {
 	transition: .2s linear;
 }
 
-.header .explore:hover,
-.header .current {
+.header .explore:hover {
 	background-color: #3a3a3a;
 	background-image: -moz-linear-gradient(center bottom, #3a3a3a, #222);
 	background-image: -webkit-linear-gradient(bottom, #3a3a3a, #222);
@@ -201,7 +200,7 @@ a:hover, a:active {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAe9JREFUeNqMU81LAlEQd9dVF79DsTwkBV7Um6eUDl6DDgl9/wXdiq6Fl6Cgi13sGp3MEPy4iSR4EPLiUQ9meApqk5TVFPOjGdknT1PowezO+73fb3bezKxMNmcNh8NtsDfJDubxWEqgAfOTfaFQcBO/WCx6KJ4fjJ8IgOJ+vx8GNwT+NWIKhWKJ+tCixLuSOBEShMFHo9HY0uv1t5SgBmaaynYCa7fbR2q1OjnKwGazvWYymReKbJpx3TGGXKvVWp2ohdFo3G82m1VSuHq9XonH409o6BMcOcgl1+cA3MDovV5vmeM4JYJA6ni93gco3jPunU7nWj6fP9BqtbxGo1EKgrAK3MPRtahWjS0cDifhUEdlqENsFped1Vu73f4BL5GCRAn7s7hgMJh3OBwLBoNB6fF4VhB0uVzrEN3CMMyH1D4LVH2diHK5XFUUxW6pVPrCNnqxzyqVSlur1S7wjpJIgAARyd8BfzQLrVarazabzzqdzjds3xkSFQbphmXZXdk/1mAweJTL5Sf0JG7SYkj3Z1pEY8hFzTiAz+cTKpXKJxkSqMddIpEoEUE6nS4jRoatXC4LqKE/wMM0ngYCgUee5/cwcCqVCpFWZbPZe8TwDDkwhceomc4SATfJKhqNnpMAsVjskvr5kKMkol8BBgAVcDUGXQNHYAAAAABJRU5ErkJggg==);
 }
 
-/* = 页尾样式
+/* = 页尾
 ----------------------------------------------- */
 .footer {
 	background-image: -moz-linear-gradient(top, #f8f9fa, #fefefe 6px, #fff);
@@ -253,7 +252,7 @@ a:hover, a:active {
 	padding: 0 20px 14px;
 }
 
-/* = 表单样式
+/* = 表单
 ----------------------------------------------- */
 .form .field {
 	margin-bottom: 12px;
@@ -349,6 +348,26 @@ a:hover, a:active {
 	margin: 0 5px 0 0;
 }
 
+.form .file {
+	background-image: url(data:image/gif;base64,R0lGODlhDgAMAIAAAP///5mZmSH5BAAAAAAALAAAAAAOAAwAAAIcjI8Jy73mIoAz0WvD09Xu7VWgInYkJTFoamZIAQA7);
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 14px;
+	height: 12px;
+	overflow: hidden;
+	position: relative;
+	vertical-align: middle;
+}
+
+.form .file input {
+	cursor: pointer;
+	opacity: 0;
+	font-size: 100px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 .form .toggle {
 	display: inline-block;
 	height: 27px;
@@ -385,13 +404,17 @@ a:hover, a:active {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
 }
 
+.form .submit {
+	padding-top: 8px;
+}
+
+/* = 迷你表单
+----------------------------------------------- */
 .form-mini .text {
 	height: 25px;
 	line-height: 25px;
 }
 
-/* = 迷你表单样式
------------------------------------------------ */
 .form-mini .select {
 	padding: 4px;
 }
@@ -401,7 +424,7 @@ a:hover, a:active {
 	line-height: 25px;
 }
 
-/* = 按钮样式
+/* = 按钮
 ----------------------------------------------- */
 .button {
 	background-color: #dd4b39;
@@ -492,7 +515,7 @@ a.button-small {
 	padding-right: 8px;
 }
 
-/* = 市场页面样式
+/* = 所有市场
 ----------------------------------------------- */
 .market table {
 	border-collapse: collapse;
@@ -553,7 +576,7 @@ a.button-small {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADExLzA1LzA33bqJ2wAAAmFJREFUeJyNk89L1FEUxT/vfcfRkdG0yRZqIYiCgmVorloUhCAkKLQxguwvSKiVUJYgFLSwZW3Kje7S3AgRiNQiTDQVhyhE0RkzTPwx4zjfmXnvtpgaZyCss3vvnXPPvedxlYiQjbql6+e8Ku+RI7rZQVcaa3BtIuTa5IxrE33rTRML2XyVXaAxeGPUUbpjzd1kx0QwGAAcNH58BKSYpE2NrbVMdOYUuBcaLJiKzH77mdqtXE1scBwCpgif8YYqDk7WfLw6EtcA7/anR/5HDLDtRIiqw8rlgs0RANUcvHnRItOzsS//FHcH2llJhJmKzHLqwI+1tkXHbWJgzd08Vni5qImVhnEEYerHJ3AtUW+cpDID2qfy63dMJEOu8pbTWFibOQ+euctk7XMGw8MMLb1OX+ZrXI9BJaVei0jFn7QBXlb10V3aTon4Ga1+yp3TXYxtTfJsYQj8DhQ6AIgSrLEV6sJCl8wlvgLQWFjLXN0wADupfUo9xeymIlS9bWXPE4NAXs5ovi2NTlkTdtAA3ApcyzyWeooB6Fl4wp6JQmmuWAkYa8I6amNBPz4AHm684NX38QxpNbbB0PobKPHw2+OoQByMxwZ1nnV6A5J22zNRbof66V66z24yQs/iY/CozNzZ0BGDTZpeJSKcnW4bjRHv2HaOfuO8qmY+HEy37su11/sWiZsx2zbfqQFq3PIun/GGSpKFGdK8LEOZ9+/imAnJymFXOousZSr7cGUUKx1RbxzXYxAlmcBUPN22wY7ZtvncZcrGifeXGjDSL0aaJWUrjVgMJmSUnbFKHtjWz4vZ/F9iIi867oQHZwAAAABJRU5ErkJggg%3D%3D);
 }
 
-/* = 更新页面样式
+/* = 更新业务数据
 ----------------------------------------------- */
 .update .hint {
 	padding-bottom: 16px;
@@ -574,7 +597,7 @@ a.button-small {
 	height: 26px;
 }
 
-/* = 设置页面样式
+/* = 设置用户参数
 ----------------------------------------------- */
 .setting .select {
 	width: 250px;
@@ -584,11 +607,7 @@ a.button-small {
 	width: 236px;
 }
 
-.setting .submit {
-	padding-top: 8px;
-}
-
-/* = 搜索页面样式
+/* = 搜索模板模块
 ----------------------------------------------- */
 .search {
 	background: #f8f8fa;
@@ -661,9 +680,7 @@ a.button-small {
 }
 
 .search .item:hover {
-	border-color: #1f75cc;
 	text-decoration: none;
-	box-shadow: 0 0 2px #1f75cc;
 }
 
 .search .nickname {
@@ -682,12 +699,10 @@ a.button-small {
 }
 
 .search .item:hover .nickname {
-	background: #1f75cc;
 	color: #fff;
 }
 
 .search .action {
-	background: #1f75cc;
 	padding: 0 5px;
 	position: absolute;
 	top: 0;
@@ -711,6 +726,36 @@ a.button-small {
 	visibility: visible;
 }
 
+.search .my .item:hover {
+	border-color: #dd4b39;
+	box-shadow: 0 0 2px #dd4b39;
+}
+
+.search .my .item:hover .nickname,
+.search .my .action {
+	background: #dd4b39;
+}
+
+.search .all .item:hover {
+	border-color: #1f75cc;
+	box-shadow: 0 0 2px #1f75cc;
+}
+
+.search .all .item:hover .nickname,
+.search .all .action {
+	background: #1f75cc;
+}
+
+.search .more .item:hover {
+	border-color: #1aa95c;
+	box-shadow: 0 0 2px #1aa95c;
+}
+
+.search .more .item:hover .nickname,
+.search .more .action {
+	background: #1aa95c;
+}
+
 .search .load {
 	width: 60px;
 	margin: 0 auto;
@@ -731,4 +776,26 @@ a.button-small {
 	background: #fff;
 	width: 72px;
 	padding-left: 0;
+}
+
+/* = 新建拷贝模板
+----------------------------------------------- */
+.template-create .text,
+.template-create .textarea,
+.template-copy .text,
+.template-copy .textarea {
+	width: 250px;
+}
+
+.template-create .imgurl,
+.template-copy .imgurl {
+	width: 264px;
+	position: relative;
+}
+
+.template-create .imgurl .file,
+.template-copy .imgurl .file {
+	position: absolute;
+	top: 9px;
+	right: 9px;
 }

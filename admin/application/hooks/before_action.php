@@ -13,7 +13,7 @@ function before_action () {
 
 	// 检查本地数据
 	$db_dir = $ci->config->item('db');
-	$files = array('config', 'setting', 'template', 'module', 'types', 'authors');
+	$files = array('config', 'setting', 'template', 'module', 'type', 'author');
 	foreach ($files as $v) {
 		if (!file_exists($db_dir . '/' . $v . '.json')) {
 			header('Location: ' . base_url('update'));
