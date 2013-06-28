@@ -228,14 +228,14 @@ class Get extends CI_Model {
 
 			// 模块作者查询
 			if (!empty($args['author'])) {
-				if ($args['author'] === $data->author) {
+				if ($args['author'] !== $data->author) {
 					continue;
 				}
 			}
 
 			// 模块宽度查询
 			if (!empty($args['width'])) {
-				if ($args['width'] === $data->width) {
+				if ($args['width'] !== $data->width) {
 					continue;
 				}
 			}
@@ -289,14 +289,14 @@ class Get extends CI_Model {
 
 			// 模块作者查询
 			if (!empty($args['author'])) {
-				if ($args['author'] === $v['author']) {
+				if ($args['author'] !== $v['author']) {
 					continue;
 				}
 			}
 
 			// 模块宽度查询
 			if (!empty($args['width'])) {
-				if ($args['width'] === $v['width']) {
+				if ($args['width'] !== $v['width']) {
 					continue;
 				}
 			}
@@ -376,7 +376,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询模块类型
-	function types () {
+	function type () {
 
 		$this->load->library('json');
 

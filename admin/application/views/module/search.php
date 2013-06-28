@@ -16,7 +16,7 @@
 			<select class="select" name="width">
 				<option value="">所有宽度</option>
 <?php foreach ($widths as $v) : ?>
-					<option>990</option>
+					<option value="<?= $v ?>"<?= $v == $width ? ' selected="selected"' : '' ?>><?= $v === 0 ? '100%' : $v ?></option>
 <?php endforeach; ?>
 			</select>
 			<input type="text" class="text" name="q" value="<?= $q ?>" placeholder="模块名称、昵称、描述">
