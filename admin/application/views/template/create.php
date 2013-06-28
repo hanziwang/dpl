@@ -1,4 +1,4 @@
-<div class="content template-create">
+<div class="content template">
 	<div class="fieldset">
 		<div class="hd"><span>新建模板</span></div>
 		<div class="bd">
@@ -18,7 +18,7 @@
 				<div class="field clearfix">
 					<label class="label">所属市场：</label>
 					<div class="clearfix">
-						<select class="select" name="market">
+						<select class="select" name="market" required="required">
 							<option value="">选择市场</option>
 <?php foreach ($market as $v) : ?>
 							<option value="<?= $v->id ?>"><?= $v->fullName ?></option>

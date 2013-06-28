@@ -31,7 +31,7 @@ class Search extends CI_Controller {
 
 		// 读取市场列表
 		$this->load->model('get');
-		$args['market_all'] = $this->get->market();
+		$args['markets'] = $this->get->market();
 
 		$this->load->view('header', $args);
 		$this->load->view('template/search');

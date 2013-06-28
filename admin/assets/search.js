@@ -71,7 +71,7 @@ var search = {
 				} else {
 					list.append(self.substitute(self.render(d.data)));
 				}
-				self.index = d.index;
+				self.index = d.code;
 			},
 			dataType: 'json'
 		});

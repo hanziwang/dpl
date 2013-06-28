@@ -780,21 +780,17 @@ a.button-small {
 
 /* = 新建拷贝模板
 ----------------------------------------------- */
-.template-create .text,
-.template-create .textarea,
-.template-copy .text,
-.template-copy .textarea {
+.template .text,
+.template .textarea {
 	width: 250px;
 }
 
-.template-create .imgurl,
-.template-copy .imgurl {
+.template .imgurl {
 	width: 264px;
 	position: relative;
 }
 
-.template-create .imgurl .file,
-.template-copy .imgurl .file {
+.template .imgurl .file {
 	position: absolute;
 	top: 9px;
 	right: 9px;

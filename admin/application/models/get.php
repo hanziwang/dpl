@@ -96,14 +96,14 @@ class Get extends CI_Model {
 				$templates[] = $data;
 				if (isset($args['index']) && count($templates) === 10) {
 					return array(
-						'index' => $index,
+						'code' => $index,
 						'data' => $templates
 					);
 				}
 			}
 		}
 		return array(
-			'index' => $index,
+			'code' => $index,
 			'data' => $templates
 		);
 
@@ -147,6 +147,11 @@ class Get extends CI_Model {
 				}
 			}
 
+			// 检查业务规范
+			if (isset($v['configid']) && $config_id !== $v['configid']) {
+				continue;
+			}
+
 			// 过滤模板数据
 			$file = $www_dir . '/' . $v['marketid'] . '/' . $v['name'] . '/data.json';
 			if (file_exists($file)) {
@@ -162,13 +167,13 @@ class Get extends CI_Model {
 			// 收集模板数据
 			if (isset($args['index']) && count($templates) === 10) {
 				return array(
-					'index' => $index,
+					'code' => $index,
 					'data' => $templates
 				);
 			}
 		}
 		return array(
-			'index' => $index,
+			'code' => $index,
 			'data' => $templates
 		);
 
@@ -247,13 +252,13 @@ class Get extends CI_Model {
 			$modules[] = $data;
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
-					'index' => $index,
+					'code' => $index,
 					'data' => $modules
 				);
 			}
 		}
 		return array(
-			'index' => $index,
+			'code' => $index,
 			'data' => $modules
 		);
 
@@ -304,6 +309,11 @@ class Get extends CI_Model {
 				}
 			}
 
+			// 检查业务规范
+			if (isset($v['configid']) && $config_id !== $v['configid']) {
+				continue;
+			}
+
 			// 过滤模块数据
 			$file = $modules_dir . '/' . $v['name'] . '/data.json';
 			if (file_exists($file)) {
@@ -319,13 +329,13 @@ class Get extends CI_Model {
 			// 收集模块数据
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
-					'index' => $index,
+					'code' => $index,
 					'data' => $modules
 				);
 			}
 		}
 		return array(
-			'index' => $index,
+			'code' => $index,
 			'data' => $modules
 		);
 
@@ -394,7 +404,7 @@ class Get extends CI_Model {
 		$data = @file_get_contents($author);
 		$data = $this->json->decode($data);
 		foreach ($data as $k => &$v) {
-			if ($v->id !== $config_id) {
+			if ($v->configid !== $config_id) {
 				unset($data[$k]);
 			}
 		}

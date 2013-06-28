@@ -1,4 +1,4 @@
-<div class="search module-search">
+<div class="search">
 	<div class="toolbar">
 		<form class="form form-mini clearfix" method="get" action="<?= base_url('module/search') ?>">
 			<input type="hidden" name="filter" value="<?= $filter ?>">
@@ -13,17 +13,17 @@
 					<option<?= $v->name == $author ? ' selected="selected"' : '' ?>><?= $v->name ?></option>
 <?php endforeach; ?>
 			</select>
-			<select class="select" name="author">
+			<select class="select" name="width">
 				<option value="">所有宽度</option>
-<?php foreach ($authors as $v) : ?>
-					<option<?= $v->name == $author ? ' selected="selected"' : '' ?>><?= $v->name ?></option>
+<?php foreach ($widths as $v) : ?>
+					<option>990</option>
 <?php endforeach; ?>
 			</select>
 			<input type="text" class="text" name="q" value="<?= $q ?>" placeholder="模块名称、昵称、描述">
 			<button class="button button-small" type="submit">搜索一下</button>
 		</form>
 	</div>
-	<div class="result">
+	<div class="result <?= $filter ?>">
 		<ul class="list clearfix"></ul>
 		<div class="load">加载中</div>
 	</div>

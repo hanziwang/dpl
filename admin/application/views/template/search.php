@@ -1,4 +1,4 @@
-<div class="search template-search">
+<div class="search">
 	<div class="toolbar">
 		<form class="form form-mini clearfix" method="get" action="<?= base_url('template/search') ?>">
 			<input type="hidden" name="filter" value="<?= $filter ?>">
@@ -9,7 +9,7 @@
 			</span>
 			<select class="select" name="market">
 				<option value="">所有市场</option>
-<?php foreach ($market_all as $v) : ?>
+<?php foreach ($markets as $v) : ?>
 				<option value="<?= $v->id ?>"<?= $v->id == $market ? ' selected="selected"' : '' ?>><?= $v->fullName ?></option>
 <?php endforeach; ?>
 			</select>

@@ -7,7 +7,7 @@ class setting extends CI_Controller {
 
 	function index () {
 
-		sleep(1);
+		usleep(500000);
 		$args = array(
 			'id' => $this->input->get('id')
 		);
