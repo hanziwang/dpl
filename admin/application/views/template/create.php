@@ -2,7 +2,7 @@
 	<div class="fieldset">
 		<div class="hd"><span>新建模板</span></div>
 		<div class="bd">
-			<form class="form" method="post" action="<?= base_url('api/template/create') ?>">
+			<form class="form">
 				<div class="field clearfix">
 					<label class="label">模板名称：</label>
 					<div class="clearfix">
@@ -60,10 +60,23 @@
 			$('.text[name=author]').val(d);
 		}
 	});
-	$('.form').on('change', 'input[type=file]', function (e) {
-		var text = $(this).parents('.file').siblings('.text');
+	$('.file input').on('change', function (e) {
 		page.upload('<?= base_url('api/upload') ?>', e.currentTarget.files[0], function (url) {
-			text.val(url);
+			$('.imgurl .text').val(url);
+		});
+	});
+	$('.form').on('submit', function (e) {
+		e.preventDefault();
+		$.ajax({
+			type: 'post',
+			url: '<?= base_url('api/template_create') ?>',
+			data: $('.form').serialize(),
+			beforeSend: page.loading,
+			complete: page.unloading,
+			success: function (d) {
+				d.code === 200 ? location.replace('<?= base_url('template/search?filter=all&q=') ?>' + $('.text[name=name]').val()) : alert(d.message);
+			},
+			dataType: 'json'
 		});
 	});
 </script>

@@ -7,6 +7,7 @@ class Template_create extends CI_Controller {
 
 	function index () {
 
+		usleep(500000);
 		$args = $this->input->post();
 		$this->load->model('template');
 		$data = $this->template->create($args);

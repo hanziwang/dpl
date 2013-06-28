@@ -117,6 +117,7 @@ class Get extends CI_Model {
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
 		$db_dir = $this->config->item('db');
+		$config_id = $this->config->item('id', 'setting');
 		$template = $db_dir . '/template.json';
 
 		// 读取模板数据
@@ -266,6 +267,7 @@ class Get extends CI_Model {
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
 		$db_dir = $this->config->item('db');
+		$config_id = $this->config->item('id', 'setting');
 		$module = $db_dir . '/module.json';
 
 		// 读取模块数据

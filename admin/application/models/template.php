@@ -36,6 +36,7 @@ class Template extends CI_Model {
 		}
 
 		// 拷贝并重命名文件
+		@mkdir($template_dir . 'modules', 0777);
 		$data_dir = dirname(BASEPATH) . '/data/template/';
 		$this->dir->copy($data_dir, $template_dir);
 		$this->dir->chmod($template_dir, 0777);
@@ -54,7 +55,7 @@ class Template extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $this->config->item('id', 'config')
+			'configid' => $this->config->item('id', 'setting')
 		);
 
 		// 写入默认配置信息
