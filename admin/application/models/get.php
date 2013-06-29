@@ -234,7 +234,7 @@ class Get extends CI_Model {
 			}
 
 			// 模块宽度查询
-			if (!empty($args['width'])) {
+			if (trim($args['width']) !== '') {
 				if (intval($args['width']) !== intval($data->width)) {
 					continue;
 				}
@@ -295,7 +295,7 @@ class Get extends CI_Model {
 			}
 
 			// 模块宽度查询
-			if (!empty($args['width'])) {
+			if (trim($args['width']) !== '') {
 				if (intval($args['width']) !== intval($v['width'])) {
 					continue;
 				}
