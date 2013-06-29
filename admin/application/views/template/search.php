@@ -10,7 +10,7 @@
 			<select class="select" name="market">
 				<option value="">所有市场</option>
 <?php foreach ($markets as $v) : ?>
-				<option value="<?= $v->id ?>"<?= $v->id == $market ? ' selected="selected"' : '' ?>><?= $v->fullName ?></option>
+				<option value="<?= $v->id ?>"<?= intval($v->id) === intval($market) ? ' selected="selected"' : '' ?>><?= $v->fullName ?></option>
 <?php endforeach; ?>
 			</select>
 			<input type="text" class="text" name="q" value="<?= $q ?>" placeholder="模板名称、昵称、描述">

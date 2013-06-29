@@ -42,7 +42,7 @@ class Grid extends CI_Model {
 			foreach ($match[2] as $v2) {
 				if ($v2 === '') {
 					$r[] = '100%';
-				} elseif ($v2 === '0') {
+				} elseif (intval($v2) === 0) {
 					$r[] = ($rule['n'] - array_sum($match[2])) * $rule['c'] - $rule['g'];
 				} else {
 					$r[] = $v2 * $rule['c'] - $rule['g'];

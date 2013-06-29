@@ -8,7 +8,7 @@
 					<div class="clearfix">
 						<select class="select" name="id">
 <?php foreach ($config as $v) : ?>
-							<option value="<?= $v->id ?>" data-src="<?= $src . '/' . $v->code ?>"<?= $v->id === $setting['id'] ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
+							<option value="<?= $v->id ?>" data-src="<?= $src . '/' . $v->code ?>"<?= intval($v->id) === intval($setting['id']) ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
 <?php endforeach; ?>
 						</select>
 					</div>

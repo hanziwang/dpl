@@ -34,7 +34,7 @@ class Get extends CI_Model {
 		$data = @file_get_contents($market);
 		$data = $this->json->decode($data);
 		foreach ($data as $k => &$v) {
-			if ($v->configId !== $config_id) {
+			if (intval($v->configId) !== intval($config_id)) {
 				unset($data[$k]);
 			}
 		}
@@ -148,7 +148,7 @@ class Get extends CI_Model {
 			}
 
 			// 检查业务规范
-			if (isset($v['configid']) && $config_id !== $v['configid']) {
+			if (isset($v['configid']) && intval($config_id) !== intval($v['configid'])) {
 				continue;
 			}
 
@@ -235,7 +235,7 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (!empty($args['width'])) {
-				if ($args['width'] !== $data->width) {
+				if (intval($args['width']) !== intval($data->width)) {
 					continue;
 				}
 			}
@@ -296,7 +296,7 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (!empty($args['width'])) {
-				if ($args['width'] !== $v['width']) {
+				if (intval($args['width']) !== intval($v['width'])) {
 					continue;
 				}
 			}
@@ -310,7 +310,7 @@ class Get extends CI_Model {
 			}
 
 			// 检查业务规范
-			if (isset($v['configid']) && $config_id !== $v['configid']) {
+			if (isset($v['configid']) && intval($config_id) !== intval($v['configid'])) {
 				continue;
 			}
 
@@ -391,7 +391,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询模块作者
-	function authors () {
+	function author () {
 
 		$this->load->library('json');
 
@@ -404,7 +404,7 @@ class Get extends CI_Model {
 		$data = @file_get_contents($author);
 		$data = $this->json->decode($data);
 		foreach ($data as $k => &$v) {
-			if ($v->configid !== $config_id) {
+			if (intval($v->configid) !== intval($config_id)) {
 				unset($data[$k]);
 			}
 		}
