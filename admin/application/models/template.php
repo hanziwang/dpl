@@ -14,6 +14,7 @@ class Template extends CI_Model {
 		$www_dir = $this->config->item('www');
 		$market_dir = $www_dir . '/' . $args['market'] . '/';
 		$template_dir = $market_dir . $args['name'] . '/';
+		$config_id = $this->config->item('id', 'setting');
 
 		// 创建市场根目录
 		if (!file_exists($www_dir)) {
@@ -55,7 +56,7 @@ class Template extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $this->config->item('id', 'setting')
+			'configid' => strval($config_id)
 		);
 
 		// 写入默认配置信息

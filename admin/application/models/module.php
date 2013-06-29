@@ -27,6 +27,7 @@ class Module extends CI_Model {
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
 		$module_dir = $this->_base_dir($args);
+		$config_id = $this->config->item('id', 'config');
 
 		// 创建模块根目录
 		if (!file_exists($modules_dir)) {
@@ -64,7 +65,7 @@ class Module extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => $this->config->item('id', 'config')
+			'configid' => strval($config_id)
 		);
 
 		// 替换模块占位符
