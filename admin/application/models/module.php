@@ -182,13 +182,13 @@ class Module extends CI_Model {
 	}
 
 	// 拷贝模块
-	function copy ($path, $args) {
+	function copy ($args) {
 
 		$this->load->library(array('dir', 'json'));
 
 		// 配置基础路径
 		$module_dir = $this->_base_dir($args);
-		$path_dir = $this->config->item('src') . '/' . $path . '/';
+		$path_dir = $this->config->item('src') . '/' . $args['path'] . '/';
 
 		// 创建模块目录
 		if (!file_exists($module_dir)) {
@@ -203,7 +203,7 @@ class Module extends CI_Model {
 
 		// 拷贝模块文件
 		$handle = opendir($path_dir);
-		$search = substr($path, strpos($path, '/') + 1);
+		$search = substr($args['path'], strpos($args['path'], '/') + 1);
 		while ($file = readdir($handle)) {
 			if ($file !== '.' && $file !== '..') {
 				$file1 = $path_dir . $file;

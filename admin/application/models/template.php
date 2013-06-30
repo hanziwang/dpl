@@ -163,14 +163,14 @@ class Template extends CI_Model {
 	}
 
 	// 拷贝模板
-	function copy ($path, $args) {
+	function copy ($args) {
 
 		$this->load->library(array('dir', 'json'));
 
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
-		$market_dir = $www_dir . '/' . $args['marketid'] . '/';
-		$path_dir = $www_dir . '/' . $path . '/';
+		$market_dir = $www_dir . '/' . $args['market'] . '/';
+		$path_dir = $www_dir . '/' . $args['path'] . '/';
 		$template_dir = $market_dir . $args['name'] . '/';
 
 		// 创建市场根目录
@@ -196,7 +196,7 @@ class Template extends CI_Model {
 
 		// 拷贝模板文件
 		$handle = opendir($path_dir);
-		$search = substr($path, strpos($path, '/') + 1);
+		$search = substr($args['path'], strpos($args['path'], '/') + 1);
 		while ($file = readdir($handle)) {
 			if ($file !== '.' && $file !== '..') {
 				$file1 = $path_dir . $file;
@@ -220,7 +220,7 @@ class Template extends CI_Model {
 		$data = $this->json->decode($data);
 		$data->name = $args['name'];
 		$data->nickname = $args['nickname'];
-		$data->marketid = $args['marketid'];
+		$data->marketid = $args['market'];
 		$data->author = $args['author'];
 		$data->description = $args['description'];
 		$data->imgurl = $args['imgurl'];
