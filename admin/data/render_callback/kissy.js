@@ -1,8 +1,7 @@
 /**
- * 模块脚本统一初始化（适用于 KISSY 环境）
- * @author 邦彦<bangyan@taobao.com>
+ * 模块脚本统一初始化（适用于 kissy 1.2+ 环境）
  */
-(function (S) {
+KISSY.use('node', function (S) {
 
 	// 定义单模块渲染回调函数
 	window.renderCallback = function (box, module) {
@@ -20,4 +19,4 @@
 		renderCallback(box, S.one(box).one('.tb-module')[0]);
 	});
 
-})(KISSY);
+});

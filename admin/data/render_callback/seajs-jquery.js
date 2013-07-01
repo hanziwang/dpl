@@ -1,8 +1,7 @@
 /**
  * 模块脚本统一初始化（适用于 seajs + jquery 环境）
- * @author 邦彦<bangyan@taobao.com>
  */
-(function () {
+(function ($) {
 
 	// 定义单模块渲染回调函数
 	window.renderCallback = function (box, module) {
@@ -21,4 +20,4 @@
 		renderCallback($(this), $(this).find('.tb-module'))
 	});
 
-})();
+})(jQuery);
