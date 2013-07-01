@@ -1,2 +1,2 @@
-httpd -k restart -n "DPL Service"
+httpd -k restart -n "DPL Client"
 pause

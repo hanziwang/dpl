@@ -1,3 +1,3 @@
-httpd -k stop -n "DPL Service"
-httpd -k uninstall -n "DPL Service"
+httpd -k stop -n "DPL Client"
+httpd -k uninstall -n "DPL Client"
 pause
