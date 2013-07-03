@@ -319,7 +319,7 @@ class Template extends CI_Model {
 	}
 
 	// 下载模板
-	public function download ($url, $args) {
+	function download ($url, $args) {
 
 		$this->load->library(array('dir', 'unzip'));
 
@@ -404,6 +404,25 @@ class Template extends CI_Model {
 				'data' => $template_dir
 			);
 		}
+
+	}
+
+	// 读取模板文件
+	function read ($args) {
+
+		// 配置基础路径
+		$www_dir = $this->config->item('www');
+		$market_dir = $www_dir . '/' . $args['market'] . '/';
+		$template_dir = $market_dir . '/' . $args['name'] . '/';
+
+		// 读取样式、脚本
+		$data = array('css' => '', 'js' => '');
+		foreach ($data as &$v) {
+			$file = $args['name'] . '.' . $v;
+			$v = @file_get_contents($template_dir . $file);
+			$v = $v ? $v : '';
+		}
+		return $data;
 
 	}
 

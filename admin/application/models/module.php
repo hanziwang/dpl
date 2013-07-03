@@ -6,7 +6,7 @@
 class Module extends CI_Model {
 
 	// 获取模块路径
-	function base_dir ($args) {
+	function _base_dir ($args) {
 
 		// 处理私有模块和公共模块的路径差异
 		if (!empty($args['market']) && !empty($args['template'])) {
@@ -26,7 +26,7 @@ class Module extends CI_Model {
 
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
-		$module_dir = $this->base_dir($args);
+		$module_dir = $this->_base_dir($args);
 		$config_id = $this->config->item('id', 'config');
 
 		// 创建模块根目录
@@ -107,7 +107,7 @@ class Module extends CI_Model {
 		$this->load->library('json');
 
 		// 配置基础路径
-		$module_dir = $this->base_dir($args);
+		$module_dir = $this->_base_dir($args);
 
 		// 排除模块不存在的情况
 		if (!file_exists($module_dir)) {
@@ -173,7 +173,7 @@ class Module extends CI_Model {
 		$this->load->library('json');
 
 		// 配置基础路径
-		$module_dir = $this->base_dir($args);
+		$module_dir = $this->_base_dir($args);
 
 		// 读取配置信息
 		$defaults = @file_get_contents($module_dir . 'data.json');
@@ -187,7 +187,7 @@ class Module extends CI_Model {
 		$this->load->library(array('dir', 'json'));
 
 		// 配置基础路径
-		$module_dir = $this->base_dir($args);
+		$module_dir = $this->_base_dir($args);
 		$path_dir = $this->config->item('src') . '/' . $args['path'] . '/';
 
 		// 创建模块目录
@@ -254,7 +254,7 @@ class Module extends CI_Model {
 		$this->load->library(array('dir', 'json', 'zip', 'snoopy'));
 
 		// 配置基础路径
-		$module_dir = $this->base_dir($args);
+		$module_dir = $this->_base_dir($args);
 		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('id', 'setting');
 
@@ -326,7 +326,7 @@ class Module extends CI_Model {
 	}
 
 	// 下载模块
-	public function download ($url, $args) {
+	function download ($url, $args) {
 
 		$this->load->library(array('dir', 'unzip'));
 
@@ -406,6 +406,46 @@ class Module extends CI_Model {
 			);
 		}
 
+	}
+
+	// 读取模块文件
+	function read ($args) {
+
+		$this->load->library('lessc');
+		$this->load->model('get');
+
+		// 配置基础路径、参数
+		$module_dir = $this->_base_dir($args);
+		$data = array();
+		$name = $module_dir . $args['name'];
+
+		// 读取默认皮肤
+		$markets = $this->get->market();
+		foreach ($markets as $v) {
+			if (intval($v->id) === intval($args['market'])) {
+				$data['skin'] = $v->color;
+				break;
+			}
+		}
+		$file = $module_dir . 'skin/default.less';
+		$data['skin'] .= @file_get_contents($file);
+		$data['skin'] = $this->lessc->parse($data['skin']);
+
+		// 读取样式
+		$file = $name . '.less';
+		if ($data['css'] = @file_get_contents($file)) {
+			$data['css'] = $this->lessc->parse($data['css']);
+		} else {
+			$file = $name . '.css';
+			$data['css'] = @file_get_contents($file);
+		}
+
+		// 读取脚本、模拟数据、源代码
+		$data['js'] = @file_get_contents($name . '.js');
+		$data['json'] = $name . '.json';
+		$data['php'] = @file_get_contents($name . '.php');
+		$data['php'] = @iconv('GBK', 'UTF-8//IGNORE', $data['php']);
+		return $data;
 	}
 
 }

@@ -1,28 +1,63 @@
-<?php header('content-type:text/html;charset=UTF-8'); ?>
-<?php _tms_import($path . $name . '.json'); ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="gbk">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<title>im-img-a1</title>
-<link rel="stylesheet" href="http://a.tbcdn.cn/??tbsp/tbsp.css,p/global/1.0/global-min.css">
-<script src="http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js"></script>
-<style>
-<?= $css ?>
-<?= $less ?>
-</style>
+<?php _tms_import($module['json']); ?>
+<?php header('Content-type:text/html;charset=UTF-8'); ?>
+<?= $header ?>
+<link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
 </head>
 <body>
-<div class="J_Module skin-default" data-name="im-img-a1" style="margin-top:50px;margin-left:50px;">
-<?= eval(' ?>' . $content . '<?php '); ?>
+<div id="page">
+	<div id="content">
+		<div class="layout grid-m0">
+<!-- 模块开始 -->
+<style>
+<?= $module['css'] ?>
+<?= $module['skin'] ?>
+</style>
+<div class="J_Module skin-default" data-name="<?= $name ?>">
+<?= eval(' ?>' . $module['php'] . '<?php '); ?>
 </div>
 <script>
-<?= $js ?>
+<?= $module['js'] ?>
 </script>
+<!-- 模块结束 -->
+		</div>
+	</div>
+</div>
+<script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
+<?php $id = md5($name); ?>
+<style>
+#page {
+	padding-top: 69px;
+}
+#span-<?= $id ?> {
+	background: rgba(255, 255, 255, 0.8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 20px;
+}
+#select-<?= $id ?> {
+	border: 1px solid #d9d9d9;
+	border-top: 1px solid #c0c0c0;
+	font-size: 12px;
+	font-family: arial;
+	border-radius: 1px;
+	margin: 0;
+	padding: 5px;
+}
+</style>
+<span id="span-<?= $id ?>">
+	<select id="select-<?= $id ?>">
+<?php foreach ($markets as $v) : ?>
+	<option value="<?= $v->id ?>"<?= intval($v->id) === intval($market) ? ' selected="selected"' : '' ?>><?= $v->fullName ?></option>
+<?php endforeach; ?>
+	</select>
+</span>
 <script>
-<?= $render_callback ?>
+document.getElementsByTagName('title')[0].innerHTML = '<?= $name ?> &lsaquo; 模块管理';
+document.getElementById('select-<?= $id ?>').onchange = function (e) {
+	location.href = '<?= base_url('module/design?name=' . $name . '&market=') ?>' + e.target.value;
+}
 </script>
-<?php _tms_export($path . $name . '.json'); ?>
 </body>
 </html>
+<?php _tms_export($module['json']); ?>

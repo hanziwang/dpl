@@ -185,8 +185,6 @@ if (!function_exists('_tms_import')) {
 		// 从指定文件导入数据
 		if (file_exists($filename)) {
 			_tms_io($filename, 'import');
-		} else {
-			_tms_error('No such file <b>' . $filename . '</b> ');
 		}
 
 	}
@@ -209,9 +207,9 @@ if (!function_exists('_tms_export')) {
 
 		// 导出数据到指定文件
 		$data = json_encode($GLOBALS['_tms_export'], true);
-		$replace = "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))";
-		$data = preg_replace('#\\\u([0-9a-f]{4})#ie', $replace, $data);
+		$data = preg_replace('#\\\u([0-9a-f]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $data);
 		@file_put_contents($filename, _tms_format($data));
+		@chmod($filename, 0777);
 		$GLOBALS['_tms_export'] = array();
 
 	}

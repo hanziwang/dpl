@@ -1,32 +1,37 @@
 <?php
 
 /**
- * 设计模块控制器
+ * 调试模块控制器
  */
 class Design extends CI_Controller {
 
 	public function index () {
 
 		$this->load->helper('tms');
-		$this->load->library('lessc');
-		$this->load->model('module');
-		$setting = $this->config->item('setting');
-		$args = array (
+		$this->load->model(array('get', 'market', 'module'));
+		$args = array(
 			'title' => '设计模块 &lsaquo; 模块管理',
+			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
 			'template' => $this->input->get('template'),
 			'name' => $this->input->get('name')
 		);
-		$path = $this->module->base_dir($args);
-		$args['path'] = $path;
-		$files['css'] = @file_get_contents($path . $args['name'] . '.css');
-		$files['less'] = @file_get_contents($path . 'skin/default.less');
-		$files['js'] = @file_get_contents($path . $args['name'] . '.js');
-		$files['less'] = $this->lessc->parse($files['less']);
-		$files['content'] = @file_get_contents($path . $args['name'] . '.php');
-		$files['content'] = @iconv('GBK', 'UTF-8//IGNORE', $files['content']);
-		$files['render_callback'] = @file_get_contents($data_dir = dirname(BASEPATH) . '/data/render_callback/' . $setting['module'] . '.js');
-		$args = array_merge($args, $files);
+
+		// 读取业务规范、市场
+		$args['setting'] = $this->config->item('setting');
+		$args['markets'] = $this->get->market();
+		if (empty($args['market'])) {
+			$markets = $args['markets'];
+			$args['market'] = $markets[array_rand($markets)]->id;
+		}
+
+		// 读取页头、模块
+		$header = $this->market->read(array(
+			'id' => $args['market']
+		))['header'];
+		$args['header'] = substr($header, 0, strpos($header, '</head>'));
+		$args['module'] = $this->module->read($args);
+
 		$this->load->view('module/design', $args);
 
 	}

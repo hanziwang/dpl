@@ -45,4 +45,35 @@ class Market extends CI_Model {
 
 	}
 
+	// 查询市场
+	function select ($args) {
+
+		$this->load->model('get');
+		$markets = $this->get->market();
+		foreach ($markets as $v) {
+			if (intval($v->id) === intval($args['id'])) {
+				return $v;
+			}
+		}
+
+	}
+
+	// 读取市场文件
+	function read ($args) {
+
+		// 配置基础路径
+		$www_dir = $this->config->item('www');
+		$market_dir = $www_dir . '/' . $args['id'] . '/';
+
+		// 读取页头、导航、页尾
+		$data = array('header' => '', 'nav' => '', 'footer' => '');
+		foreach ($data as $k => &$v) {
+			$file = $market_dir . '__' . $k . '.php';
+			$v = @file_get_contents($file);
+			$v = @iconv('GBK', 'UTF-8//IGNORE', $v ? $v : '');
+		}
+		return $data;
+
+	}
+
 }
