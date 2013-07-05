@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 更新接口控制器
+ * 更新业务数据接口控制器
  */
 class Update extends CI_Controller {
 

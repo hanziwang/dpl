@@ -21,9 +21,9 @@
 					<div class="clearfix">
 						<select class="select select-disabled" disabled="disabled">
 							<option value="">选择市场</option>
-<?php foreach ($markets as $v) : ?>
-							<option value="<?= $v->id ?>"<?= intval($market) === intval($v->id) ? ' selected="selected"' : '' ?>><?= $v->fullName ?></option>
-<?php endforeach; ?>
+<?php foreach ($markets as $v) : if (intval($market) === intval($v->id)) : ?>
+							<option value="<?= $v->id ?>"><?= $v->fullName ?></option>
+<?php endif; endforeach; ?>
 						</select>
 						<input type="hidden" name="market" value="<?= $market ?>">
 					</div>
@@ -55,13 +55,6 @@
 	</div>
 </div>
 <script>
-	$.ajax({
-		dataType: 'jsonp',
-		url: '//www.taobao.com/go/market/dpl/tracknick.php',
-		success: function (d) {
-			$('.text[name=author]').val(d);
-		}
-	});
 	$('.file input').on('change', function (e) {
 		page.upload('<?= base_url('api/upload') ?>', e.currentTarget.files[0], function (url) {
 			$('.imgurl .text').val(url);

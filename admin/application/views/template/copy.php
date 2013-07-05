@@ -54,13 +54,6 @@
 	</div>
 </div>
 <script>
-	$.ajax({
-		dataType: 'jsonp',
-		url: '//www.taobao.com/go/market/dpl/tracknick.php',
-		success: function (d) {
-			$('.text[name=author]').val(d);
-		}
-	});
 	$('.file input').on('change', function (e) {
 		page.upload('<?= base_url('api/upload') ?>', e.currentTarget.files[0], function (url) {
 			$('.imgurl .text').val(url);

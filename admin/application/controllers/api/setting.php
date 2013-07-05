@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 设置接口控制器
+ * 设置用户参数接口控制器
  */
 class setting extends CI_Controller {
 
