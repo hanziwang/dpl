@@ -26,88 +26,8 @@ defined('_TMS_IMAGE') or define('_TMS_IMAGE', 'http://img.f2e.taobao.net/img.png
 defined('_TMS_LINK') or define('_TMS_LINK', 'http://www.taobao.com/');
 defined('_TMS_TEXT') or define('_TMS_TEXT', 'string');
 
-/* = 设置全局数据堆栈
------------------------------------------------ */
-$GLOBALS['_tms_import'] = array();
-$GLOBALS['_tms_export'] = array();
-
 /* = 基础函数
 ----------------------------------------------- */
-/**
- * 将字符串编码为 utf-8 格式
- * @param string $args
- * @return array
- * @private
- */
-if (!function_exists('_tms_encode')) {
-
-	function _tms_encode ($str) {
-
-		if (!@mb_check_encoding($str, 'UTF-8')) {
-			$str = @mb_convert_encoding($str, 'UTF-8', @mb_detect_encoding($str));
-		}
-		return $str;
-
-	}
-
-}
-
-/**
- * 抛出标签错误信息
- * @param string $error_msg
- * @return string
- * @private
- */
-if (!function_exists('_tms_error')) {
-
-	function _tms_error ($error_msg) {
-
-		try {
-			$error = '<b>Fatal error: </b> ';
-			throw new Exception();
-		} catch (Exception $e) {
-			$trace = $e->getTrace();
-			$trace = array_pop($trace);
-			$error .= str_replace('{function}', $trace['function'], $error_msg);
-			$error .= 'in <b>' . $trace['file'] . '</b> ';
-			$error .= 'on line <b>' . $trace['line'] . '</b><br>';
-			exit($error);
-		}
-
-	}
-
-}
-
-/**
- * 检查标签参数语法
- * @param array $args
- * @param array $keys
- * @return string
- * @private
- */
-if (!function_exists('_tms_syntax')) {
-
-	function _tms_syntax ($args, $keys) {
-
-		// 检查参数是否合法
-		if (empty($args)) {
-			_tms_error('Invalid argument in call to <b>{function}()</b> ');
-		}
-
-		// 检查参数是否缺少字段，或字段值错误
-		foreach ($keys as $v) {
-			if (empty($args[$v])) {
-				_tms_error('Undefined index: <b>' . $v . '</b> ');
-			}
-		}
-
-		// 校验通过
-		return true;
-
-	}
-
-}
-
 /**
  * 将 JSON 字符串转换为可读格式
  * @param string $json
@@ -154,20 +74,39 @@ if (!function_exists('_tms_format')) {
 }
 
 /**
- * 标签输入输出控制器
+ * 将字符串编码为 utf-8 格式
+ * @param string $args
+ * @return array
+ * @private
+ */
+if (!function_exists('_tms_encode')) {
+
+	function _tms_encode ($str) {
+
+		if (@mb_detect_encoding($str) !== 'UTF-8') {
+			$str = @mb_convert_encoding($str, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
+		}
+		return $str;
+
+	}
+
+}
+
+/**
+ * 标签导出导出控制器
  * @param string $filename
- * @param string $io
+ * @param string $action
  * @return void
  */
-if (!function_exists('_tms_io')) {
+if (!function_exists('_tms_data')) {
 
-	function _tms_io ($filename, $io) {
+	function _tms_data ($filename, $action) {
 
 		$data = @file_get_contents($filename);
 		$data = _tms_encode($data);
 		$data = json_decode($data, true);
 		$data = $data ? $data : array();
-		$GLOBALS['_tms_' . $io] = array_merge($GLOBALS['_tms_' . $io], $data);
+		$GLOBALS['_tms_' . $action] = array_merge($GLOBALS['_tms_' . $action], $data);
 
 	}
 
@@ -182,9 +121,12 @@ if (!function_exists('_tms_import')) {
 
 	function _tms_import ($filename) {
 
+		$GLOBALS['_tms_file'] = substr($filename, 0, -5) . '.php';
+		$GLOBALS['_tms_import'] = array();
+
 		// 从指定文件导入数据
 		if (file_exists($filename)) {
-			_tms_io($filename, 'import');
+			_tms_data($filename, 'import');
 		}
 
 	}
@@ -200,9 +142,11 @@ if (!function_exists('_tms_export')) {
 
 	function _tms_export ($filename) {
 
+		$GLOBALS['_tms_export'] = array();
+
 		// 预读并保留原始数据
 		if (file_exists($filename)) {
-			_tms_io($filename, 'export');
+			_tms_data($filename, 'export');
 		}
 
 		// 导出数据到指定文件
@@ -211,6 +155,63 @@ if (!function_exists('_tms_export')) {
 		@file_put_contents($filename, _tms_format($data));
 		@chmod($filename, 0777);
 		$GLOBALS['_tms_export'] = array();
+
+	}
+
+}
+
+/**
+ * 抛出标签错误信息
+ * @param string $error_msg
+ * @return string
+ * @private
+ */
+if (!function_exists('_tms_error')) {
+
+	function _tms_error ($error) {
+
+		try {
+			throw new Exception($error);
+		} catch (Exception $e) {
+			$trace = $e->getTrace()[4];
+			$trace['file'] = $GLOBALS['_tms_file'];
+			$trace['args'] = $trace['args'][0];
+			$trace['message'] = $e->getMessage();
+			foreach ($trace as $k => $v) {
+				echo ucfirst($k) . ': ' . $v . "\r\n";
+			}
+
+		}
+
+	}
+
+}
+
+/**
+ * 检查标签参数语法
+ * @param array $args
+ * @param array $keys
+ * @return string
+ * @private
+ */
+if (!function_exists('_tms_syntax')) {
+
+	function _tms_syntax ($args, $keys) {
+
+		// 检查参数是否为空
+		if (empty($args)) {
+			_tms_error('参数为空');
+		}
+
+		// 检查参数字段是否未设置或为空
+		foreach ($keys as $v) {
+			if (empty($args[$v])) {
+				_tms_error('参数字段 ' . $v . ' 未设置或为空');
+			}
+		}
+
+		// 校验通过
+		return true;
 
 	}
 

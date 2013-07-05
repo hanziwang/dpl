@@ -31,7 +31,7 @@
 			};
 		$('.progress').show('fast', function () {
 			target.addClass('button-disabled').attr('disabled', true).html('正在下载数据，请稍候');
-			ajax(['config', 'market', 'template', 'module', 'types', 'authors']);
+			ajax(['config', 'market', 'template', 'module', 'type', 'author']);
 		});
 	});
 </script>

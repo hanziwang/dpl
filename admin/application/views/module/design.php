@@ -1,4 +1,3 @@
-<?php _tms_import($module['json']); ?>
 <?php header('Content-type:text/html;charset=UTF-8'); ?>
 <?= $header ?>
 <link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
@@ -13,7 +12,11 @@
 <?= $module['skin'] ?>
 </style>
 <div class="J_Module skin-default" data-name="<?= $name ?>">
-<?= eval(' ?>' . $module['php'] . '<?php '); ?>
+<?php
+_tms_import($module['json']);
+eval(' ?>' . $module['php'] . '<?php ');
+_tms_export($module['json']);
+?>
 </div>
 <script>
 <?= $module['js'] ?>
@@ -53,11 +56,10 @@
 	</select>
 </span>
 <script>
-document.getElementsByTagName('title')[0].innerHTML = '<?= $name ?> &lsaquo; 模块管理';
+document.getElementsByTagName('title')[0].innerHTML = '<?= $name ?>';
 document.getElementById('select-<?= $id ?>').onchange = function (e) {
 	location.href = '<?= base_url('module/design?name=' . $name . '&market=') ?>' + e.target.value;
 }
 </script>
 </body>
 </html>
-<?php _tms_export($module['json']); ?>
