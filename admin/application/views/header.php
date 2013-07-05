@@ -29,7 +29,7 @@
 		<li class="item parent">
 			<a class="explore" href="javascript:;">模块管理</a>
 			<ul class="submenu">
-				<li><a href="<?= base_url('module/create') ?>">新建公共模块</a></li>
+				<li><a href="<?= base_url('module/create') ?>">新建模块</a></li>
 				<li><a href="<?= base_url('module/search?filter=all') ?>">所有模块</a></li>
 				<li><a href="<?= base_url('module/search?filter=my') ?>">我的模块</a></li>
 			</ul>

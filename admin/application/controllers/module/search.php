@@ -32,9 +32,9 @@ class Search extends CI_Controller {
 		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
 
 		// 读取模块作者、宽度列表
-		$this->load->model(array('get', 'grid'));
+		$this->load->model(array('get', 'layout'));
 		$args['authors'] = $this->get->author();
-		$args['widths'] = $this->grid->width();
+		$args['widths'] = $this->layout->width();
 
 		$this->load->view('header', $args);
 		$this->load->view('module/search');

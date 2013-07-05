@@ -1,9 +1,9 @@
 <?php
 
 /**
- * 设计模型
+ * 布局模型
  */
-class Grid extends CI_Model {
+class Layout extends CI_Model {
 
 	// 栅格公式
 	private $rules = array(

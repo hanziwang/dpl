@@ -91,7 +91,7 @@
 			beforeSend: page.loading,
 			complete: page.unloading,
 			success: function (d) {
-				d.code !== 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + name : alert(d.message);
+				d.code === 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + name : alert(d.message);
 			}
 		});
 	});

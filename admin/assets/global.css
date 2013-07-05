@@ -778,20 +778,63 @@ a.button-small {
 	padding-left: 0;
 }
 
-/* = 新建拷贝模板
+/* = 新建、编辑、拷贝模板和模块
 ----------------------------------------------- */
 .template .text,
-.template .textarea {
+.template .textarea,
+.module .text,
+.module .textarea {
 	width: 250px;
 }
 
-.template .imgurl {
+.template .imgurl,
+.module .imgurl {
 	width: 264px;
 	position: relative;
 }
 
-.template .imgurl .file {
+.template .imgurl .file,
+.module .imgurl .file {
 	position: absolute;
 	top: 9px;
 	right: 9px;
+}
+
+.cat-select {
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.cat-selected span {
+	color: green;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.cat-selected span a {
+	background-image: url(data:image/gif;base64,R0lGODlhFAAKALMAAPKTk/Oenva3t/jIyPnT0/rY2P///+np6ebm5uDg4NbW1sjIyMLCwv///wAAAAAAACH5BAEAAA0ALAAAAAAUAAoAAARjsLWj1lJHyiJCEIWWMGSZSAOgrsPEGAiJGMxRAAahEgZQKIwZQshQCAA8QhIgWMgMMNIisIPqAAFnEBpjTKs5VQAoJBqRuaXg8OrOarcw2tcYlUinRmqlakkoFhgaDRweIBIRADs%3D);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	color: green;
+	margin-right: 3px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	vertical-align: middle;
+}
+
+.cat-selected span a:hover {
+	background-position: -10px 0;
+}
+
+.cat-unselected {
+	background: #F9F9F9;
+	border: 1px solid #DDD;
+	padding: 10px 15px;
+	margin-top: 10px;
+}
+
+.cat-unselected a {
+	margin-right: 8px;
+	white-space: nowrap;
 }

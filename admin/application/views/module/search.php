@@ -37,11 +37,11 @@
 		</a>
 		<ul class="action clearfix">
 			<li><a href="<?= base_url('module/edit?name={name}') ?>">编辑</a></li>
-			<li><a href="<?= base_url('module/design?name={name}') ?>" target="_blank">调试</a></li>
 			<li><a href="<?= base_url('module/copy?name={name}') ?>">拷贝</a></li>
-			<?php if ($filter === 'my') : ?>
-				<li><a href="javascript:;" class="upload" data-name="{name}">上传模块</a></li>
-			<?php endif; ?>
+			<li><a href="<?= base_url('module/design?name={name}') ?>" target="_blank">调试</a></li>
+<?php if ($filter === 'my') : ?>
+			<li><a href="javascript:;" class="upload" data-name="{name}">上传模块</a></li>
+<?php endif; ?>
 		</ul>
 	</li>
 </script>
@@ -54,7 +54,7 @@
 			<img src="{imgurl}_250x250.jpg" alt="">
 		</a>
 		<ul class="action clearfix">
-			<li><a href="javascript:;" class="download" data-id="{id}">下载</a></li>
+			<li><a href="javascript:;" class="download" data-id="{id}" data-name="{name}">下载</a></li>
 		</ul>
 	</li>
 </script>
@@ -68,3 +68,38 @@
 		q: '<?= $q ?>'
 	});
 </script>
+<?php if ($filter === 'my') : ?>
+<script>
+	$('.my').on('click', '.upload', function () {
+		var target = $(this),
+			name = target.attr('data-name');
+		$.ajax({
+			dataType: 'json',
+			url: '<?= base_url('api/module_upload') ?>?name=' + name,
+			beforeSend: page.loading,
+			complete: page.unloading,
+			success: function (d) {
+				d.code === 200 ? location.href = '<?= base_url('module/search?filter=my&q=') ?>' + name : alert(d.message);
+			}
+		});
+	});
+</script>
+<?php endif; ?>
+<?php if ($filter === 'more') : ?>
+<script>
+	$('.more').on('click', '.download', function () {
+		var target = $(this),
+			id = target.attr('data-id'),
+			name = target.attr('data-name');
+		$.ajax({
+			dataType: 'json',
+			url: '<?= base_url('api/module_download') ?>?id=' + id,
+			beforeSend: page.loading,
+			complete: page.unloading,
+			success: function (d) {
+				d.code === 200 ? location.href = '<?= base_url('module/search?filter=my&q=') ?>' + name : alert(d.message);
+			}
+		});
+	});
+</script>
+<?php endif; ?>
