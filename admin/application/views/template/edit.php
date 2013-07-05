@@ -22,7 +22,7 @@
 						<select class="select select-disabled" disabled="disabled">
 							<option value="">选择市场</option>
 <?php foreach ($markets as $v) : if (intval($market) === intval($v->id)) : ?>
-							<option value="<?= $v->id ?>"><?= $v->fullName ?></option>
+							<option value="<?= $v->id ?>" selected="selected"><?= $v->fullName ?></option>
 <?php endif; endforeach; ?>
 						</select>
 						<input type="hidden" name="market" value="<?= $market ?>">
@@ -69,7 +69,7 @@
 			beforeSend: page.loading,
 			complete: page.unloading,
 			success: function (d) {
-				d.code === 200 ? location.href = '<?= base_url('template/search?filter=all&q=') ?>' + $('input[name=name]').val() : alert(d.message);
+				d.code === 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + $('input[name=name]').val() : alert(d.message);
 			},
 			dataType: 'json'
 		});

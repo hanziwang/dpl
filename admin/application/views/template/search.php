@@ -48,7 +48,7 @@
 			<img src="{imgurl}_250x250.jpg" alt="">
 		</a>
 		<ul class="action clearfix">
-			<li><a href="javascript:;" class="download" data-id="{id}">下载</a></li>
+			<li><a href="javascript:;" class="download" data-id="{id}" data-name="{name}">下载</a></li>
 		</ul>
 	</li>
 </script>
@@ -61,3 +61,39 @@
 		q: '<?= $q ?>'
 	});
 </script>
+<?php if ($filter === 'my') : ?>
+<script>
+	$('.my').on('click', '.upload', function () {
+		var target = $(this),
+			market = target.attr('data-market'),
+			name = target.attr('data-name');
+		$.ajax({
+			dataType: 'json',
+			url: '<?= base_url('api/template_upload') ?>?market=' + market + '&name=' + name,
+			beforeSend: page.loading,
+			complete: page.unloading,
+			success: function (d) {
+				d.code === 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + name : alert(d.message);
+			}
+		});
+	});
+</script>
+<?php endif; ?>
+<?php if ($filter === 'more') : ?>
+<script>
+	$('.more').on('click', '.download', function () {
+		var target = $(this),
+			id = target.attr('data-id'),
+			name = target.attr('data-name');
+		$.ajax({
+			dataType: 'json',
+			url: '<?= base_url('api/template_download') ?>?id=' + id,
+			beforeSend: page.loading,
+			complete: page.unloading,
+			success: function (d) {
+				d.code !== 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + name : alert(d.message);
+			}
+		});
+	});
+</script>
+<?php endif; ?>

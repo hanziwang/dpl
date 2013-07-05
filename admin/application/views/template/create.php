@@ -74,7 +74,7 @@
 			beforeSend: page.loading,
 			complete: page.unloading,
 			success: function (d) {
-				d.code === 200 ? location.href = '<?= base_url('template/search?filter=all&q=') ?>' + $('.text[name=name]').val() : alert(d.message);
+				d.code === 200 ? location.href = '<?= base_url('template/search?filter=my&q=') ?>' + $('.text[name=name]').val() : alert(d.message);
 			},
 			dataType: 'json'
 		});
