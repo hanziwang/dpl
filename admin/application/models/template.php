@@ -122,8 +122,8 @@ class Template extends CI_Model {
 		}
 
 		// 写入布局参数
-		$attribute = $this->json->decode($args['attribute'], true);
-		if (!empty($args['attribute']) && is_array($attribute)) {
+		if (!empty($args['attribute'])) {
+			$attribute = $this->json->decode($args['attribute'], true);
 			$defaults->attribute = $attribute;
 		}
 
