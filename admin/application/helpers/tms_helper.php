@@ -174,12 +174,12 @@ if (!function_exists('_tms_error')) {
 			throw new Exception($error);
 		} catch (Exception $e) {
 			$trace = $e->getTrace()[4];
-			$trace['file'] = $GLOBALS['_tms_file'];
-			$trace['args'] = $trace['args'][0];
-			$trace['message'] = $e->getMessage();
-			foreach ($trace as $k => $v) {
-				echo ucfirst($k) . ': ' . $v . "\r\n";
-			}
+			$file = $GLOBALS['_tms_file'];
+			$line = $trace['line'];
+			$function = $trace['function'];
+			$args = $trace['args'][0];
+			$message = $e->getMessage();
+			include APPPATH . 'errors/error_tms.php';
 
 		}
 

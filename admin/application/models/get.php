@@ -397,17 +397,11 @@ class Get extends CI_Model {
 
 		// 配置基础路径
 		$db_dir = $this->config->item('db');
-		$config_id = $this->config->item('id', 'setting');
 		$author = $db_dir . '/author.json';
 
 		// 读取作者数据
 		$data = @file_get_contents($author);
 		$data = $this->json->decode($data);
-		foreach ($data as $k => &$v) {
-			if (intval($v->configid) !== intval($config_id)) {
-				unset($data[$k]);
-			}
-		}
 		return $data;
 
 	}
