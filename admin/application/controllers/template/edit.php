@@ -5,7 +5,7 @@
  */
 class Edit extends CI_Controller {
 
-	public function index () {
+	function index () {
 
 		$this->load->model(array('get', 'template'));
 		$args = array (

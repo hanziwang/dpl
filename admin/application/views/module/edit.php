@@ -111,7 +111,7 @@
 			beforeSend: page.loading,
 			complete: page.unloading,
 			success: function (d) {
-				d.code === 200 ? location.href = '<?= base_url('module/search?filter=my&q=') ?>' + $('.text[name=name]').val() : alert(d.message);
+				d.code === 200 ? location.href = '<?= base_url('module/search?filter=my&q=') ?>' + $('input[name=name]').val() : alert(d.message);
 			},
 			dataType: 'json'
 		});

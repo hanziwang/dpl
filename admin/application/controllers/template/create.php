@@ -5,7 +5,7 @@
  */
 class Create extends CI_Controller {
 
-	public function index () {
+	function index () {
 
 		$this->load->model('get');
 		$markets = $this->get->market();

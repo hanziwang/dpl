@@ -5,14 +5,16 @@
  */
 class Copy extends CI_Controller {
 
-	public function index () {
+	function index () {
 
 		$this->load->model(array('get', 'layout', 'module'));
 		$args = array(
-			'title' => '宝贝模块 &lsaquo; 模板管理',
+			'title' => '拷贝模块 &lsaquo; 模板管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->layout->width(),
+			'market' => $this->input->get('market'),
+			'template' => $this->input->get('template'),
 			'name' => $this->input->get('name'),
 		);
 

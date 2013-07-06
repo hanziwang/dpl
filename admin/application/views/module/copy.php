@@ -3,6 +3,7 @@
 		<div class="hd"><span>拷贝模块 “<?= $name ?>”</span></div>
 		<div class="bd">
 			<form class="form">
+				<input type="hidden" name="path" value="<?= $path ?>">
 				<div class="field clearfix">
 					<label class="label">模块名称：</label>
 					<div class="clearfix">

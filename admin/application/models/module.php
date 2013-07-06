@@ -127,6 +127,11 @@ class Module extends CI_Model {
 			$defaults->nickname = $args['nickname'];
 		}
 
+		// 写入分类参数
+		if (!empty($args['category'])) {
+			$defaults->category = $args['category'];
+		}
+
 		// 写入宽度参数
 		if (!empty($args['width'])) {
 			$defaults->width = $args['width'];

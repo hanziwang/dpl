@@ -5,7 +5,7 @@
  */
 class Edit extends CI_Controller {
 
-	public function index () {
+	function index () {
 
 		$this->load->model(array('get', 'layout', 'module'));
 		$args = array(
@@ -13,7 +13,9 @@ class Edit extends CI_Controller {
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->layout->width(),
-			'name' => $this->input->get('name'),
+			'market' => $this->input->get('market'),
+			'template' => $this->input->get('template'),
+			'name' => $this->input->get('name')
 		);
 
 		// 读取模块信息、合并请求参数

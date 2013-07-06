@@ -5,7 +5,7 @@
  */
 class Design extends CI_Controller {
 
-	public function index () {
+	function index () {
 
 		$this->load->helper('tms');
 		$this->load->model(array('get', 'market', 'module'));
