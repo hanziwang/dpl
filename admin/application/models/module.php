@@ -27,7 +27,7 @@ class Module extends CI_Model {
 		// 配置基础路径
 		$modules_dir = $this->config->item('modules');
 		$module_dir = $this->_base_dir($args);
-		$config_id = $this->config->item('id', 'config');
+		$config_id = $this->config->item('id', 'setting');
 
 		// 创建模块根目录
 		if (!file_exists($modules_dir)) {
@@ -45,7 +45,7 @@ class Module extends CI_Model {
 		}
 
 		// 拷贝并重命名文件
-		$config_module = $this->config->item('module', 'config');
+		$config_module = $this->config->item('module', 'setting');
 		$data_dir = dirname(BASEPATH) . '/data/module/' . $config_module . '/';
 		$this->dir->copy($data_dir, $module_dir);
 		$this->dir->chmod($module_dir, 0777);

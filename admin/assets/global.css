@@ -42,7 +42,7 @@ a:hover, a:active {
 	zoom: 1;
 }
 
-/* = 加载
+/* = 加载状态
 ----------------------------------------------- */
 .loading {
 	background: rgba(0, 0, 0, 0.6);
@@ -778,7 +778,7 @@ a.button-small {
 	padding-left: 0;
 }
 
-/* = 新建、编辑、拷贝模板和模块
+/* = 新建、编辑、拷贝模板模块
 ----------------------------------------------- */
 .template .text,
 .template .textarea,
@@ -800,41 +800,44 @@ a.button-small {
 	right: 9px;
 }
 
-.cat-select {
+/* = 新建模块
+----------------------------------------------- */
+.module .type-select {
 	vertical-align: middle;
 	white-space: nowrap;
 }
 
-.cat-selected span {
+.type-selected span {
 	color: green;
 	margin-right: 10px;
 	vertical-align: middle;
 }
 
-.cat-selected span a {
+.type-selected span a {
 	background-image: url(data:image/gif;base64,R0lGODlhFAAKALMAAPKTk/Oenva3t/jIyPnT0/rY2P///+np6ebm5uDg4NbW1sjIyMLCwv///wAAAAAAACH5BAEAAA0ALAAAAAAUAAoAAARjsLWj1lJHyiJCEIWWMGSZSAOgrsPEGAiJGMxRAAahEgZQKIwZQshQCAA8QhIgWMgMMNIisIPqAAFnEBpjTKs5VQAoJBqRuaXg8OrOarcw2tcYlUinRmqlakkoFhgaDRweIBIRADs%3D);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	color: green;
-	margin-right: 3px;
+	margin: 3px 3px 0 0;
 	display: inline-block;
 	width: 10px;
 	height: 10px;
-	vertical-align: middle;
+	vertical-align: text-top;
 }
 
-.cat-selected span a:hover {
+.type-selected span a:hover {
 	background-position: -10px 0;
 }
 
-.cat-unselected {
-	background: #F9F9F9;
-	border: 1px solid #DDD;
+.type-unselected {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
 	padding: 10px 15px;
 	margin-top: 10px;
+	display: none;
 }
 
-.cat-unselected a {
+.type-unselected a {
 	margin-right: 8px;
 	white-space: nowrap;
 }

@@ -16,7 +16,7 @@ class Edit extends CI_Controller {
 			'name' => $this->input->get('name')
 		);
 
-		// 读取模块信息、合并请求参数
+		// 读取模板信息、合并请求参数
 		$template = $this->template->select($args);
 		$defaults = array(
 			'nickname' => $template->nickname,

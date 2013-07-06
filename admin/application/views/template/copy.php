@@ -54,11 +54,15 @@
 	</div>
 </div>
 <script>
+
+	// 上传图片
 	$('.file input').on('change', function (e) {
 		page.upload('<?= base_url('api/upload') ?>', e.currentTarget.files[0], function (url) {
 			$('.imgurl .text').val(url);
 		});
 	});
+
+	// 拷贝模板
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
 		$.ajax({
@@ -73,4 +77,5 @@
 			dataType: 'json'
 		});
 	});
+
 </script>

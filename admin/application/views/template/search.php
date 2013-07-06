@@ -55,14 +55,19 @@
 <?php endif; ?>
 <script src="<?= base_url('assets/search.js?v=' . $version) ?>"></script>
 <script>
+
+	// 搜索模板
 	search.init('<?= base_url("api/template_search") ?>', {
 		filter: '<?= $filter ?>',
 		market: '<?= $market ?>',
 		q: '<?= $q ?>'
 	});
+
 </script>
 <?php if ($filter === 'my') : ?>
 <script>
+
+	// 上传模板
 	$('.my').on('click', '.upload', function () {
 		var target = $(this),
 			market = target.attr('data-market'),
@@ -77,10 +82,13 @@
 			}
 		});
 	});
+
 </script>
 <?php endif; ?>
 <?php if ($filter === 'more') : ?>
 <script>
+
+	// 下载模板
 	$('.more').on('click', '.download', function () {
 		var target = $(this),
 			id = target.attr('data-id'),
@@ -95,5 +103,6 @@
 			}
 		});
 	});
+
 </script>
 <?php endif; ?>

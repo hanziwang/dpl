@@ -19,6 +19,8 @@
 	</div>
 </div>
 <script>
+
+	// 程序版本
 	$.ajax({
 		dataType: 'jsonp',
 		url: '//www.taobao.com/go/market/dpl/v3.php',
@@ -30,4 +32,5 @@
 			}
 		}
 	});
+
 </script>

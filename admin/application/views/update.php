@@ -13,6 +13,8 @@
 	</div>
 </div>
 <script>
+
+	// 更新业务数据
 	$('.button').on('click', function () {
 		var target = $(this),
 			ajax = function (ids) {
@@ -34,4 +36,5 @@
 			ajax(['config', 'market', 'template', 'module', 'type', 'author']);
 		});
 	});
+
 </script>

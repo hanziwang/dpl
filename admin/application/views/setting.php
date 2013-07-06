@@ -27,10 +27,13 @@
 	</div>
 </div>
 <script>
+
+	// 设置用户参数
 	$('.select').on('change', function () {
 		var target = $(this),
 			index = target[0].selectedIndex + 1;
 		$('.text').val(target.find('option:nth-child(' + index + ')').attr('data-src'));
 	});
 	$('.form').on('submit', page.loading);
+
 </script>

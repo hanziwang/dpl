@@ -53,6 +53,8 @@
 	</div>
 </div>
 <script>
+
+	// 创建者
 	$.ajax({
 		dataType: 'jsonp',
 		url: '//www.taobao.com/go/market/dpl/tracknick.php',
@@ -60,11 +62,15 @@
 			$('.text[name=author]').val(d);
 		}
 	});
+
+	// 上传图片
 	$('.file input').on('change', function (e) {
 		page.upload('<?= base_url('api/upload') ?>', e.currentTarget.files[0], function (url) {
 			$('.imgurl .text').val(url);
 		});
 	});
+
+	// 新建模板
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
 		$.ajax({
@@ -79,4 +85,5 @@
 			dataType: 'json'
 		});
 	});
+
 </script>

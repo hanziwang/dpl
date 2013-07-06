@@ -23,9 +23,9 @@
 					</td>
 					<td>
 						<div class="parts clearfix">
-							<a href="//www.taobao.com/go/market/<?= $v->id ?>/__header.php" target="_blank">页头</a>
-							<a href="//www.taobao.com/go/rgn/nav/<?= $v->id ?>__nav.php" target="_blank">导航</a>
-							<a href="//www.taobao.com/go/market/<?= $v->id ?>/__footer.php" target="_blank">页尾</a>
+							<a href="http://www.taobao.com/go/market/<?= $v->id ?>/__header.php" target="_blank">页头</a>
+							<a href="http://www.taobao.com/go/rgn/nav/<?= $v->id ?>__nav.php" target="_blank">导航</a>
+							<a href="http://www.taobao.com/go/market/<?= $v->id ?>/__footer.php" target="_blank">页尾</a>
 							<a class="update" data-id="<?= $v->id ?>" href="javascript:;" title="更新页头、导航、页尾"></a>
 						</div>
 					</td>
@@ -39,6 +39,8 @@
 	</div>
 </div>
 <script>
+
+	// 更新页头、导航、页尾
 	$('.update').on('click', function () {
 		var target = $(this),
 			id = target.attr('data-id');
@@ -53,4 +55,5 @@
 			}
 		});
 	});
+
 </script>

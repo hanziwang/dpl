@@ -61,15 +61,20 @@
 <?php endif; ?>
 <script src="<?= base_url('assets/search.js?v=' . $version) ?>"></script>
 <script>
+
+	// 搜索模块
 	search.init('<?= base_url("api/module_search") ?>', {
 		filter: '<?= $filter ?>',
 		author: '<?= $author ?>',
 		width: '<?= $width ?>',
 		q: '<?= $q ?>'
 	});
+
 </script>
 <?php if ($filter === 'my') : ?>
 <script>
+
+	// 上传模块
 	$('.my').on('click', '.upload', function () {
 		var target = $(this),
 			name = target.attr('data-name');
@@ -83,10 +88,13 @@
 			}
 		});
 	});
+
 </script>
 <?php endif; ?>
 <?php if ($filter === 'more') : ?>
 <script>
+
+	// 下载模块
 	$('.more').on('click', '.download', function () {
 		var target = $(this),
 			id = target.attr('data-id'),
@@ -101,5 +109,6 @@
 			}
 		});
 	});
+
 </script>
 <?php endif; ?>
