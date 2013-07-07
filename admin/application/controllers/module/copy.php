@@ -13,8 +13,6 @@ class Copy extends CI_Controller {
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->layout->width(),
-			'market' => $this->input->get('market'),
-			'template' => $this->input->get('template'),
 			'name' => $this->input->get('name'),
 		);
 

@@ -25,6 +25,7 @@ function before_action () {
 	$data = $ci->json->decode($data, true);
 	$src = $ci->config->item('src') . '/' . $data['code'];
 	$ci->config->set_item('setting', $data);
+	$ci->config->set_item('src', $src);
 	$ci->config->set_item('modules', $src . '/modules');
 	$ci->config->set_item('www', $src . '/www');
 
