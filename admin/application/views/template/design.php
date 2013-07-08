@@ -1,5 +1,5 @@
 <?php header('Content-type:text/html;charset=UTF-8'); ?>
-<?= $header ?>
+<?php eval(' ?>' . $header . '<?php '); ?>
 <link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
 <?= $nav ?>
 <!-- 模板开始 -->
