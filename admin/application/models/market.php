@@ -72,6 +72,7 @@ class Market extends CI_Model {
 			$v = @file_get_contents($file);
 			$v = @iconv('GBK', 'UTF-8//IGNORE', $v ? $v : '');
 		}
+		$data['header'] = str_replace($data['nav'], '', $data['header']);
 		return $data;
 
 	}
