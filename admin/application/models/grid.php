@@ -1,9 +1,9 @@
 <?php
 
 /**
- * 布局模型
+ * 栅格模型
  */
-class Layout extends CI_Model {
+class Grid extends CI_Model {
 
 	// 栅格公式
 	private $rules = array(
@@ -29,7 +29,7 @@ class Layout extends CI_Model {
 		)
 	);
 
-	// 栅格查询
+	// 查询栅格
 	function grid () {
 
 		$setting = $this->config->item('setting');
@@ -54,7 +54,7 @@ class Layout extends CI_Model {
 
 	}
 
-	// 宽度查询
+	// 查询宽度
 	function width () {
 
 		$grid = $this->grid();
@@ -65,6 +65,45 @@ class Layout extends CI_Model {
 		};
 		asort($data);
 		return array_values($data);
+
+	}
+
+	// 查询布局模板
+	function template ($grid) {
+
+		// 定义布局模板
+		$layouts = array(
+			'<div class="layout {grid} J_Layout">
+	<div class="col-main">
+		<div class="main-wrap J_Region">{module}</div>
+	</div>
+</div>',
+			'<div class="layout {grid} J_Layout">
+	<div class="col-main">
+		<div class="main-wrap J_Region">{module}</div>
+	</div>
+	<div class="col-sub J_Region">{module}</div>
+</div>',
+			'<div class="layout {grid} J_Layout">
+	<div class="col-main">
+		<div class="main-wrap J_Region">{module}</div>
+	</div>
+	<div class="col-sub J_Region">{module}</div>
+	<div class="col-extra J_Region">{module}</div>
+</div>'
+		);
+
+		// 读取布局模板
+		if (in_array($grid, array('grid-m', 'grid-m0'))) {
+			$data = $layouts[0];
+		} elseif (preg_match('/^grid-([a-z][0-9]+){2}$/', $grid)) {
+			$data = $layouts[1];
+		} elseif (preg_match('/^grid-([a-z][0-9]+){3}$/', $grid)) {
+			$data = $layouts[2];
+		} else {
+			$data = '';
+		}
+		return str_replace('{grid}', $grid, $data);
 
 	}
 

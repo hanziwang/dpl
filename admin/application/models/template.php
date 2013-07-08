@@ -417,8 +417,8 @@ class Template extends CI_Model {
 
 		// 读取样式、脚本
 		$data = array('css' => '', 'js' => '');
-		foreach ($data as &$v) {
-			$file = $args['name'] . '.' . $v;
+		foreach ($data as $k => &$v) {
+			$file = $args['name'] . '.' . $k;
 			$v = @file_get_contents($template_dir . $file);
 			$v = $v ? $v : '';
 		}

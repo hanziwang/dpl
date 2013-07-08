@@ -7,12 +7,12 @@ class Copy extends CI_Controller {
 
 	function index () {
 
-		$this->load->model(array('get', 'layout', 'module'));
+		$this->load->model(array('get', 'grid', 'module'));
 		$args = array(
 			'title' => '拷贝模块 &lsaquo; 模板管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
-			'widths' => $this->layout->width(),
+			'widths' => $this->grid->width(),
 			'name' => $this->input->get('name'),
 		);
 

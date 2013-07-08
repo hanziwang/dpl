@@ -38,7 +38,7 @@
 		<ul class="action clearfix">
 			<li><a href="<?= base_url('module/edit?name={name}') ?>">编辑</a></li>
 			<li><a href="<?= base_url('module/copy?name={name}') ?>">拷贝</a></li>
-			<li><a href="<?= base_url('module/design?name={name}') ?>" target="_blank">调试</a></li>
+			<li><a href="<?= base_url('module/design?name={name}&debug') ?>" target="_blank">调试</a></li>
 <?php if ($filter === 'my') : ?>
 			<li><a href="javascript:;" class="upload" data-name="{name}">上传模块</a></li>
 <?php endif; ?>

@@ -426,19 +426,26 @@ class Module extends CI_Model {
 
 		// 读取默认皮肤
 		$markets = $this->get->market();
+		$color = '';
 		foreach ($markets as $v) {
 			if (intval($v->id) === intval($args['market'])) {
-				$data['skin'] = $v->color;
+				$color = $v->color;
 				break;
 			}
 		}
-		$file = $module_dir . 'skin/default.less';
-		$data['skin'] .= @file_get_contents($file);
-		$data['skin'] = $this->lessc->parse($data['skin']);
+		$skins = glob($module_dir . 'skin/*.less');
+		foreach ($skins as $v) {
+			$filename = explode('/', $v);
+			$filename = array_pop($filename);
+			$filename = str_replace('.less', '', $filename);
+			$skin = $color . @file_get_contents($v);
+			$data['skin-' . $filename] = $this->lessc->parse($skin);
+		}
 
 		// 读取样式
 		$file = $name . '.less';
-		if ($data['css'] = @file_get_contents($file)) {
+		if (file_exists($file)) {
+			$data['css'] = @file_get_contents($file);
 			$data['css'] = $this->lessc->parse($data['css']);
 		} else {
 			$file = $name . '.css';

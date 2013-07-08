@@ -9,7 +9,7 @@
 <!-- 模块开始 -->
 <style>
 <?= $module['css'] ?>
-<?= $module['skin'] ?>
+<?= $module['skin-default'] ?>
 </style>
 <div class="J_Module skin-default" data-name="<?= $name ?>">
 <?php

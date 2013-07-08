@@ -10,7 +10,6 @@ class Design extends CI_Controller {
 		$this->load->helper('tms');
 		$this->load->model(array('get', 'market', 'module'));
 		$args = array(
-			'title' => '设计模块 &lsaquo; 模块管理',
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
 			'template' => $this->input->get('template'),
