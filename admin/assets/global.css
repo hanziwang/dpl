@@ -30,6 +30,22 @@ a:hover, a:active {
 	text-decoration: underline;
 }
 
+/* = 滚动条
+----------------------------------------------- */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #666;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #aaa;
+}
+
+/* = 清除浮动
+----------------------------------------------- */
 .clearfix:after {
 	content: '.';
 	display: block;
