@@ -73,18 +73,18 @@ class Grid extends CI_Model {
 
 		// 定义布局模板
 		$layouts = array(
-			'<div class="layout {grid} J_Layout">
+			'<div class="J_Layout layout {grid}">
 	<div class="col-main">
 		<div class="main-wrap J_Region">{module}</div>
 	</div>
 </div>',
-			'<div class="layout {grid} J_Layout">
+			'<div class="J_Layout layout {grid}">
 	<div class="col-main">
 		<div class="main-wrap J_Region">{module}</div>
 	</div>
 	<div class="col-sub J_Region">{module}</div>
 </div>',
-			'<div class="layout {grid} J_Layout">
+			'<div class="J_Layout layout {grid}">
 	<div class="col-main">
 		<div class="main-wrap J_Region">{module}</div>
 	</div>
