@@ -1,0 +1,206 @@
+/**
+ * 设计页面渲染
+ * @author 邦彦<bangyan@taobao.com>
+ */
+/* = 布局样式
+----------------------------------------------- */
+.press-layout-admin {
+	background: #fff;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -2147483647;
+	box-shadow: 0 0 4px #ccc inset, 0 0 0 3px #f60;
+	width: auto;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.press-layout-action {
+	background: #f60;
+	height: 26px;
+	padding: 0 5px;
+	overflow: hidden;
+	position: absolute;
+	right: -3px;
+	top: -26px;
+}
+
+.press-layout-action span {
+	cursor: pointer;
+	width: 22px;
+	height: 26px;
+	float: left;
+}
+
+.press-layout-action i {
+	margin: 6px 4px;
+}
+
+.press-layout-add {
+	width: auto !important;
+	white-space: nowrap;
+}
+
+.press-layout-add b {
+	border-right: 1px solid #f2b2aa;
+	color: #fff;
+	display: inline-block;
+	font-family: arial;
+	font-weight: normal;
+	line-height: 1.231;
+	padding-right: 8px;
+	margin: 6px 4px 0 5px;
+}
+
+.press-layout {
+	overflow: visible !important;
+	position: relative !important;
+	z-index: 2147483647 !important;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.press-layout .press-layout-admin {
+	width: 100%;
+	visibility: visible;
+	opacity: 1;
+	-moz-transition: opacity 0.25s;
+	-webkit-transition: opacity 0.25s;
+	transition: opacity 0.25s;
+}
+
+/* = 区块样式
+----------------------------------------------- */
+.press-region-admin {
+	background: #FFF;
+	width: 100%;
+	height: 150px;
+	min-height: 150px;
+	box-shadow: 0 0 1px #333 inset;
+}
+
+.press-region-action {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: table;
+}
+
+.press-region-label {
+	background: #CCC;
+	color: #FFF;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 0 5px;
+}
+
+.press-region-add {
+	cursor: pointer;
+	display: table-cell;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.press-region-label {
+	background: #ccc;
+}
+
+.press-region .press-region-admin {
+	background: rgba(89, 131, 214, 0.4);
+	box-shadow: 0 0 1px #016 inset;
+}
+
+.press-region .press-region-label {
+	background: #5983d6;
+}
+
+.press-region .press-region-admin,
+.press-region .press-region-label {
+	-moz-transition: all 0.25s;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+/* = 模块样式
+----------------------------------------------- */
+.press-module-admin {
+	background: rgba(89, 131, 214, 0.4);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2147483647 !important;
+	box-shadow: 0 0 1px #016 inset;
+	cursor: move;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.press-module-mask {
+	width: 100%;
+	height: 100%;
+}
+
+.press-module-action {
+	background: #5983d6;
+	height: 26px;
+	padding: 0 5px;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: default;
+}
+
+.press-module-action span {
+	cursor: pointer;
+	width: 22px;
+	height: 26px;
+	float: left;
+}
+
+.press-module-action i {
+	margin: 6px 4px;
+}
+
+.press-module-add {
+	width: auto !important;
+	white-space: nowrap;
+}
+
+.press-module-add b {
+	border-right: 1px solid #acc1eb;
+	color: #fff;
+	display: inline-block;
+	font-family: arial;
+	font-weight: normal;
+	line-height: 1.231;
+	padding-right: 8px;
+	margin: 6px 4px 0 5px;
+}
+
+.press-module {
+	position: relative !important;
+	z-index: 2147483647 !important;
+}
+
+.press-module .press-module-admin {
+	visibility: visible;
+	opacity: 1;
+	-moz-transition: opacity 0.25s;
+	-webkit-transition: opacity 0.25s;
+	transition: opacity 0.25s;
+}
+
+/* = 侵入性样式及插件样式
+----------------------------------------------- */
+.J_Module {
+	min-height: 10px;
+}

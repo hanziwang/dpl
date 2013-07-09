@@ -1,0 +1,196 @@
+/**
+ * 模块操作
+ * @author 邦彦<bangyan@taobao.com>
+ */
+/* = 添加模块
+----------------------------------------------- */
+.press-module-add-form {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	padding: 20px 0 20px 30px;
+}
+
+.press-module-add-form .press-form-toggle,
+.press-module-add-form .press-form-select,
+.press-module-add-form .press-form-text,
+.press-module-add-form .press-button {
+	float: left;
+	margin-right: 10px;
+}
+
+.press-module-add-form .press-module-add-togglable {
+	float: left;
+}
+
+/* = 模块列表
+----------------------------------------------- */
+.press-module-add-list {
+	position: absolute;
+	top: 66px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 2px 30px 20px 30px;
+	overflow-x: hidden;
+	overflow-y: visible;
+}
+
+.press-module-add-item {
+	background: #eee;
+	width: 250px;
+	height: 250px;
+	line-height: 250px;
+	overflow: hidden;
+	margin: 0 10px 10px 0;
+	float: left;
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 1px #ddd;
+}
+
+.press-module-add-item img {
+	vertical-align: middle;
+}
+
+.press-module-add-item em {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	height: 29px;
+	line-height: 29px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.press-module-add-item i {
+	background: #1e8cbe;
+	color: #fff;
+	font-style: normal;
+	width: auto;
+	height: 23px;
+	line-height: 23px;
+	padding: 0 6px 0 7px;
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	z-index: 3;
+	display: none;
+}
+
+.press-module-add-explore {
+	background: rgba(0, 0, 0, .7);
+	color: #fff;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	text-align: left;
+	padding: 10px 15px;
+	line-height: 21px;
+	visibility: hidden;
+	opacity: 0;
+	-moz-transition: opacity 0.25s;
+	-webkit-transition: opacity 0.25s;
+	transition: opacity 0.25s;
+}
+
+.press-module-add-explore b {
+	float: left;
+	font-weight: normal;
+}
+
+.press-module-add-explore span {
+	display: block;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.press-module-add-item:hover .press-module-add-explore {
+	visibility: visible;
+	opacity: 1;
+}
+
+.press-module-add-action {
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+}
+
+.press-module-add-selected {
+	box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), 0 0 0 2px #1e8cbe;
+}
+
+.press-module-add-selected i {
+	display: inline-block;
+}
+
+/* = 模块选项
+----------------------------------------------- */
+.press-module-option-form {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 388px;
+	background: #fff;
+	border-right: 1px solid #dfdfdf;
+	padding: 20px 30px;
+	overflow-x: hidden;
+	overflow-y: visible;
+}
+
+.press-module-option-history {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	padding: 10px 15px;
+	margin-top: 10px;
+	display: none;
+}
+
+.press-module-option-history a {
+	margin-right: 8px;
+	white-space: nowrap;
+}
+
+.press-module-option-form .press-form-text {
+	width: 200px;
+}
+
+.press-module-option-card {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 449px;
+	padding: 20px 0 0 23px;
+}
+
+.press-module-option-card strong {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.press-module-option-card span {
+	display: block;
+	height: 28px;
+}
+
+.press-module-option-card i {
+	margin-right: 5px;
+	height: 28px;
+	width: 28px;
+	float: left;
+}
+
+.press-module-option-submit {
+	display: none;
+}

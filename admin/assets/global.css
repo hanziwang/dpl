@@ -818,18 +818,14 @@ a.button-small {
 
 /* = 新建模块
 ----------------------------------------------- */
-.module .type-select {
-	vertical-align: middle;
-	white-space: nowrap;
-}
-
-.type-selected span {
+.module .type-selected span {
 	color: green;
-	margin-right: 10px;
+	display: inline-block;
+	margin: 0 10px 10px 0;
 	vertical-align: middle;
 }
 
-.type-selected span a {
+.module .type-selected span a {
 	background-image: url(data:image/gif;base64,R0lGODlhFAAKALMAAPKTk/Oenva3t/jIyPnT0/rY2P///+np6ebm5uDg4NbW1sjIyMLCwv///wAAAAAAACH5BAEAAA0ALAAAAAAUAAoAAARjsLWj1lJHyiJCEIWWMGSZSAOgrsPEGAiJGMxRAAahEgZQKIwZQshQCAA8QhIgWMgMMNIisIPqAAFnEBpjTKs5VQAoJBqRuaXg8OrOarcw2tcYlUinRmqlakkoFhgaDRweIBIRADs%3D);
 	background-repeat: no-repeat;
 	background-position: 0 0;
@@ -841,19 +837,17 @@ a.button-small {
 	vertical-align: text-top;
 }
 
-.type-selected span a:hover {
+.module .type-selected span a:hover {
 	background-position: -10px 0;
 }
 
-.type-unselected {
+.module .type-unselected {
 	background: #f9f9f9;
 	border: 1px solid #ddd;
 	padding: 10px 15px;
-	margin-top: 10px;
-	display: none;
 }
 
-.type-unselected a {
+.module .type-unselected a {
 	margin-right: 8px;
 	white-space: nowrap;
 }

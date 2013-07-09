@@ -1,0 +1,20 @@
+/**
+ * 管理工具条
+ * @author 邦彦<bangyan@taobao.com>
+ */
+/* = 全局样式
+----------------------------------------------- */
+.press-admin {
+
+}
+
+.press-admin-module {
+	background: rgba(54, 54, 54, 0.7);
+	cursor: pointer;
+	position: fixed;
+	top: 15px;
+	left: 15px;
+	width: 32px;
+	height: 32px;
+	border-radius: 16px;
+}

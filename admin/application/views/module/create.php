@@ -18,9 +18,8 @@
 				<div class="field clearfix">
 					<label class="label">模块分类：</label>
 					<div class="clearfix types">
-						<input type="hidden" class="category" name="category" required="required">
+						<input type="hidden" class="category" name="category">
 						<span class="type-selected"></span>
-						<a href="javascript:;" class="type-select">点此选择分类 »</a>
 						<div class="type-unselected">
 <?php foreach ($types as $v) : ?>
 							<a data-id="<?= $v->id ?>" href="javascript:;"><?= $v->value ?></a>
@@ -68,9 +67,6 @@
 <script>
 
 	// 模块分类
-	$('.type-select').on('click', function () {
-		$('.type-unselected').fadeToggle('fast');
-	});
 	$('.type-selected').on('click', 'a', function () {
 		$(this).parent().remove();
 	});

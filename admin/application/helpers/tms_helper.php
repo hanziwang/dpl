@@ -168,10 +168,10 @@ if (!function_exists('_tms_export')) {
  */
 if (!function_exists('_tms_error')) {
 
-	function _tms_error ($error) {
+	function _tms_error ($message) {
 
 		try {
-			throw new Exception($error);
+			throw new Exception($message);
 		} catch (Exception $e) {
 			$trace = $e->getTrace()[4];
 			$file = $GLOBALS['_tms_file'];
@@ -198,12 +198,12 @@ if (!function_exists('_tms_syntax')) {
 
 	function _tms_syntax ($args, $keys) {
 
-		// 检查参数是否为空
+		// 检查参数
 		if (empty($args)) {
 			_tms_error('参数为空');
 		}
 
-		// 检查参数字段是否未设置或为空
+		// 检查字段
 		foreach ($keys as $v) {
 			if (empty($args[$v])) {
 				_tms_error('参数字段 ' . $v . ' 未设置或为空');
@@ -251,8 +251,8 @@ if (!function_exists('_tms_common')) {
 	function _tms_common ($args = '{}', $attributes) {
 
 		// 校验标签参数
-		$required = array('name', 'title', 'group', 'row', 'defaultRow');
-		$args = _tms_parse_args($args, $required);
+		$keys = array('name', 'title', 'group');
+		$args = _tms_parse_args($args, $keys);
 
 		// 读取自定义数据
 		$name = $args['name'];
@@ -262,7 +262,8 @@ if (!function_exists('_tms_common')) {
 
 		// 填充默认数据
 		$defaults = array();
-		for ($i = 0; $i < $args['defaultRow']; $i++) {
+		$row = isset($args['row']) ? $args['row'] : 1;
+		for ($i = 0; $i < $row; $i++) {
 			$defaults[] = $attributes;
 		}
 		return $GLOBALS['_tms_export'][$name] = $defaults;
@@ -377,8 +378,8 @@ if (!function_exists('_tms_custom')) {
 	function _tms_custom ($args) {
 
 		// 校验标签参数
-		$required = array('fields');
-		$_args = _tms_parse_args($args, $required);
+		$keys = array('fields');
+		$_args = _tms_parse_args($args, $keys);
 
 		// 解析自定义字段
 		$fields = explode(',', $_args['fields']);
@@ -556,8 +557,8 @@ if (!function_exists('_tms_module_begin')) {
 
 	function _tms_module_begin ($args = '{}') {
 
-		$required = array('name');
-		_tms_parse_args($args, $required);
+		$keys = array('name');
+		_tms_parse_args($args, $keys);
 
 		// 线上模块标签会输出 spm 埋点容器
 		echo '<div class="module">';
@@ -586,8 +587,8 @@ if (!function_exists('_tms_repeat_begin')) {
 
 	function _tms_repeat_begin ($args = '{}') {
 
-		$required = array('name', 'title', 'group', 'row');
-		$args = _tms_parse_args($args, $required);
+		$keys = array('name', 'title', 'group', 'row');
+		$args = _tms_parse_args($args, $keys);
 
 		// 导出标签数据
 		$row = $args['row'];

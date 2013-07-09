@@ -33,4 +33,53 @@ endforeach;
 </script>
 <script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
 <!-- 模板结束 -->
+<?php if (isset($_REQUEST['debug'])) : ?>
+<script>
+
+	// 初始化模板调试
+	var press = {
+
+		// 配置接口
+		api: '<?= base_url('api') ?>',
+
+		// 配置目录
+		base: '<?= base_url('assets/libs') ?>',
+
+		// 配置版本
+		version:'<?= $version ?>',
+
+		// 加载 seajs 类库
+		seajs: function () {
+
+			var readyState = false,
+				script = document.createElement('script');
+			script.charset = 'utf-8';
+			script.id = 'seajsnode';
+			script.src = this.base + '/sea.js?v=' + this.version;
+			script.setAttribute('data-main', this.base + '/main.js?v=' + this.version);
+
+			// 绑定加载完毕事件
+			script.onload = script.onreadystatechange = function () {
+				if (!readyState && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+					readyState = true;
+				}
+			};
+			document.body.appendChild(script);
+
+		},
+
+		// 初始化
+		init: function () {
+
+			document.getElementsByTagName('title')[0].innerHTML = '<?= $name ?>';
+			this.seajs();
+
+		}
+
+	};
+
+	press.init();
+
+</script>
+<?php endif; ?>
 <?= $footer ?>

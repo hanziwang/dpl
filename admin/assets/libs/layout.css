@@ -1,0 +1,254 @@
+/**
+ * 布局操作
+ * @author 邦彦<bangyan@taobao.com>
+ */
+/* = 布局方案
+----------------------------------------------- */
+.press-grid {
+	background-repeat: no-repeat;
+	width: 300px;
+	height: 37px;
+	margin-bottom: 10px;
+	position: relative;
+	box-shadow: 0 0 4px #d5e7ff;
+}
+
+.press-grid i,
+.press-grid span {
+	display: none;
+}
+
+.press-grid-selected {
+	box-shadow: 0 0 0 1px #1e8cbe inset, 0 0 0 1px #1e8cbe;
+}
+
+.press-grid-selected i {
+	background-image: url(http://img02.taobaocdn.com/tps/i2/T1d1pWXrldXXcmZd7.-12-12.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.press-grid-selected span {
+	background: #1e8cbe;
+	color: #fff;
+	display: inline-block;
+	cursor: pointer;
+	font-style: normal;
+	width: auto;
+	height: 21px;
+	line-height: 21px;
+	padding: 0 5px 0 7px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.press-grid-m {
+	background-image: url(http://img02.taobaocdn.com/tps/i2/T1gXx4XAJXXXbz59Tx-300-37.png) !important;
+}
+
+/* = 宽度适配
+----------------------------------------------- */
+.press-layout-990 .press-grid {
+	background-image: url(http://img02.taobaocdn.com/tps/i2/T1yBxVXvBdXXc5_a_T-300-597.png);
+}
+
+.press-layout-990 .press-grid-m0 {
+	background-position: 0 0;
+}
+
+.press-layout-990 .press-grid-s4m0 {
+	background-position: 0 -40px;
+}
+
+.press-layout-990 .press-grid-m0s4 {
+	background-position: 0 -80px;
+}
+
+.press-layout-990 .press-grid-s5m0 {
+	background-position: 0 -120px;
+}
+
+.press-layout-990 .press-grid-m0s5 {
+	background-position: 0 -160px;
+}
+
+.press-layout-990 .press-grid-s8m0 {
+	background-position: 0 -200px;
+}
+
+.press-layout-990 .press-grid-m0s8 {
+	background-position: 0 -240px;
+}
+
+.press-layout-990 .press-grid-s9m0 {
+	background-position: 0 -280px;
+}
+
+.press-layout-990 .press-grid-m0s9 {
+	background-position: 0 -320px;
+}
+
+.press-layout-990 .press-grid-s5m0e4 {
+	background-position: 0 -360px;
+}
+
+.press-layout-990 .press-grid-s5e4m0 {
+	background-position: 0 -400px;
+}
+
+.press-layout-990 .press-grid-e4m0s5 {
+	background-position: 0 -440px;
+}
+
+.press-layout-990 .press-grid-e4s5m0 {
+	background-position: 0 -480px;
+}
+
+.press-layout-990 .press-grid-m0s5e4 {
+	background-position: 0 -520px;
+}
+
+.press-layout-990 .press-grid-m0e4s5 {
+	background-position: 0 -560px;
+}
+
+.press-layout-950 .press-grid {
+	background-image: url(http://img01.taobaocdn.com/tps/i1/T12RRlFalbXXbz59Tx-300-37.png);
+}
+
+.press-layout-950 .press-grid-m0 {
+	background-position: 0 0;
+}
+
+.press-layout-940 .press-grid {
+	background-image: url(http://img04.taobaocdn.com/tps/i4/T1ebJlFjxbXXbz59Tx-300-37.png);
+}
+
+.press-layout-940 .press-grid-m0 {
+	background-position: 0 0;
+}
+
+.press-layout-320 .press-grid {
+	background-image: url(http://img04.taobaocdn.com/tps/i4/T1ElBqFjNdXXbz59Tx-300-37.png);
+}
+
+.press-layout-320 .press-grid-m0 {
+	background-position: 0 0;
+}
+
+/* = 添加布局
+----------------------------------------------- */
+.press-layout-add-selectable {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 300px;
+	background: #fff;
+	border-right: 1px solid #dfdfdf;
+	padding: 20px 30px;
+	overflow-x: hidden;
+	overflow-y: visible;
+}
+
+.press-layout-add-selectable strong {
+	width: 300px;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.press-layout-add-selectable ul {
+	width: 300px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.press-layout-add-selectable li {
+	cursor: pointer;
+}
+
+.press-layout-add-selected {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 361px;
+	width: 301px;
+	background: #fff;
+	border-right: 1px solid #dfdfdf;
+	padding: 20px 23px;
+	overflow-x: hidden;
+	overflow-y: visible;
+}
+
+.press-layout-add-selected strong {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.press-layout-add-selected ul {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* = 布局选项
+----------------------------------------------- */
+.press-layout-option-selectable {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 300px;
+	background: #fff;
+	border-right: 1px solid #dfdfdf;
+	padding: 20px 30px;
+	overflow-x: hidden;
+	overflow-y: visible;
+}
+
+.press-layout-option-selectable strong {
+	width: 300px;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.press-layout-option-selectable ul {
+	width: 300px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.press-layout-option-selectable li {
+	cursor: pointer;
+}
+
+.press-layout-option-using {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 361px;
+	padding: 20px 0 0 23px;
+}
+
+.press-layout-option-using strong {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.press-layout-option-using .press-grid {
+	-moz-filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
