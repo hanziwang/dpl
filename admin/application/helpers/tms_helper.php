@@ -170,10 +170,10 @@ if (!function_exists('_tms_export')) {
  */
 if (!function_exists('_tms_error')) {
 
-	function _tms_error ($message) {
+	function _tms_error ($error_msg) {
 
 		try {
-			throw new Exception($message);
+			throw new Exception($error_msg);
 		} catch (Exception $e) {
 			$trace = $e->getTrace()[4];
 			$file = $GLOBALS['_tms_file'];
