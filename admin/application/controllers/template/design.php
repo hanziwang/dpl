@@ -8,13 +8,16 @@ class Design extends CI_Controller {
 	function index () {
 
 		$this->load->helper('tms');
+		$this->load->library('json');
 		$this->load->model(array('get', 'market', 'grid', 'template', 'module'));
+		$author = $this->get->author();
 		$args = array(
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
 			'name' => $this->input->get('name'),
 			'content' => "\r\n",
-			'modules' => array()
+			'modules' => array(),
+			'author' => $this->json->encode($author)
 		);
 
 		// 读取业务规范
@@ -31,7 +34,7 @@ class Design extends CI_Controller {
 			'name' => $args['name']
 		)));
 
-		// 读取模板配置信息
+		// 读取配置信息
 		$defaults = $this->template->select(array(
 			'market' => $args['market'],
 			'name' => $args['name']

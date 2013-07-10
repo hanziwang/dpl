@@ -14,6 +14,13 @@ class Module_search extends CI_Controller {
 			'q' => $this->input->get('q'),
 			'index' => $this->input->get('index')
 		);
+
+		// 过滤私有模板筛选
+		if ($args['filter'] === 'private') {
+			$args['market'] = $this->input->get('market');
+			$args['template'] = $this->input->get('template');
+		}
+
 		$this->load->library('json');
 		$this->load->model('get');
 		$data = $this->get->module($args);

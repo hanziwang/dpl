@@ -36,7 +36,7 @@ press.seajs.config({
 	debug: false,
 
 	// 路径配置
-	base: press.base,
+	base: press.base + 'assets/libs',
 
 	// 文件编码
 	charset: 'utf-8'

@@ -109,8 +109,10 @@ press.define('page', ['jquery'], function (require) {
 
 			$.ajax({
 				type: 'post',
-				url: press.api + '/template_save' + location.search,
+				url: press.base + 'api/template_save',
 				data: {
+					market: press.market,
+					name: press.name,
 					attribute: JSON.stringify(attribute)
 				},
 				beforeSend: self.loading,

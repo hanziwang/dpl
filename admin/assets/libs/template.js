@@ -9,9 +9,19 @@ press.define('template', [], function () {
 
 		// 管理工具条模板
 		TEMPLATE_ADMIN: '<div class="press-base press-admin">' +
-			'	<div class="press-admin-module" title="私有模块管理">' +
-			'		<u></u><s></s><b></b><i></i>' +
-			'	</div>' +
+			'	<ul class="press-admin-menu press-clearfix">' +
+			'		<li class="press-admin-item">' +
+			'			<button class="press-button press-button-gray press-admin-private">打开模块管理</button>' +
+			'		</li>' +
+			'	</ul>' +
+			'	<ul class="press-admin-action press-clearfix">' +
+			'		<li class="press-admin-item">' +
+			'			<a class="press-button press-button-gray press-admin-preview" href="{{url}}" target="_blank">预览</a>' +
+			'		</li>' +
+			'		<li class="press-admin-item">' +
+			'			<button class="press-button press-button-red press-admin-save">保存设置</button>' +
+			'		</li>' +
+			'	</ul>' +
 			'</div>',
 
 		// 布局工具条模板
@@ -97,61 +107,48 @@ press.define('template', [], function () {
 		// 添加模块模板
 		TEMPLATE_MODULE_ADD: '<form class="press-module-add-form">' +
 			'	<div class="press-form-mini press-clearfix">' +
-			'		{{#template}}' +
 			'		<div class="press-form-toggle press-clearfix">' +
-			'			<a href="javascript:;" class="press-form-toggle-selected" data-value="1">公共模块</a>' +
-			'			<a href="javascript:;" data-value="0">私有模块</a>' +
-			'			<input type="hidden" name="public">' +
+			'			<a href="javascript:;" class="press-form-toggle-selected" data-value="all">公共模块</a>' +
+			'			<a href="javascript:;" data-value="private">私有模块</a>' +
+			'			<input type="hidden" name="filter" value="all">' +
 			'		</div>' +
-			'		{{/template}}' +
 			'		<div class="press-module-add-togglable">' +
-			'		<select class="press-form-select press-module-add-authors" name="author">' +
-			'			<option value="">创建者</option>' +
-			'		</select>' +
 			'		<select class="press-form-select press-form-select-disabled" disabled="disabled">' +
 			'			<option>{{width}}</option>' +
 			'		</select>' +
 			'		<input type="hidden" name="width" value="{{width}}">' +
-			'		<select class="press-form-select press-module-add-types" name="type"></select>' +
-			'		<input class="press-form-text" type="text" size="35" placeholder="模块名称、描述" name="key">' +
+			'		<select class="press-form-select press-module-add-authors" name="author">' +
+			'			<option value="">创建者</option>' +
+			'			{{#author}}' +
+			'			<option value="{{name}}">{{name}}</option>' +
+			'			{{/author}}' +
+			'		</select>' +
+			'		<input class="press-form-text" type="text" size="35" placeholder="模块名称、描述" name="q">' +
 			'		<button class="press-button press-button-blue press-button-small" type="submit">搜索</button>' +
 			'		</div>' +
 			'	</div>' +
-			'	<ul class="press-module-add-list press-clearfix press-overlay-scroll" data-load="true" data-page="0"></ul>' +
+			'	<ul class="press-module-add-list press-clearfix press-overlay-scroll" data-load="true" data-index="0"></ul>' +
 			'</form>',
 
 		// 模块条目模板
 		TEMPLATE_MODULE_ADD_LIST: '{{#data}}' +
-			'<li class="press-module-add-item" data-name="{{name}}" data-id="{{id}}" data-base="{{baseUrl}}">' +
-			'	<img src="{{imgUrl}}_250x250.jpg" alt="">' +
-			'	<em>{{nickName}}</em><i>已选择</i>' +
+			'<li class="press-module-add-item" data-name="{{name}}">' +
+			'	<img src="{{imgurl}}_250x250.jpg" alt="">' +
+			'	<em>{{nickname}}</em><i>已选择</i>' +
 			'	<div class="press-module-add-explore">' +
 			'		<ul>' +
-			'			<li>{{nickName}}</li>' +
+			'			<li>{{nickname}}</li>' +
 			'			<li class="press-clearfix"><b>名称：</b><span>{{name}}</span></li>' +
-			'			<li class="press-clearfix"><b>描述：</b><span>{{des}}</span></li>' +
+			'			<li class="press-clearfix"><b>描述：</b><span>{{description}}</span></li>' +
 			'			<li class="press-clearfix"><b>作者：</b><span>{{author}}</span></li>' +
-			'			<li class="press-clearfix"><b>热度：</b><span>{{useNum}} 次</span></li>' +
 			'		</ul>' +
 			'		<div class="press-module-add-action">' +
-			'			{{#public}}' +
-			'			<a class="press-button press-button-gray" href="/daogou/site/market/previewModule.htm?id={{id}}" target="_blank">预览</a>' +
-			'			{{/public}}' +
+			'			<a class="press-button press-button-gray" href="{{url}}" target="_blank">预览</a>' +
 			'			<a class="press-button press-button-blue press-module-add-select" href="javascript:;">选择该模块</a>' +
 			'		</div>' +
 			'	</div>' +
 			'</li>' +
-			'{{/data}}',
-
-		// 模块作者模板
-		TEMPLATE_MODULE_ADD_AUTHORS: '{{#authors}}' +
-			'<option value="{{.}}">{{.}}</option>' +
-			'{{/authors}}',
-
-		// 模块类型模板
-		TEMPLATE_MODULE_ADD_TYPES: '{{#types}}' +
-			'<option value="{{key}}">{{value}}</option>' +
-			'{{/types}}'
+			'{{/data}}'
 
 	};
 

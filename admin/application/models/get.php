@@ -353,12 +353,36 @@ class Get extends CI_Model {
 
 		// 收集模块数据
 		$modules = array();
+		$index = 0;
 		foreach ($files as $v) {
-			$data = @file_get_contents($v);
-			$data = $this->json->decode($data, true);
-			$modules[] = $data;
+			$v = @file_get_contents($v);
+			$v = $this->json->decode($v, true);
+
+			// 从指定页码读取
+			if (isset($args['index']) && $args['index'] > $index++) {
+				continue;
+			}
+
+			// 模块宽度查询
+			if (trim($args['width']) !== '') {
+				if (intval($args['width']) !== intval($v['width'])) {
+					continue;
+				}
+			}
+			$modules[] = $v;
+
+			// 收集模块数据
+			if (isset($args['index']) && count($modules) === 10) {
+				return array(
+					'code' => $index,
+					'data' => $modules
+				);
+			}
 		}
-		return $modules;
+		return array(
+			'code' => $index,
+			'data' => $modules
+		);
 
 	}
 

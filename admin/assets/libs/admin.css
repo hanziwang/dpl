@@ -5,16 +5,33 @@
 /* = 全局样式
 ----------------------------------------------- */
 .press-admin {
-
+	background: transparent !important;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 2147483647;
+	min-width: 768px;
+	pointer-events: none;
 }
 
-.press-admin-module {
-	background: rgba(54, 54, 54, 0.7);
-	cursor: pointer;
-	position: fixed;
-	top: 15px;
-	left: 15px;
-	width: 32px;
-	height: 32px;
-	border-radius: 16px;
+.press-admin-menu {
+	margin: 20px 0 0 20px;
+	float: left;
+	pointer-events: auto;
+}
+
+.press-admin-item {
+	float: left;
+}
+
+.press-admin-action {
+	margin: 20px 20px 0 0;
+	float: right;
+	pointer-events: auto;
+}
+
+.press-admin-preview {
+	margin-right: 10px;
 }

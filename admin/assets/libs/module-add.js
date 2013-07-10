@@ -40,13 +40,12 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 			// 获取模块列表
 			$.ajax({
-				dataType: 'jsonp',
-				url: press.api + '?method=tms.module.get.list' + '&' + form.serialize(),
+				dataType: 'json',
+				url: press.base + 'api/module_search?' + form.serialize(),
 				data: {
-					config: press.config,
-					id: press.page,
-					page: parseInt(list.attr('data-page')) + 1,
-					_input_charset: 'utf-8'
+					market: press.market,
+					template: press.name,
+					index: parseInt(list.attr('data-index')) + 1
 				},
 				beforeSend: function () {
 					self.__loading = true;
@@ -58,9 +57,15 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					if (d.data.length === 0) {
 						list.attr('data-load', 'false');
 					} else {
-						!d['public'] && list.attr('data-load', 'false');
-						list.attr('data-page', d.page);
+						list.attr('data-index', d.code);
 						list.append(function () {
+							var filter = form.find('input[name=filter]').val();
+							$.each(d.data, function (k, v) {
+								v.url = press.base + 'module/design?name=' + v.name;
+								if (filter === 'private') {
+									v.url += '&market=' + press.market + '&template=' + press.name;
+								}
+							});
 							return $(mustache.render(template.TEMPLATE_MODULE_ADD_LIST, d)).fadeIn();
 						});
 					}
@@ -85,12 +90,12 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 				// 加载模块数据
 				!trigger.attr('disabled') && $.ajax({
-					dataType: 'jsonp',
-					url: press.api + '?method=tms.module.get.source',
+					dataType: 'json',
+					url: press.base + 'api/module_render',
 					data: {
-						page: press.page,
-						id: item.attr('data-id'),
-						_input_charset: 'utf-8'
+						market: press.market,
+						template: press.name,
+						name: item.attr('data-name')
 					},
 					beforeSend: function () {
 						trigger.html('正在读取...');
@@ -101,7 +106,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					},
 					success: function (d) {
 						trigger.html('取消该模块');
-						self.__selected[name] = d.data;
+						self.__selected[name] = d;
 						item.addClass(cls);
 					},
 					error: function () {
@@ -133,13 +138,12 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 			$('.press-module-add-selected').each(function (key, item) {
 
 				var name = $(item).attr('data-name'),
-					base = $(item).attr('data-base'),
 					data = self.__selected[name],
 					time = new Date().getTime();
 
 				// 构建模块容器节点
 				var box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>'),
-					module = $(data.html);
+					module = $(data['php']);
 
 				// 设置模块属性
 				box.attr({
@@ -149,8 +153,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				});
 
 				// 插入模块样式、结构
-				box.append('<link rel="stylesheet" href="' + base + '/' + name + '.css?t=' + time + '">')
-					.append('<style id="skin-' + time + '">' + data.skin + '</style>')
+				box.append('<style>' + data['css'] + data['skin/default'] + '</style>')
 					.append(module);
 
 				// 插入模块工具条
@@ -166,39 +169,14 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 				// 加载模块脚本前，判断是否已经加载过
 				if (!page.loaded[name]) {
-
-					$.getScript(base + '/' + name + '.js?t=' + time, function () {
-						renderCallback(box[0], module[0]);
-						$(this).remove();
-						page.loaded[name] = true;
-					});
-
+					box.append('<script>' + data['js'] + '</script>');
+					renderCallback(box[0], module[0]);
+					page.loaded[name] = true;
 				} else {
 					renderCallback(box[0], module[0]);
 				}
 
-				// 检查并装载插件环境
-				config.plugin && config.plugin(box);
-
 			});
-
-		},
-
-		// 设置模块作者、分类列表
-		__setAuthorsTypes: function () {
-
-			var AUTHORS = template.TEMPLATE_MODULE_ADD_AUTHORS,
-				TYPES = template.TEMPLATE_MODULE_ADD_TYPES;
-
-			// 设置作者列表
-			$('.press-module-add-authors').append(mustache.render(AUTHORS, {
-				authors: $.parseJSON(press.authors)
-			}));
-
-			// 设置分类列表
-			$('.press-module-add-types').append(mustache.render(TYPES, {
-				types: $.parseJSON(press.types)
-			}));
 
 		},
 
@@ -206,8 +184,10 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 		__getContent: function (config) {
 
 			return $(mustache.render(template.TEMPLATE_MODULE_ADD, {
-				template: press.template === 'true',
-				width: config.width
+				market: press.market,
+				template: press.name,
+				width: config.width,
+				author: $.parseJSON(press.author)
 			}));
 
 		},
@@ -229,7 +209,6 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					close();
 				},
 				afterRenderUI: function () {
-					self.__setAuthorsTypes();
 					self.__bind();
 					self.__load();
 				},
@@ -251,7 +230,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				e.preventDefault();
 				list.html('');
 				list.attr({
-					'data-page': 0,
+					'data-index': 0,
 					'data-load': 'true'
 				});
 				self.__load();
@@ -276,7 +255,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					val = $(this).attr('data-value');
 
 				// 私有模块隐藏表单
-				val === '0' ? togglable.hide() : togglable.show();
+				val === 'private' ? togglable.hide() : togglable.show();
 				$(this).addClass(cls);
 				$(this).siblings('a').removeClass(cls);
 				$(this).siblings('input').val(val);

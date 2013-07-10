@@ -32,11 +32,9 @@ _tms_export($module['json']);
 	padding-top: 69px;
 }
 #span-<?= $id ?> {
-	background: rgba(255, 255, 255, 0.8);
 	position: fixed;
-	top: 0;
-	left: 0;
-	padding: 20px;
+	top: 20px;
+	left: 20px;
 }
 #select-<?= $id ?> {
 	border: 1px solid #d9d9d9;

@@ -12,7 +12,7 @@
 foreach ($modules as $module) :
 ob_start();
 ?>
-<div class="J_Module skin-<?= $module['skin'] ?>" data-name="<?= $module['name'] ?>" data-skin="<?= $module['skin'] ?>" data-guid="<?= $module['guid'] ?>">
+<div class="J_Module skin-<?= $module['skin'] ?>" id="guid-<?= $module['guid'] ?>" data-name="<?= $module['name'] ?>" data-skin="<?= $module['skin'] ?>" data-guid="<?= $module['guid'] ?>">
 <?php
 _tms_import($module['json']);
 eval(' ?>' . $module['php'] . '<?php ');
@@ -39,24 +39,23 @@ endforeach;
 	// 初始化模板调试
 	var press = {
 
-		// 配置接口
-		api: '<?= base_url('api') ?>',
-
-		// 配置目录
-		base: '<?= base_url('assets/libs') ?>',
-
-		// 配置版本
+		// 配置参数
+		base: '<?= base_url('/') ?>',
+		author: '<?= $author ?>',
+		market: '<?= $market ?>',
+		name: '<?= $name ?>',
 		version:'<?= $version ?>',
 
 		// 加载 seajs 类库
 		seajs: function () {
 
-			var readyState = false,
+			var base = this.base + 'assets/libs/',
+				readyState = false,
 				script = document.createElement('script');
 			script.charset = 'utf-8';
 			script.id = 'seajsnode';
-			script.src = this.base + '/sea.js?v=' + this.version;
-			script.setAttribute('data-main', this.base + '/main.js?v=' + this.version);
+			script.src = base + 'sea.js?v=' + this.version;
+			script.setAttribute('data-main', base + 'main.js?v=' + this.version);
 
 			// 绑定加载完毕事件
 			script.onload = script.onreadystatechange = function () {
