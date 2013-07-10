@@ -9,7 +9,7 @@
  *                             |___/
  * tms 标签解析函数集
  * @see http://wiki.tms.taobao.net/syntax:php:start
- * @version 0.9.1
+ * @version 0.9.2
  */
 
 /* = 错误报告模式
@@ -93,7 +93,7 @@ if (!function_exists('_tms_encode')) {
 }
 
 /**
- * 标签导出导出控制器
+ * 标签数据导入导出控制器
  * @param string $filename
  * @param string $action
  * @return void
