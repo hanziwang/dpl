@@ -25,7 +25,6 @@ class Module_render extends CI_Controller {
 		ob_start();
 		_tms_import($data['json']);
 		eval(' ?>' . $data['php'] . '<?php ');
-		_tms_export($data['json']);
 		$data['php'] = ob_get_contents();
 		ob_end_clean();
 

@@ -4,23 +4,16 @@
  */
 /* = 全局样式
 ----------------------------------------------- */
-.press-admin {
-	background: transparent !important;
-	width: 100%;
+.press-admin-menu,
+.press-admin-action {
 	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
+	padding: 20px;
 	z-index: 2147483647;
-	min-width: 768px;
-	text-align: center;
-	pointer-events: none;
 }
 
 .press-admin-menu {
-	margin: 20px 0 0 20px;
-	float: left;
-	pointer-events: auto;
+	top: 0;
+	left: 0;
 }
 
 .press-admin-item {
@@ -28,9 +21,8 @@
 }
 
 .press-admin-action {
-	margin: 20px 20px 0 0;
-	float: right;
-	pointer-events: auto;
+	right: 0;
+	bottom: 0;
 }
 
 .press-admin-preview {

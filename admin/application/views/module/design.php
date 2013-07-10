@@ -35,6 +35,7 @@ _tms_export($module['json']);
 	position: fixed;
 	top: 20px;
 	left: 20px;
+	padding: 20px;
 }
 #select-<?= $id ?> {
 	border: 1px solid #d9d9d9;

@@ -60,9 +60,16 @@ class Design extends CI_Controller {
 						'template' => $args['name'],
 						'name' => $module['name']
 					));
+
+					// 读取模块数据、样式、脚本
+					$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
+					if (file_exists($json)) {
+						$data['json'] = $json;
+					}
 					$args['css'] .= $data['css'];
 					$args['css'] .= $data['skin/' . $module['skin']];
 					$args['js'] .= $data['js'];
+
 					$args['modules'][] = array_merge($module, $data);
 					$replace .= "{" . $module['guid'] . "}\r\n";
 				}
