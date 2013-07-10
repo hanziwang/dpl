@@ -70,11 +70,11 @@
 	background-position: 0 -80px;
 }
 
-.press-layout-990 .press-grid-s5m0 {
+.press-layout-990 .press-grid-m0s5 {
 	background-position: 0 -120px;
 }
 
-.press-layout-990 .press-grid-m0s5 {
+.press-layout-990 .press-grid-s5m0 {
 	background-position: 0 -160px;
 }
 
@@ -198,57 +198,4 @@
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
-}
-
-/* = 布局选项
------------------------------------------------ */
-.press-layout-option-selectable {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	width: 300px;
-	background: #fff;
-	border-right: 1px solid #dfdfdf;
-	padding: 20px 30px;
-	overflow-x: hidden;
-	overflow-y: visible;
-}
-
-.press-layout-option-selectable strong {
-	width: 300px;
-	display: block;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-.press-layout-option-selectable ul {
-	width: 300px;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
-.press-layout-option-selectable li {
-	cursor: pointer;
-}
-
-.press-layout-option-using {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 361px;
-	padding: 20px 0 0 23px;
-}
-
-.press-layout-option-using strong {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-.press-layout-option-using .press-grid {
-	-moz-filter: grayscale(100%);
-	-webkit-filter: grayscale(100%);
-	filter: grayscale(100%);
 }

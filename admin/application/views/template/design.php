@@ -40,8 +40,10 @@ endforeach;
 	var press = {
 
 		// 配置参数
-		base: '<?= base_url('/') ?>',
-		author: '<?= $author ?>',
+		base: '<?= base_url() ?>',
+		grids: <?= $grids ?>,
+		authors: '<?= $authors ?>',
+		width: <?= $setting['width'] ?>,
 		market: '<?= $market ?>',
 		name: '<?= $name ?>',
 		version:'<?= $version ?>',

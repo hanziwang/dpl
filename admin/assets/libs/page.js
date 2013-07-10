@@ -11,19 +11,6 @@ press.define('page', ['jquery'], function (require) {
 		// 页面模块脚本加载状态
 		loaded: {},
 
-		// 操作信息提示
-		message: function (str, hide) {
-
-			var trigger = $('.press-admin-message span'),
-				message = press.message;
-
-			trigger.html(str).show();
-			hide && setTimeout(function () {
-				message ? trigger.html(message) : trigger.hide();
-			}, 2500);
-
-		},
-
 		// 窗口卸载提示
 		beforeUnload: function () {
 
@@ -118,9 +105,7 @@ press.define('page', ['jquery'], function (require) {
 				beforeSend: self.loading,
 				complete: self.unloading,
 				success: function (d) {
-					if (d.code === 200) {
-						self.message(d.message);
-					} else {
+					if (d.code !== 200) {
 						alert(d.message);
 					}
 				},

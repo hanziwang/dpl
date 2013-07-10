@@ -58,7 +58,7 @@ press.define('layout-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 		// 获取内容节点
 		__getContent: function () {
 
-			var grids = $.parseJSON(press.grids),
+			var grids = press.grids,
 				types = [];
 
 			return $(mustache.render(template.TEMPLATE_LAYOUT_ADD, {

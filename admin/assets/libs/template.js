@@ -11,7 +11,7 @@ press.define('template', [], function () {
 		TEMPLATE_ADMIN: '<div class="press-base press-admin">' +
 			'	<ul class="press-admin-menu press-clearfix">' +
 			'		<li class="press-admin-item">' +
-			'			<button class="press-button press-button-gray press-admin-private">打开模块管理</button>' +
+			'			<button class="press-button press-button-gray press-admin-private">私有模块管理</button>' +
 			'		</li>' +
 			'	</ul>' +
 			'	<ul class="press-admin-action press-clearfix">' +
@@ -119,9 +119,9 @@ press.define('template', [], function () {
 			'		<input type="hidden" name="width" value="{{width}}">' +
 			'		<select class="press-form-select press-module-add-authors" name="author">' +
 			'			<option value="">创建者</option>' +
-			'			{{#author}}' +
+			'			{{#authors}}' +
 			'			<option value="{{name}}">{{name}}</option>' +
-			'			{{/author}}' +
+			'			{{/authors}}' +
 			'		</select>' +
 			'		<input class="press-form-text" type="text" size="35" placeholder="模块名称、描述" name="q">' +
 			'		<button class="press-button press-button-blue press-button-small" type="submit">搜索</button>' +

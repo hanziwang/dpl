@@ -10,14 +10,16 @@ class Design extends CI_Controller {
 		$this->load->helper('tms');
 		$this->load->library('json');
 		$this->load->model(array('get', 'market', 'grid', 'template', 'module'));
-		$author = $this->get->author();
+		$authors = $this->get->author();
+		$grids = $this->grid->grid();
 		$args = array(
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
 			'name' => $this->input->get('name'),
 			'content' => "\r\n",
 			'modules' => array(),
-			'author' => $this->json->encode($author)
+			'authors' => $this->json->encode($authors),
+			'grids' => $this->json->encode(array_keys($grids)),
 		);
 
 		// 读取业务规范

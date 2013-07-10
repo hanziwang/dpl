@@ -187,7 +187,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				market: press.market,
 				template: press.name,
 				width: config.width,
-				author: $.parseJSON(press.author)
+				authors: $.parseJSON(press.authors)
 			}));
 
 		},
