@@ -157,7 +157,6 @@ if (!function_exists('_tms_export')) {
 			@file_put_contents($filename, $data);
 			@chmod($filename, 0777);
 		}
-		$GLOBALS['_tms_export'] = array();
 
 	}
 
