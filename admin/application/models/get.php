@@ -371,6 +371,8 @@ class Get extends CI_Model {
 				return $this->_module_common($args);
 			case 'more':
 				return $this->_module_more($args);
+			case 'private':
+				return $this->_module_private($args);
 		}
 
 	}

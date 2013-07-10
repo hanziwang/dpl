@@ -439,7 +439,7 @@ class Module extends CI_Model {
 			$filename = array_pop($filename);
 			$filename = str_replace('.less', '', $filename);
 			$skin = $color . @file_get_contents($v);
-			$data['skin-' . $filename] = $this->lessc->parse($skin);
+			$data['skin/' . $filename] = $this->lessc->parse($skin);
 		}
 
 		// 读取样式

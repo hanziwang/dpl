@@ -56,7 +56,7 @@ class Design extends CI_Controller {
 						'name' => $module['name']
 					));
 					$args['css'] .= $data['css'];
-					$args['css'] .= $data['skin-' . $module['skin']];
+					$args['css'] .= $data['skin/' . $module['skin']];
 					$args['js'] .= $data['js'];
 					$args['modules'][] = array_merge($module, $data);
 					$replace .= "{" . $module['guid'] . "}\r\n";
