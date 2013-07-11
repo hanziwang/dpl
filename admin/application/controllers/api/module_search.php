@@ -15,7 +15,10 @@ class Module_search extends CI_Controller {
 			'index' => $this->input->get('index')
 		);
 
-		// 过滤私有模板筛选
+		// 模块宽度处理
+		$args['width'] = $args['width'] !== '100%' ? $args['width'] : 0;
+
+		// 过滤私有模块
 		if ($args['filter'] === 'private') {
 			$args['market'] = $this->input->get('market');
 			$args['template'] = $this->input->get('template');

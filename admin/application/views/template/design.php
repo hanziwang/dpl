@@ -46,7 +46,8 @@ endforeach;
 		width: <?= $setting['width'] ?>,
 		market: '<?= $market ?>',
 		name: '<?= $name ?>',
-		version:'<?= $version ?>',
+		//version:'<?= $version ?>',
+		version: new Date().getTime(),
 
 		// 加载 seajs 类库
 		seajs: function () {

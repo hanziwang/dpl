@@ -12,6 +12,9 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 	return {
 
+		// 设置过滤参数
+		__filter: 'all',
+
 		// 重置模块列表宽度
 		__resize: function (list) {
 
@@ -43,6 +46,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				dataType: 'json',
 				url: press.base + 'api/module_search?' + form.serialize(),
 				data: {
+					filter: self.__filter,
 					market: press.market,
 					template: press.name,
 					index: parseInt(list.attr('data-index')) + 1
@@ -59,10 +63,9 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					} else {
 						list.attr('data-index', d.code);
 						list.append(function () {
-							var filter = form.find('input[name=filter]').val();
 							$.each(d.data, function (k, v) {
 								v.url = press.base + 'module/design?name=' + v.name;
-								if (filter === 'private') {
+								if (self.__filter === 'private') {
 									v.url += '&market=' + press.market + '&template=' + press.name;
 								}
 							});
@@ -93,6 +96,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					dataType: 'json',
 					url: press.base + 'api/module_render',
 					data: {
+						filter: self.__filter,
 						market: press.market,
 						template: press.name,
 						name: item.attr('data-name')
@@ -132,17 +136,16 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 		// 将模块插入页面
 		__insert: function (config) {
 
-			var self = this;
+			var self = this, insert;
 
-			// 遍历选中的模块
-			$('.press-module-add-selected').each(function (key, item) {
+			// 定义模块插入方法
+			insert = function (name) {
 
-				var name = $(item).attr('data-name'),
-					data = self.__selected[name],
-					time = new Date().getTime();
+				var data = self.__selected[name],
+					time = new Date().getTime(),
 
 				// 构建模块容器节点
-				var box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>'),
+					box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>'),
 					module = $(data['php']);
 
 				// 设置模块属性
@@ -174,6 +177,33 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					page.loaded[name] = true;
 				} else {
 					renderCallback(box[0], module[0]);
+				}
+
+			};
+
+			// 遍历选中的模块
+			$('.press-module-add-selected').each(function (key, item) {
+
+				var name = $(item).attr('data-name');
+				if (self.__filter === 'private') {
+					insert(name);
+				} else {
+					$.ajax({
+						dataType: 'json',
+						url: press.base + 'api/module_copy',
+						data: {
+							path: 'modules/' + name,
+							market: press.market,
+							template: press.name,
+							name: name
+						},
+						beforeSend: page.loading,
+						complete: page.unloading,
+						success: function () {
+							insert(name);
+						},
+						type: 'post'
+					});
 				}
 
 			});
@@ -258,7 +288,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				val === 'private' ? togglable.hide() : togglable.show();
 				$(this).addClass(cls);
 				$(this).siblings('a').removeClass(cls);
-				$(this).siblings('input').val(val);
+				self.__filter = val;
 				form.submit();
 
 			});

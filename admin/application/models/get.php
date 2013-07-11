@@ -390,12 +390,12 @@ class Get extends CI_Model {
 	function module ($args) {
 
 		switch ($args['filter']) {
-			case 'my':
-			case 'all':
+			case 'my' :
+			case 'all' :
 				return $this->_module_common($args);
-			case 'more':
+			case 'more' :
 				return $this->_module_more($args);
-			case 'private':
+			case 'private' :
 				return $this->_module_private($args);
 		}
 

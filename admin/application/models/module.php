@@ -227,16 +227,46 @@ class Module extends CI_Model {
 		}
 		closedir($handle);
 
-		// 清除 tmsId 字段、最后修改时间、版本
+		// 写入配置信息
 		$data = @file_get_contents($module_dir . 'data.json');
 		$data = $this->json->decode($data);
-		$data->name = $args['name'];
-		$data->nickname = $args['nickname'];
-		$data->width = $args['width'];
-		$data->author = $args['author'];
-		$data->category = $args['category'];
-		$data->description = $args['description'];
-		$data->imgurl = $args['imgurl'];
+
+		// 设置名称参数
+		if (!empty($args['name'])) {
+			$data->name = $args['name'];
+		}
+
+		// 设置昵称参数
+		if (!empty($args['nickname'])) {
+			$data->nickname = $args['nickname'];
+		}
+
+		// 设置宽度参数
+		if (!empty($args['width'])) {
+			$data->width = $args['width'];
+		}
+
+		// 设置作者参数
+		if (!empty($args['author'])) {
+			$data->author = $args['author'];
+		}
+
+		// 设置分类参数
+		if (!empty($args['category'])) {
+			$data->category = $args['category'];
+		}
+
+		// 设置描述参数
+		if (!empty($args['description'])) {
+			$data->description = $args['description'];
+		}
+
+		// 设置缩略图参数
+		if (!empty($args['imgurl'])) {
+			$data->imgurl = $args['imgurl'];
+		}
+
+		// 清除 tmsId 字段、最后修改时间、版本
 		$data->id = '';
 		$data->modify_time = '';
 		$data->version = '';

@@ -110,7 +110,6 @@ press.define('template', [], function () {
 			'		<div class="press-form-toggle press-clearfix">' +
 			'			<a href="javascript:;" class="press-form-toggle-selected" data-value="all">公共模块</a>' +
 			'			<a href="javascript:;" data-value="private">私有模块</a>' +
-			'			<input type="hidden" name="filter" value="all">' +
 			'		</div>' +
 			'		<div class="press-module-add-togglable">' +
 			'		<select class="press-form-select press-form-select-disabled" disabled="disabled">' +
