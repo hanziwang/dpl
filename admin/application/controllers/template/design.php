@@ -9,9 +9,9 @@ class Design extends CI_Controller {
 
 		$this->load->helper('tms');
 		$this->load->library('json');
-		$this->load->model(array('get', 'market', 'grid', 'template', 'module'));
+		$this->load->model(array('get', 'market', 'render', 'template', 'module'));
 		$authors = $this->get->author();
-		$grids = $this->grid->grid();
+		$grids = $this->render->grid();
 		$args = array(
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
@@ -45,7 +45,7 @@ class Design extends CI_Controller {
 		// 解析模板结构数据
 		$attribute = $defaults->attribute;
 		foreach ($attribute as $layout) {
-			$template = $this->grid->template($layout->grid);
+			$template = $this->render->template($layout->grid);
 			foreach ($layout->region as $region) {
 				$replace = "\r\n";
 				if (empty($region)) {

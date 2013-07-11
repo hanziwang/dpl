@@ -31,6 +31,9 @@ _tms_export($module['json']);
 #page {
 	padding-top: 69px;
 }
+</style>
+<?php if (isset($_REQUEST['debug'])) : ?>
+<style>
 #span-<?= $id ?> {
 	position: fixed;
 	top: 20px;
@@ -60,5 +63,6 @@ document.getElementById('select-<?= $id ?>').onchange = function (e) {
 	location.href = '<?= base_url('module/design?name=' . $name . '&market=') ?>' + e.target.value;
 }
 </script>
+<?php endif; ?>
 </body>
 </html>

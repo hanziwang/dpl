@@ -199,8 +199,8 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 						},
 						beforeSend: page.loading,
 						complete: page.unloading,
-						success: function () {
-							insert(name);
+						success: function (d) {
+							d.code === 200 && insert(name);
 						},
 						type: 'post'
 					});
