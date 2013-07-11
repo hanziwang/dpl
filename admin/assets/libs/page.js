@@ -105,7 +105,9 @@ press.define('page', ['jquery'], function (require) {
 				beforeSend: self.loading,
 				complete: self.unloading,
 				success: function (d) {
-					if (d.code !== 200) {
+					if (d.code === 200) {
+						self.attribute = attribute;
+					} else {
 						alert(d.message);
 					}
 				},
