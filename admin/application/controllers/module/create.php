@@ -7,12 +7,12 @@ class Create extends CI_Controller {
 
 	function index () {
 
-		$this->load->model(array('get', 'render'));
+		$this->load->model(array('get', 'grid'));
 		$args = array (
 			'title' => '新建模块 &lsaquo; 模板管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
-			'widths' => $this->render->width()
+			'widths' => $this->grid->width()
 		);
 		$this->load->view('header', $args);
 		$this->load->view('module/create');

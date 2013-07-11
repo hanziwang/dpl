@@ -7,12 +7,12 @@ class Edit extends CI_Controller {
 
 	function index () {
 
-		$this->load->model(array('get', 'render', 'module'));
+		$this->load->model(array('get', 'grid', 'module'));
 		$args = array(
 			'title' => '编辑模块 &lsaquo; 模板管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
-			'widths' => $this->render->width(),
+			'widths' => $this->grid->width(),
 			'name' => $this->input->get('name')
 		);
 

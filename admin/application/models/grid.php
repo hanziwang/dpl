@@ -1,9 +1,9 @@
 <?php
 
 /**
- * 渲染模型
+ * 栅格模型
  */
-class Render extends CI_Model {
+class Grid extends CI_Model {
 
 	// 栅格公式
 	private $rules = array(
@@ -104,20 +104,6 @@ class Render extends CI_Model {
 			$data = '';
 		}
 		return str_replace('{grid}', $grid, $data);
-
-	}
-
-	// 查询渲染函数
-	function callback () {
-
-		// 配置基础路径
-		$config_module = $this->config->item('module', 'setting');
-		$data_dir = dirname(BASEPATH) . '/data/callback/';
-
-		// 读取脚本文件
-		$file = $data_dir . $config_module . '.js';
-		$data = @file_get_contents($file);
-		return $data;
 
 	}
 

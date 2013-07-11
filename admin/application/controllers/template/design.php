@@ -9,9 +9,9 @@ class Design extends CI_Controller {
 
 		$this->load->helper('tms');
 		$this->load->library('json');
-		$this->load->model(array('get', 'market', 'render', 'template', 'module'));
+		$this->load->model(array('get', 'market', 'grid', 'template', 'module'));
 		$authors = $this->get->author();
-		$grids = $this->render->grid();
+		$grids = $this->grid->grid();
 		$args = array(
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
@@ -19,7 +19,7 @@ class Design extends CI_Controller {
 			'content' => "\r\n",
 			'modules' => array(),
 			'authors' => $this->json->encode($authors),
-			'grids' => $this->json->encode(array_keys($grids)),
+			'grids' => $this->json->encode(array_keys($grids))
 		);
 
 		// 读取业务规范
@@ -45,7 +45,7 @@ class Design extends CI_Controller {
 		// 解析模板结构数据
 		$attribute = $defaults->attribute;
 		foreach ($attribute as $layout) {
-			$template = $this->render->template($layout->grid);
+			$template = $this->grid->template($layout->grid);
 			foreach ($layout->region as $region) {
 				$replace = "\r\n";
 				if (empty($region)) {
@@ -61,7 +61,7 @@ class Design extends CI_Controller {
 						'name' => $module['name']
 					));
 
-					// 读取模块数据、样式、脚本
+					// 读取模块数据\
 					$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
 					if (file_exists($json)) {
 						$data['json'] = $json;
