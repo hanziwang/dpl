@@ -152,7 +152,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				// 插入模块样式、结构、工具条
 				box.append('<style>' + data['css'] + data['skin/default'] + '</style>');
 				box.append(data['php']);
-				module = box.children('.tb-module');
+				module = box.find('.tb-module');
 				page.setModuleAdmin(box, config.width);
 
 				// 插入页面指定位置
