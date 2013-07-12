@@ -143,20 +143,16 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 				// 构建模块容器节点
 				box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>');
-				module = $(data['php']).children('.tb-module');
-
-				// 设置模块属性
 				box.attr({
 					'data-name': name,
 					'data-skin': 'default',
 					'data-guid': time
 				});
 
-				// 插入模块样式、结构
-				box.append('<style>' + data['css'] + data['skin/default'] + '</style>')
-					.append(module);
-
-				// 插入模块工具条
+				// 插入模块样式、结构、工具条
+				box.append('<style>' + data['css'] + data['skin/default'] + '</style>');
+				box.append(data['php']);
+				module = box.children('.tb-module');
 				page.setModuleAdmin(box, config.width);
 
 				// 插入页面指定位置
