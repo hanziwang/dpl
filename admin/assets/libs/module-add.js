@@ -12,9 +12,6 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 	return {
 
-		// 设置过滤参数
-		__filter: 'all',
-
 		// 重置模块列表宽度
 		__resize: function (list) {
 
@@ -142,11 +139,11 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 			insert = function (name) {
 
 				var data = self.__selected[name],
-					time = new Date().getTime(),
+					time = new Date().getTime(), box, module;
 
 				// 构建模块容器节点
-					box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>'),
-					module = $(data['php']);
+				box = $('<div class="J_Module skin-default" id="guid-' + time + '"></div>');
+				module = $(data['php']).children('.tb-module');
 
 				// 设置模块属性
 				box.attr({
@@ -200,7 +197,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 						beforeSend: page.loading,
 						complete: page.unloading,
 						success: function (d) {
-							d.code === 200 && insert(name);
+							d && insert(name);
 						},
 						type: 'post'
 					});
@@ -304,6 +301,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 		// 初始化
 		init: function (config) {
 
+			this.__filter = 'all';
 			this.__create(config);
 
 		}

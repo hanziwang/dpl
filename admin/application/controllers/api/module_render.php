@@ -12,12 +12,12 @@ class Module_render extends CI_Controller {
 		$this->load->model(array('get', 'module'));
 		$args = array(
 			'filter' => $this->input->get('filter'),
+			'market' => $this->input->get('market'),
 			'name' => $this->input->get('name')
 		);
 
 		// 过滤私有模板筛选
 		if ($args['filter'] === 'private') {
-			$args['market'] = $this->input->get('market');
 			$args['template'] = $this->input->get('template');
 		}
 

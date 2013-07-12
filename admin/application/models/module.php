@@ -447,7 +447,7 @@ class Module extends CI_Model {
 	function read ($args) {
 
 		$this->load->library('lessc');
-		$this->load->model('get');
+		$this->load->model('market');
 
 		// 配置基础路径、参数
 		$module_dir = $this->_base_dir($args);
@@ -455,14 +455,10 @@ class Module extends CI_Model {
 		$name = $module_dir . $args['name'];
 
 		// 读取默认皮肤
-		$markets = $this->get->market();
-		$color = '';
-		foreach ($markets as $v) {
-			if (intval($v->id) === intval($args['market'])) {
-				$color = $v->color;
-				break;
-			}
-		}
+		$market = $this->market->select(array(
+			'id' => $args['market']
+		));
+		$color = $market->color;
 		$skins = glob($module_dir . 'skin/*.less');
 		foreach ($skins as $v) {
 			$filename = explode('/', $v);
