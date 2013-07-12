@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 更新控制器
+ * 更新业务数据控制器
  */
 class Update extends CI_Controller {
 

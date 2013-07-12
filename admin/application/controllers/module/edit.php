@@ -13,19 +13,26 @@ class Edit extends CI_Controller {
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->grid->width(),
-			'name' => $this->input->get('name')
+			'name' => $this->input->get('name'),
+			'category' => array()
 		);
 
-		// 读取模块信息、合并请求参数
+		// 读取模块信息
 		$module = $this->module->select($args);
 		$defaults = array(
 			'nickname' => $module->nickname,
-			'category' => isset($module->category) ? explode(',', $module->category) : array(),
 			'width' => $module->width,
 			'author' => $module->author,
 			'description' => $module->description,
 			'imgurl' => $module->imgurl
 		);
+
+		// 设置模块分类
+		if (isset($module->category)) {
+			$args['category'] = explode(',', $module->category);
+		}
+
+		// 合并请求参数
 		$args = array_merge($args, $defaults);
 
 		$this->load->view('header', $args);

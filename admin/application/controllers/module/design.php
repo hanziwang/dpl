@@ -25,9 +25,10 @@ class Design extends CI_Controller {
 		}
 
 		// 读取页头、模块
-		$header = $this->market->read(array(
+		$market = $this->market->read(array(
 			'id' => $args['market']
-		))['header'];
+		));
+		$header = $market['header'];
 		$args['header'] = substr($header, 0, strpos($header, '</head>'));
 		$args['module'] = $this->module->read($args);
 

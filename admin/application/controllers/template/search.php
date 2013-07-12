@@ -7,6 +7,7 @@ class Search extends CI_Controller {
 
 	function index () {
 
+		$this->load->model('get');
 		$args = array(
 			'version' => $this->config->item('version'),
 			'filter' => $this->input->get('filter'),
@@ -30,7 +31,6 @@ class Search extends CI_Controller {
 		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
 
 		// 读取市场列表
-		$this->load->model('get');
 		$args['markets'] = $this->get->market();
 
 		$this->load->view('header', $args);

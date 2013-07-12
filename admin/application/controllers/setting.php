@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 设置控制器
+ * 设置用户参数控制器
  */
 class Setting extends CI_Controller {
 

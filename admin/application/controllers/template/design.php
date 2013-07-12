@@ -61,7 +61,7 @@ class Design extends CI_Controller {
 						'name' => $module['name']
 					));
 
-					// 读取模块数据\
+					// 读取模块数据
 					$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
 					if (file_exists($json)) {
 						$data['json'] = $json;
