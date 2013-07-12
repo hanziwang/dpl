@@ -42,8 +42,8 @@
 		<li class="item parent">
 			<a class="explore" href="javascript:;">帮助中心</a>
 			<ul class="submenu">
-				<li><a href="//wiki.tms.taobao.net/dpl:start" target="_blank">使用手册</a></li>
-				<li><a href="//wiki.tms.taobao.net/dpl:issues" target="_blank">意见反馈</a></li>
+				<li><a href="http://wiki.tms.taobao.net/dpl:start" target="_blank">使用手册</a></li>
+				<li><a href="http://wiki.tms.taobao.net/dpl:issues" target="_blank">意见反馈</a></li>
 			</ul>
 		</li>
 		<li class="item">

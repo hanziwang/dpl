@@ -12,8 +12,8 @@
 		<div class="hd"><span>快捷导航</span></div>
 		<div class="bd">
 			<ul class="clearfix">
-				<li>常用地址：<a href="//daogou.tms.taobao.com" target="_blank">新版管理系统</a><a href="//wiki.tms.taobao.net" target="_blank">维基百科</a></li>
-				<li>帮助中心：<a href="//dpl.taobao.net" target="_blank">使用手册</a><a href="//wiki.tms.taobao.net/dpl:issues" target="_blank">意见反馈</a></li>
+				<li>常用地址：<a href="http://daogou.tms.taobao.com" target="_blank">新版管理系统</a><a href="http://wiki.tms.taobao.net" target="_blank">维基百科</a></li>
+				<li>帮助中心：<a href="http://dpl.taobao.net" target="_blank">使用手册</a><a href="http://wiki.tms.taobao.net/dpl:issues" target="_blank">意见反馈</a></li>
 			</ul>
 		</div>
 	</div>
