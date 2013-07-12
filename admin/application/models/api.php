@@ -50,6 +50,8 @@ class Api extends CI_Model {
 				$src = $this->config->item('src') . '/' . $v->code;
 				if (!file_exists($src)) {
 					@mkdir($src, 0777);
+					@mkdir($src . '/modules', 0777);
+					@mkdir($src . '/www', 0777);
 				}
 				$v = $this->json->encode($v);
 				@file_put_contents($db_dir . '/setting.json', $v);

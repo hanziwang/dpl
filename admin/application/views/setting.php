@@ -8,7 +8,7 @@
 					<div class="clearfix">
 						<select class="select" name="id">
 <?php foreach ($config as $v) : ?>
-							<option value="<?= $v->id ?>" data-src="<?= dirname($src) . '/' . $v->code ?>"<?= intval($v->id) === intval($setting['id']) ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
+							<option value="<?= $v->id ?>" data-src="<?= $src . '/' . $v->code ?>"<?= intval($v->id) === intval($setting['id']) ? ' selected="selected"' : '' ?>><?= $v->name ?>（<?= $v->company ?>）</option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -16,7 +16,7 @@
 				<div class="field clearfix">
 					<label class="label">当前工作目录：</label>
 					<div class="clearfix">
-						<input type="text" class="text text-disabled" disabled="disabled" value="<?= $src ?>">
+						<input type="text" class="text text-disabled" disabled="disabled" value="<?= $src . '/' . $setting['code'] ?>">
 					</div>
 				</div>
 				<div class="submit">
