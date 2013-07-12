@@ -1,7 +1,7 @@
 /**
  * 设计页面渲染
  * 注：渲染设计状态下的工具条、占位块
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('render', ['jquery', 'mustache', 'template', 'page'], function (require) {
 

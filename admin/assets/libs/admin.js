@@ -1,6 +1,6 @@
 /**
  * 管理工具条
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (require) {
 

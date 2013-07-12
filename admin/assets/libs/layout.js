@@ -1,7 +1,7 @@
 /**
  * 布局操作
  * 注：集合了基本的布局操作功能
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('layout', ['jquery', 'mustache', 'layout-add'], function (require) {
 

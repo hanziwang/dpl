@@ -1,6 +1,6 @@
 /**
  * 简单的弹出层
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('overlay', ['jquery'], function (require) {
 

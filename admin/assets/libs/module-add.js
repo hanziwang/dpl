@@ -1,6 +1,6 @@
 /**
  * 添加模块
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page'], function (require) {
 

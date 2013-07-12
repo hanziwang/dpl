@@ -7,12 +7,12 @@
 .press-admin-menu,
 .press-admin-action {
 	position: fixed;
+	top: 0;
 	padding: 20px;
 	z-index: 2147483647;
 }
 
 .press-admin-menu {
-	top: 0;
 	left: 0;
 }
 
@@ -22,7 +22,6 @@
 
 .press-admin-action {
 	right: 0;
-	bottom: 0;
 }
 
 .press-admin-preview {

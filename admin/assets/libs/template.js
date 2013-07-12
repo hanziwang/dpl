@@ -1,7 +1,7 @@
 /**
  * 页面组件模板
  * 注：遵循 mustache 语法规则
- * @author 邦彦<bangyan@taobao.com>
+ * @author 邦彦<tinyhill@163.com>
  */
 press.define('template', [], function () {
 
