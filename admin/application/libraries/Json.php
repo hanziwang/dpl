@@ -8,7 +8,7 @@ class Json {
 	// 将数组编码为字符串
 	function encode ($value) {
 
-		return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", str_replace('\/', '/', json_encode($value)));
+		return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
 
 	}
 
