@@ -9,7 +9,7 @@ class Copy extends CI_Controller {
 
 		$this->load->model(array('get', 'grid', 'module'));
 		$args = array(
-			'title' => '拷贝模块 &lsaquo; 模板管理',
+			'title' => '拷贝模块 &lsaquo; 模块管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->grid->width(),

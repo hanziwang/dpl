@@ -9,7 +9,7 @@ class Create extends CI_Controller {
 
 		$this->load->model(array('get', 'grid'));
 		$args = array (
-			'title' => '新建模块 &lsaquo; 模板管理',
+			'title' => '新建公共模块 &lsaquo; 模块管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->grid->width()

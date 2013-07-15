@@ -1,6 +1,6 @@
 <div class="content module">
 	<div class="fieldset">
-		<div class="hd"><span>新建模块</span></div>
+		<div class="hd"><span>新建公共模块</span></div>
 		<div class="bd">
 			<form class="form">
 				<div class="field clearfix">

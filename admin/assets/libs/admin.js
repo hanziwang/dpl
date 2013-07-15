@@ -27,6 +27,11 @@ press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (requ
 			var doc = $(document);
 
 			// 保存配置
+			doc.on('click', '.press-admin-private', function () {
+				console.log('private' + new Date().getTime());
+			});
+
+			// 保存配置
 			doc.on('click', '.press-admin-save', function () {
 				page.setAttribute();
 			});

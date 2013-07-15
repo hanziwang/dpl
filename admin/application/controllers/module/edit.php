@@ -9,7 +9,7 @@ class Edit extends CI_Controller {
 
 		$this->load->model(array('get', 'grid', 'module'));
 		$args = array(
-			'title' => '编辑模块 &lsaquo; 模板管理',
+			'title' => '编辑模块 &lsaquo; 模块管理',
 			'version' => $this->config->item('version'),
 			'types' => $this->get->type(),
 			'widths' => $this->grid->width(),
