@@ -16,6 +16,9 @@ class Search extends CI_Controller {
 			'q' => $this->input->get('q')
 		);
 
+		// 设置过滤参数
+		$args['filter'] = $args['filter'] ? $args['filter'] : 'all';
+
 		// 设置标题
 		if ($args['filter'] === 'my') {
 			$args['title'] = '我的模块 &lsaquo; 模块管理';
@@ -23,8 +26,6 @@ class Search extends CI_Controller {
 			$args['title'] = '所有模块 &lsaquo; 模块管理';
 		} elseif ($args['filter'] === 'more') {
 			$args['title'] = '更多模块 &lsaquo; 模块管理';
-		} else {
-			$args['filter'] = 'all';
 		}
 
 		// 设置查询参数

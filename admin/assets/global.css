@@ -216,6 +216,10 @@ a:hover, a:active {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAe9JREFUeNqMU81LAlEQd9dVF79DsTwkBV7Um6eUDl6DDgl9/wXdiq6Fl6Cgi13sGp3MEPy4iSR4EPLiUQ9meApqk5TVFPOjGdknT1PowezO+73fb3bezKxMNmcNh8NtsDfJDubxWEqgAfOTfaFQcBO/WCx6KJ4fjJ8IgOJ+vx8GNwT+NWIKhWKJ+tCixLuSOBEShMFHo9HY0uv1t5SgBmaaynYCa7fbR2q1OjnKwGazvWYymReKbJpx3TGGXKvVWp2ohdFo3G82m1VSuHq9XonH409o6BMcOcgl1+cA3MDovV5vmeM4JYJA6ni93gco3jPunU7nWj6fP9BqtbxGo1EKgrAK3MPRtahWjS0cDifhUEdlqENsFped1Vu73f4BL5GCRAn7s7hgMJh3OBwLBoNB6fF4VhB0uVzrEN3CMMyH1D4LVH2diHK5XFUUxW6pVPrCNnqxzyqVSlur1S7wjpJIgAARyd8BfzQLrVarazabzzqdzjds3xkSFQbphmXZXdk/1mAweJTL5Sf0JG7SYkj3Z1pEY8hFzTiAz+cTKpXKJxkSqMddIpEoEUE6nS4jRoatXC4LqKE/wMM0ngYCgUee5/cwcCqVCpFWZbPZe8TwDDkwhceomc4SATfJKhqNnpMAsVjskvr5kKMkol8BBgAVcDUGXQNHYAAAAABJRU5ErkJggg==);
 }
 
+.header .icon-close {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAT0lEQVR42mNgGAVDF/z//z8BiN8DsQEWOQOoXAKphoI0/Uc3GMlAsByphhqgG4xNjJwgQDeEMgNxGEy5gTQxlOrep0lE0SpJUT/xj4IRAgBMbhb828ioRQAAAABJRU5ErkJggg==);
+}
+
 /* = 页尾
 ----------------------------------------------- */
 .footer {
@@ -770,6 +774,16 @@ a.button-small {
 .search .more .item:hover .nickname,
 .search .more .action {
 	background: #1aa95c;
+}
+
+.search .private .item:hover {
+	border-color: #636;
+	box-shadow: 0 0 2px #636;
+}
+
+.search .private .item:hover .nickname,
+.search .private .action {
+	background: #636;
 }
 
 .search .load {

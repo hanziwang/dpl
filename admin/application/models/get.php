@@ -363,15 +363,30 @@ class Get extends CI_Model {
 				continue;
 			}
 
+			// 模块作者查询
+			if (!empty($args['author'])) {
+				if ($args['author'] !== $v['author']) {
+					continue;
+				}
+			}
+
 			// 模块宽度查询
 			if (trim($args['width']) !== '') {
 				if (intval($args['width']) !== intval($v['width'])) {
 					continue;
 				}
 			}
-			$modules[] = $v;
+
+			// 关键字查询
+			if (!empty($args['q'])) {
+				$haystack = $v['name'] . $v['nickname'] . $v['description'];
+				if (strpos($haystack, $args['q']) === false) {
+					continue;
+				}
+			}
 
 			// 收集模块数据
+			$modules[] = $v;
 			if (isset($args['index']) && count($modules) === 10) {
 				return array(
 					'code' => $index,

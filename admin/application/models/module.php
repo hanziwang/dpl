@@ -57,9 +57,9 @@ class Module extends CI_Model {
 		$defaults = array(
 			'name' => $args['name'],
 			'nickname' => $args['nickname'],
+			'category' => $args['category'],
 			'width' => $args['width'],
 			'author' => $args['author'],
-			'category' => $args['category'],
 			'description' => $args['description'],
 			'imgurl' => $args['imgurl'],
 			'id' => '',
