@@ -1,3 +1,3 @@
-httpd -k stop -n "DPL Client"
-httpd -k uninstall -n "DPL Client"
+httpd -k stop -n "DPLSDK"
+httpd -k uninstall -n "DPLSDK"
 pause

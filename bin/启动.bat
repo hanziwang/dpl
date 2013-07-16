@@ -1,3 +1,3 @@
-httpd -k install -n "DPL Client"
-httpd -k start -n "DPL Client"
+httpd -k install -n "DPLSDK"
+httpd -k start -n "DPLSDK"
 pause

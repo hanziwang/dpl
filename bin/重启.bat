@@ -1,2 +1,2 @@
-httpd -k restart -n "DPL Client"
+httpd -k restart -n "DPLSDK"
 pause
