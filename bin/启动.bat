@@ -1,3 +1,3 @@
-httpd -k install -f "bin/conf/httpd.conf" -n "DPL Client"
+httpd -k install -n "DPL Client"
 httpd -k start -n "DPL Client"
 pause
