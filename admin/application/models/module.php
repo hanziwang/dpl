@@ -65,7 +65,8 @@ class Module extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => strval($config_id)
+			'configid' => strval($config_id),
+			'tag' => $args['tag'],
 		);
 
 		// 替换模块占位符
@@ -150,6 +151,11 @@ class Module extends CI_Model {
 		// 写入缩略图参数
 		if (!empty($args['imgurl'])) {
 			$defaults->imgurl = $args['imgurl'];
+		}
+
+		// 写入标签参数
+		if (!empty($args['tag'])) {
+			$defaults->tag = $args['tag'];
 		}
 
 		// 写入配置信息
@@ -264,6 +270,11 @@ class Module extends CI_Model {
 		// 设置缩略图参数
 		if (!empty($args['imgurl'])) {
 			$data->imgurl = $args['imgurl'];
+		}
+
+		// 设置标签参数
+		if (!empty($args['tag'])) {
+			$data->tag = $args['tag'];
 		}
 
 		// 清除 tmsId 字段、最后修改时间、版本

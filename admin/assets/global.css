@@ -832,6 +832,42 @@ a.button-small {
 
 /* = 新建模块
 ----------------------------------------------- */
+.module .tag-selectable a {
+	border: 1px solid #e2e1e3;
+	color: #000;
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 8px;
+	float: left;
+	margin-right: 5px;
+	position: relative;
+}
+
+.module .tag-selectable a:hover,
+.module .tag-selectable .selected {
+	border: 2px solid #de2915;
+	height: 23px;
+	line-height: 23px;
+	padding: 0 7px;
+	color: #de2915 !important;
+	text-decoration: none;
+}
+
+.module .tag-selectable i {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF9vf4////3ikV////Q5Qz6AAAAAR0Uk5T////AEAqqfQAAAA2SURBVHjaTMtBDgAwCAJB2f7/z7VwKMZExoQ5f5jKBQoUKFBIDPaCZDjsPuC33ElXadVcAQYAccIBVR3fXWsAAAAASUVORK5CYII=);
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	right: -2px;
+	bottom: -2px;
+	display: none;
+}
+
+.module .tag-selectable .selected i {
+	display: inline-block;
+}
+
 .module .type-selected span {
 	color: green;
 	display: inline-block;

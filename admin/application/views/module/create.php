@@ -16,6 +16,17 @@
 					</div>
 				</div>
 				<div class="field clearfix">
+					<label class="label">业务标签：</label>
+					<div class="clearfix tags">
+						<input type="hidden" class="tag" name="tag">
+						<div class="tag-selectable clearfix">
+<?php foreach ($tags as $v) : $v = explode(':', $v); ?>
+							<a data-id="<?= $v[0] ?>" href="javascript:;"<?= intval($default) === intval($v[0]) ? ' class="selected"' : '' ?>><?= $v[1] ?><i></i></a>
+<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix">
 					<label class="label">模块分类：</label>
 					<div class="clearfix types">
 						<input type="hidden" class="category" name="category">
@@ -66,6 +77,11 @@
 </div>
 <script>
 
+	// 业务标签
+	$('.tag-selectable').on('click', 'a', function () {
+		$(this).toggleClass('selected');
+	});
+
 	// 模块分类
 	$('.type-selected').on('click', 'a', function () {
 		$(this).parent().remove();
@@ -97,6 +113,13 @@
 	// 新建模块
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
+		$('.tag').val(function () {
+			var tags = [];
+			$('.tag-selectable a.selected').each(function (k, v) {
+				tags.push($(v).attr('data-id'));
+			});
+			return tags.join(',') || $('.tag').val();
+		});
 		$('.category').val(function () {
 			var types = [];
 			$('.type-selected a').each(function (k, v) {

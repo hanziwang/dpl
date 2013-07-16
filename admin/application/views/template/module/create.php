@@ -6,6 +6,7 @@
 				<input type="hidden" name="market" value="<?= $market ?>">
 				<input type="hidden" name="template" value="<?= $template ?>">
 				<input type="hidden" name="category" value="">
+				<input type="hidden" name="tag" value="">
 				<div class="field clearfix">
 					<label class="label">模块名称：</label>
 					<div class="clearfix">

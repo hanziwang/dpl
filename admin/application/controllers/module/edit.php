@@ -14,7 +14,8 @@ class Edit extends CI_Controller {
 			'types' => $this->get->type(),
 			'widths' => $this->grid->width(),
 			'name' => $this->input->get('name'),
-			'category' => array()
+			'category' => array(),
+			'tag' => array()
 		);
 
 		// 读取模块信息
@@ -30,6 +31,13 @@ class Edit extends CI_Controller {
 		// 设置模块分类
 		if (isset($module->category)) {
 			$args['category'] = explode(',', $module->category);
+		}
+
+		// 设置业务标签
+		$setting = $this->config->item('setting');
+		$args['tags'] = explode(',', $setting['tags']);
+		if (isset($module->tag)) {
+			$args['tag'] = explode(',', $module->tag);
 		}
 
 		// 合并请求参数

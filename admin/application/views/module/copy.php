@@ -17,6 +17,17 @@
 					</div>
 				</div>
 				<div class="field clearfix">
+					<label class="label">业务标签：</label>
+					<div class="clearfix tags">
+						<input type="hidden" class="tag" name="tag">
+						<div class="tag-selectable clearfix">
+<?php foreach ($tags as $v) : $v = explode(':', $v); ?>
+							<a data-id="<?= $v[0] ?>" href="javascript:;"<?= in_array($v[0], $tag) ? ' class="selected"' : '' ?>><?= $v[1] ?><i></i></a>
+<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+				<div class="field clearfix">
 					<label class="label">模块分类：</label>
 					<div class="clearfix types">
 						<input type="hidden" class="category" name="category" required="required">
@@ -25,7 +36,6 @@
 							<span id="type-selected-<?= $v->id ?>"><a data-id="<?= $v->id ?>" href="javascript:;"></a><?= $v->value ?></span>
 <?php endif; endforeach; ?>
 						</span>
-						<a href="javascript:;" class="type-select">点此选择分类 »</a>
 						<div class="type-unselected">
 <?php foreach ($types as $v) : ?>
 							<a data-id="<?= $v->id ?>" href="javascript:;"><?= $v->value ?></a>
@@ -72,6 +82,11 @@
 </div>
 <script>
 
+	// 业务标签
+	$('.tag-selectable').on('click', 'a', function () {
+		$(this).toggleClass('selected');
+	});
+
 	// 模块分类
 	$('.type-select').on('click', function () {
 		$('.type-unselected').fadeToggle('fast');
@@ -97,6 +112,13 @@
 	// 拷贝模块
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
+		$('.tag').val(function () {
+			var tags = [];
+			$('.tag-selectable a.selected').each(function (k, v) {
+				tags.push($(v).attr('data-id'));
+			});
+			return tags.join(',') || $('.tag').val();
+		});
 		$('.category').val(function () {
 			var types = [];
 			$('.type-selected a').each(function (k, v) {
