@@ -207,8 +207,14 @@ if (!function_exists('_tms_syntax')) {
 
 		// 检查字段
 		foreach ($keys as $v) {
-			if (empty($args[$v])) {
-				_tms_error('参数字段 ' . $v . ' 未设置或为空');
+			if ($v === 'name') {
+				if (!isset($args[$v]) || empty($args[$v])) {
+					_tms_error('参数字段 ' . $v . ' 未设置或为空');
+				}
+			} else {
+				if (!isset($args[$v])) {
+					_tms_error('参数字段 ' . $v . ' 未设置');
+				}
 			}
 		}
 
@@ -407,7 +413,7 @@ if (!function_exists('_tms_custom')) {
 					$v = _TMS_LINK;
 					break;
 				case 'img':
-					$v = _TMS_IMAGE . ($sizes[$k] ? '?x=' . $sizes[$k] : '');
+					$v = _TMS_IMAGE . (isset($sizes[$k]) ? '?x=' . $sizes[$k] : '');
 					break;
 				case 'boolean':
 					$v = 'true';
@@ -446,6 +452,7 @@ if (!function_exists('_tms_subArea')) {
 		curl_setopt($ch, CURLOPT_URL, $args);
 		$data = curl_exec($ch);
 		curl_close($ch);
+		$data = @iconv('GBK', 'UTF-8//IGNORE', $data);
 		return eval(' ?>' . $data . '<?php ');
 
 	}

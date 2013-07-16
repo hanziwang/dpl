@@ -84,7 +84,11 @@
 
 	// 业务标签
 	$('.tag-selectable').on('click', 'a', function () {
-		$(this).toggleClass('selected');
+		if ($(this).hasClass('selected') && $(this).siblings('.selected').length !== 0) {
+			$(this).removeClass('selected');
+		} else {
+			$(this).addClass('selected');
+		}
 	});
 
 	// 模块分类

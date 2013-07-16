@@ -3,7 +3,7 @@
 		<div class="hd"><span>更新业务数据</span></div>
 		<div class="bd">
 			<form class="form" method="get" action="<?= base_url('api/update/setting') ?>">
-				<div class="hint">提示信息：请确认数据目录【db】可写（777）</div>
+				<div class="hint">提示信息：请确认数据目录【db】可写</div>
 				<div class="progress"><span></span></div>
 				<div class="submit">
 					<button type="button" class="button">下载业务数据</button>
