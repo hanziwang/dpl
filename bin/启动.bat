@@ -1,4 +1,2 @@
-httpd -k install -n "DPLSDK"
-httpd -k start -n "DPLSDK"
+httpd -f "bin/conf/httpd.conf" -k start -n "DPLSDK"
 pause
-start http://localhost:8000/admin
