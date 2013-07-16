@@ -20,7 +20,7 @@
 	</ul>
 	<ul class="quick-action clearfix">
 		<li class="item">
-			<a class="explore" href="javascript:;" title="关闭窗口"><b class="icon icon-close"></b></a>
+			<a class="explore" href="javascript:window.top.press.close();" title="关闭窗口"><b class="icon icon-close"></b></a>
 		</li>
 	</ul>
 </div>

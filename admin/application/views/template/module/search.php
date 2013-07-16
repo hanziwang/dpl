@@ -1,3 +1,8 @@
+<style>
+	html {
+		background: #f8f8fa;
+	}
+</style>
 <div class="search">
 	<div class="toolbar">
 		<form class="form form-mini clearfix" method="get" action="<?= base_url('template/module/search') ?>">

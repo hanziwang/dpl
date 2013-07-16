@@ -777,13 +777,13 @@ a.button-small {
 }
 
 .search .private .item:hover {
-	border-color: #636;
-	box-shadow: 0 0 2px #636;
+	border-color: #f60;
+	box-shadow: 0 0 2px #f60;
 }
 
 .search .private .item:hover .nickname,
 .search .private .action {
-	background: #636;
+	background: #f60;
 }
 
 .search .load {

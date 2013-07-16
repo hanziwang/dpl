@@ -11,6 +11,9 @@ press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (requ
 
 	var admin = {
 
+		// 滚动位置
+		scrollTop: 0,
+
 		// 插入管理工具条
 		__create: function () {
 
@@ -21,20 +24,47 @@ press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (requ
 
 		},
 
+		// 私有模块管理
+		__private: function () {
+
+			var src = press.base + 'template/module/search?market=' + press.market + '&template=' + press.name;
+
+			// 记录滚动位置
+			this.scrollTop = $(window).scrollTop();
+
+			// 插入页面
+			if ($('.press-admin-iframe').length === 0) {
+				$('body').append(function () {
+					return $(mustache.render(template.TEMPLATE_ADMIN_PRIVATE, {
+						src: src
+					})).fadeIn();
+				});
+			}
+
+		},
+
 		// 绑定事件
 		__bind: function () {
 
-			var doc = $(document);
+			var self = this, doc = $(document);
 
-			// 保存配置
+			// 模块管理
 			doc.on('click', '.press-admin-private', function () {
-				console.log('private' + new Date().getTime());
+				self.__private();
 			});
 
 			// 保存配置
 			doc.on('click', '.press-admin-save', function () {
 				page.setAttribute();
 			});
+
+			// 关闭窗口
+			press.close = function () {
+				$('.press-admin-iframe').fadeOut('fast', function () {
+					$(this).remove();
+					$(window).scrollTop(self.scrollTop);
+				});
+			};
 
 		},
 

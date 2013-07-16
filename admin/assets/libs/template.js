@@ -24,6 +24,12 @@ press.define('template', [], function () {
 			'	</ul>' +
 			'</div>',
 
+		// 私有模块管理模板
+		TEMPLATE_ADMIN_PRIVATE: '<div class="press-admin-iframe">' +
+			'   <style>html, body { overflow: hidden !important; }</style>' +
+			'   <iframe src="{{src}}"></iframe>' +
+			'</div>',
+
 		// 布局工具条模板
 		TEMPLATE_LAYOUT_ADMIN: '<div class="press-base press-layout-admin">' +
 			'	<div class="press-layout-action press-clearfix">' +
