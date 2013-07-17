@@ -43,42 +43,43 @@ class Design extends CI_Controller {
 		));
 
 		// 解析模板结构数据
-		$attribute = $defaults->attribute;
-		foreach ($attribute as $layout) {
-			$template = $this->grid->template($layout->grid);
-			foreach ($layout->region as $region) {
-				$replace = "\r\n";
-				if (empty($region)) {
+		if ($attribute = $defaults->attribute) {
+			foreach ($attribute as $layout) {
+				$template = $this->grid->template($layout->grid);
+				foreach ($layout->region as $region) {
+					$replace = "\r\n";
+					if (empty($region)) {
+						$start = strpos($template, '{module}');
+						$template = substr_replace($template, $replace, $start, 8);
+						continue;
+					}
+					foreach ($region as $module) {
+						$module = get_object_vars($module);
+						$data = $this->module->read(array(
+							'market' => $args['market'],
+							'template' => $args['name'],
+							'name' => $module['name']
+						));
+
+						// 读取模块数据
+						$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
+						if (file_exists($json)) {
+							$data['json'] = $json;
+						}
+
+						// 读取模块样式、脚本
+						$args['css'] .= $data['css'];
+						$args['css'] .= $data['skin/' . $module['skin']];
+						$args['js'] .= $data['js'];
+
+						$args['modules'][] = array_merge($module, $data);
+						$replace .= "{" . $module['guid'] . "}\r\n";
+					}
 					$start = strpos($template, '{module}');
 					$template = substr_replace($template, $replace, $start, 8);
-					continue;
 				}
-				foreach ($region as $module) {
-					$module = get_object_vars($module);
-					$data = $this->module->read(array(
-						'market' => $args['market'],
-						'template' => $args['name'],
-						'name' => $module['name']
-					));
-
-					// 读取模块数据
-					$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
-					if (file_exists($json)) {
-						$data['json'] = $json;
-					}
-
-					// 读取模块样式、脚本
-					$args['css'] .= $data['css'];
-					$args['css'] .= $data['skin/' . $module['skin']];
-					$args['js'] .= $data['js'];
-
-					$args['modules'][] = array_merge($module, $data);
-					$replace .= "{" . $module['guid'] . "}\r\n";
-				}
-				$start = strpos($template, '{module}');
-				$template = substr_replace($template, $replace, $start, 8);
+				$args['content'] .= $template . "\r\n";
 			}
-			$args['content'] .= $template . "\r\n";
 		}
 
 		$this->load->view('template/design', $args);
