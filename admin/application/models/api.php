@@ -48,7 +48,8 @@ class Api extends CI_Model {
 		$data = $this->json->decode($data);
 		foreach ($data as $v) {
 			if (intval($v->id) === intval($args['id'])) {
-				$src = dirname($src) . '/' . $v->code;
+				$src = substr($src, -3) === 'src' ? $src : dirname($src);
+				$src .= '/' . $v->code;
 				if (!file_exists($src)) {
 					@mkdir($src, 0777);
 					@mkdir($src . '/modules', 0777);
