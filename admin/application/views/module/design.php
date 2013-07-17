@@ -60,7 +60,7 @@ _tms_export($module['json']);
 <script>
 document.getElementsByTagName('title')[0].innerHTML = '<?= $name ?>';
 document.getElementById('select-<?= $id ?>').onchange = function (e) {
-	location.href = '<?= base_url('module/design?name=' . $name . '&market=') ?>' + e.target.value;
+	location.href = '<?= base_url('module/design?name=' . $name . '&market=') ?>' + e.target.value + '&debug';
 }
 </script>
 <?php endif; ?>

@@ -20,7 +20,7 @@ function before_action () {
 		}
 	}
 
-	// 读取用户参数
+	// 设置用户参数
 	$data = @file_get_contents($db_dir . '/setting.json');
 	$data = $ci->json->decode($data, true);
 	$src = $ci->config->item('src') . '/' . $data['code'];
