@@ -18,26 +18,4 @@ class Update extends CI_Controller {
 
 	}
 
-	// 设置用户参数
-	function setting () {
-
-		$this->load->model(array('api', 'get', 'market'));
-		$src = $this->config->item('src');
-		$args = array(
-			'id' => '1',
-			'src' => $src . '/taobao'
-		);
-		$this->api->setting($args);
-		$this->config->set_item('setting', $args);
-		$this->config->set_item('www', $args['src'] . '/www');
-		$markets = $this->get->market();
-		foreach ($markets as $v) {
-			$this->market->create(array(
-				'id' => $v->id
-			));
-		}
-		header('Location: ' . base_url('home'));
-
-	}
-
 }

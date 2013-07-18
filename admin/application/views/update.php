@@ -2,7 +2,9 @@
 	<div class="fieldset">
 		<div class="hd"><span>更新业务数据</span></div>
 		<div class="bd">
-			<form class="form" method="get" action="<?= base_url('api/update/setting') ?>">
+			<form class="form" method="get" action="<?= base_url('api/setting') ?>">
+				<input type="hidden" name="ref" value="update">
+				<input type="hidden" name="id" value="1">
 				<div class="hint">提示信息：请确认数据目录可写</div>
 				<div class="progress"><span></span></div>
 				<div class="submit">

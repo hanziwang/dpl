@@ -18,9 +18,9 @@ $config['tms_author'] = $tms . 'client/getModuleAuthors.htm';
 $config['version'] = '20130717';
 
 // 配置系统路径
-$dir = dirname(dirname(BASEPATH));
-$config['db'] = $dir . '/db';
-$config['src'] = $dir . '/src';
+$home = dirname(dirname(BASEPATH));
+$config['db'] = $home . '/db';
+$config['src'] = $home . '/src';
 
 // 配置资源路径
 $src = $config['src'];

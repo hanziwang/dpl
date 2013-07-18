@@ -43,12 +43,15 @@ class Api extends CI_Model {
 		$db_dir = $this->config->item('db');
 		$src = $this->config->item('src');
 
+		// 配置资源目录
+		$dir = dirname(dirname(BASEPATH)) . '/src';
+		$src = $src === $dir ? $src : $dir;
+
 		// 写入用户参数
 		$data = @file_get_contents($db_dir . '/config.json');
 		$data = $this->json->decode($data);
 		foreach ($data as $v) {
 			if (intval($v->id) === intval($args['id'])) {
-				$src = substr($src, -3) === 'src' ? $src : dirname($src);
 				$src .= '/' . $v->code;
 				if (!file_exists($src)) {
 					@mkdir($src, 0777);

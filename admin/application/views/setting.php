@@ -3,6 +3,7 @@
 		<div class="hd"><span>设置用户参数</span></div>
 		<div class="bd">
 			<form class="form" method="get" action="<?= base_url('api/setting') ?>">
+				<input type="hidden" name="ref" value="setting">
 				<div class="field clearfix">
 					<label class="label">使用业务规范：</label>
 					<div class="clearfix">
