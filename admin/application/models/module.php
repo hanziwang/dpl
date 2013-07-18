@@ -495,10 +495,7 @@ class Module extends CI_Model {
 
 		// 读取源代码
 		$data['php'] = @file_get_contents($name . '.php');
-		if (@mb_detect_encoding($data['php']) !== 'UTF-8') {
-			$encoding = array('ASCII', 'GB2312', 'GBK', 'UTF-8');
-			$data['php'] = @mb_convert_encoding($data['php'], 'UTF-8', $encoding);
-		}
+		$data['php'] = @mb_convert_encoding($data['php'], 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
 		return $data;
 	}
 
