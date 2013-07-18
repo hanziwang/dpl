@@ -385,7 +385,7 @@ if (!function_exists('_tms_custom')) {
 		$fields = explode(',', $_args['fields']);
 		$attributes = array();
 		$sizes = array();
-		foreach ($fields as $k => $v) {
+		foreach ($fields as $v) {
 			$field = explode(':', $v);
 			$attributes[$field[0]] = $field[2];
 			if (preg_match('/\[(\d+x\d+)]\:img$/', $v, $match)) {
