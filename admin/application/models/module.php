@@ -248,7 +248,7 @@ class Module extends CI_Model {
 		}
 
 		// 设置宽度参数
-		if (!empty($args['width'])) {
+		if (isset($args['width'])) {
 			$data->width = $args['width'];
 		}
 
