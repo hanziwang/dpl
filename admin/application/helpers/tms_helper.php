@@ -150,7 +150,7 @@ if (!function_exists('_tms_export')) {
 		}
 
 		// 导出数据到指定文件
-		$data = json_encode($GLOBALS['_tms_export'], true);
+		$data = json_encode($GLOBALS['_tms_export']);
 		$data = preg_replace('#\\\u([0-9a-f]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $data);
 		$data = _tms_format($data);
 		if ($data !== @file_get_contents($filename)) {
@@ -175,7 +175,8 @@ if (!function_exists('_tms_error')) {
 		try {
 			throw new Exception($error_msg);
 		} catch (Exception $e) {
-			$trace = $e->getTrace()[4];
+			$trace = $e->getTrace();
+			$trace = $trace[4];
 			$file = $GLOBALS['_tms_file'];
 			$line = $trace['line'];
 			$function = $trace['function'];
