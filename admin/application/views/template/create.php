@@ -1,4 +1,4 @@
-<div class="content template">
+<div class="content manage">
 	<div class="fieldset">
 		<div class="hd"><span>新建模板</span></div>
 		<div class="bd">
@@ -13,6 +13,17 @@
 					<label class="label">模板昵称：</label>
 					<div class="clearfix">
 						<input type="text" class="text" name="nickname" maxlength="50" required="required">
+					</div>
+				</div>
+				<div class="field clearfix">
+					<label class="label">业务标签：</label>
+					<div class="clearfix tags">
+						<input type="hidden" class="tag" name="tag">
+						<div class="tag-selectable clearfix">
+<?php foreach ($tags as $v) : $v = explode(':', $v); ?>
+							<a data-id="<?= $v[0] ?>" href="javascript:;"<?= intval($default) === intval($v[0]) ? ' class="selected"' : '' ?>><?= $v[1] ?><i></i></a>
+<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 				<div class="field clearfix">
@@ -53,6 +64,15 @@
 	</div>
 </div>
 <script>
+
+	// 业务标签
+	$('.tag-selectable').on('click', 'a', function () {
+		if ($(this).hasClass('selected') && $(this).siblings('.selected').length !== 0) {
+			$(this).removeClass('selected');
+		} else {
+			$(this).addClass('selected');
+		}
+	});
 
 	// 创建者
 	$.ajax({

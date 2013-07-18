@@ -38,6 +38,8 @@ class Edit extends CI_Controller {
 		$args['tags'] = explode(',', $setting['tags']);
 		if (isset($module->tag)) {
 			$args['tag'] = explode(',', $module->tag);
+		} else {
+			$args['tag'] = array($setting['default']);
 		}
 
 		// 合并请求参数

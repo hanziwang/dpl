@@ -1,4 +1,4 @@
-<div class="content module">
+<div class="content manage">
 	<div class="fieldset">
 		<div class="hd"><span>新建私有模块</span></div>
 		<div class="bd">

@@ -1,4 +1,4 @@
-<div class="content template">
+<div class="content manage">
 	<div class="fieldset">
 		<div class="hd"><span>编辑模板 “<?= $name ?>”</span></div>
 		<div class="bd">
@@ -14,6 +14,17 @@
 					<label class="label">模板昵称：</label>
 					<div class="clearfix">
 						<input type="text" class="text" name="nickname" maxlength="50" required="required" value="<?= $nickname ?>">
+					</div>
+				</div>
+				<div class="field clearfix">
+					<label class="label">业务标签：</label>
+					<div class="clearfix tags">
+						<input type="hidden" class="tag" name="tag">
+						<div class="tag-selectable clearfix">
+<?php foreach ($tags as $v) : $v = explode(':', $v); ?>
+							<a data-id="<?= $v[0] ?>" href="javascript:;"<?= in_array($v[0], $tag) ? ' class="selected"' : '' ?>><?= $v[1] ?><i></i></a>
+<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 				<div class="field clearfix">
@@ -55,6 +66,15 @@
 	</div>
 </div>
 <script>
+
+	// 业务标签
+	$('.tag-selectable').on('click', 'a', function () {
+		if ($(this).hasClass('selected') && $(this).siblings('.selected').length !== 0) {
+			$(this).removeClass('selected');
+		} else {
+			$(this).addClass('selected');
+		}
+	});
 
 	// 上传图片
 	$('.file input').on('change', function (e) {

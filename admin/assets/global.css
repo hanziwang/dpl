@@ -810,29 +810,23 @@ a.button-small {
 
 /* = 新建、编辑、拷贝模板模块
 ----------------------------------------------- */
-.template .text,
-.template .textarea,
-.module .text,
-.module .textarea {
+.manage .text,
+.manage .textarea {
 	width: 250px;
 }
 
-.template .imgurl,
-.module .imgurl {
+.manage .imgurl {
 	width: 264px;
 	position: relative;
 }
 
-.template .imgurl .file,
-.module .imgurl .file {
+.manage .imgurl .file {
 	position: absolute;
 	top: 9px;
 	right: 9px;
 }
 
-/* = 新建模块
------------------------------------------------ */
-.module .tag-selectable a {
+.manage .tag-selectable a {
 	border: 1px solid #e2e1e3;
 	color: #000;
 	display: inline-block;
@@ -844,8 +838,8 @@ a.button-small {
 	position: relative;
 }
 
-.module .tag-selectable a:hover,
-.module .tag-selectable .selected {
+.manage .tag-selectable a:hover,
+.manage .tag-selectable .selected {
 	border: 2px solid #de2915;
 	height: 23px;
 	line-height: 23px;
@@ -854,7 +848,7 @@ a.button-small {
 	text-decoration: none;
 }
 
-.module .tag-selectable i {
+.manage .tag-selectable i {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF9vf4////3ikV////Q5Qz6AAAAAR0Uk5T////AEAqqfQAAAA2SURBVHjaTMtBDgAwCAJB2f7/z7VwKMZExoQ5f5jKBQoUKFBIDPaCZDjsPuC33ElXadVcAQYAccIBVR3fXWsAAAAASUVORK5CYII=);
 	width: 12px;
 	height: 12px;
@@ -864,18 +858,20 @@ a.button-small {
 	display: none;
 }
 
-.module .tag-selectable .selected i {
+.manage .tag-selectable .selected i {
 	display: inline-block;
 }
 
-.module .type-selected span {
+/* = 新建模块
+----------------------------------------------- */
+.manage .type-selected span {
 	color: green;
 	display: inline-block;
 	margin: 0 10px 10px 0;
 	vertical-align: middle;
 }
 
-.module .type-selected span a {
+.manage .type-selected span a {
 	background-image: url(data:image/gif;base64,R0lGODlhFAAKALMAAPKTk/Oenva3t/jIyPnT0/rY2P///+np6ebm5uDg4NbW1sjIyMLCwv///wAAAAAAACH5BAEAAA0ALAAAAAAUAAoAAARjsLWj1lJHyiJCEIWWMGSZSAOgrsPEGAiJGMxRAAahEgZQKIwZQshQCAA8QhIgWMgMMNIisIPqAAFnEBpjTKs5VQAoJBqRuaXg8OrOarcw2tcYlUinRmqlakkoFhgaDRweIBIRADs%3D);
 	background-repeat: no-repeat;
 	background-position: 0 0;
@@ -887,17 +883,17 @@ a.button-small {
 	vertical-align: text-top;
 }
 
-.module .type-selected span a:hover {
+.manage .type-selected span a:hover {
 	background-position: -10px 0;
 }
 
-.module .type-unselected {
+.manage .type-unselected {
 	background: #f9f9f9;
 	border: 1px solid #ddd;
 	padding: 10px 15px;
 }
 
-.module .type-unselected a {
+.manage .type-unselected a {
 	margin-right: 8px;
 	white-space: nowrap;
 }

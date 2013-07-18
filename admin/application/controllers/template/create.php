@@ -14,6 +14,12 @@ class Create extends CI_Controller {
 			'version' => $this->config->item('version'),
 			'markets' => $markets
 		);
+
+		// 设置业务标签
+		$setting = $this->config->item('setting');
+		$args['tags'] = explode(',', $setting['tags']);
+		$args['default'] = $setting['default'];
+
 		$this->load->view('header', $args);
 		$this->load->view('template/create');
 		$this->load->view('footer');

@@ -56,7 +56,8 @@ class Template extends CI_Model {
 			'id' => '',
 			'modify_time' => '',
 			'version' => '',
-			'configid' => strval($config_id)
+			'configid' => strval($config_id),
+			'tag' => $args['tag'],
 		);
 
 		// 写入默认配置信息
@@ -125,6 +126,11 @@ class Template extends CI_Model {
 		if (!empty($args['attribute'])) {
 			$attribute = $this->json->decode($args['attribute'], true);
 			$defaults->attribute = $attribute;
+		}
+
+		// 写入标签参数
+		if (!empty($args['tag'])) {
+			$defaults->tag = $args['tag'];
 		}
 
 		// 写入配置信息
@@ -215,7 +221,7 @@ class Template extends CI_Model {
 		}
 		closedir($handle);
 
-		// 清除 tmsId 字段、最后修改时间、版本
+		// 写入配置信息
 		$data = @file_get_contents($template_dir . 'data.json');
 		$data = $this->json->decode($data);
 		$data->name = $args['name'];
@@ -224,6 +230,13 @@ class Template extends CI_Model {
 		$data->author = $args['author'];
 		$data->description = $args['description'];
 		$data->imgurl = $args['imgurl'];
+
+		// 设置标签参数
+		if (!empty($args['tag'])) {
+			$data->tag = $args['tag'];
+		}
+
+		// 清除 tmsId 字段、最后修改时间、版本
 		$data->id = '';
 		$data->modify_time = '';
 		$data->version = '';

@@ -26,6 +26,15 @@ class Copy extends CI_Controller {
 		);
 		$args = array_merge($args, $defaults);
 
+		// 设置业务标签
+		$setting = $this->config->item('setting');
+		$args['tags'] = explode(',', $setting['tags']);
+		if (isset($template->tag)) {
+			$args['tag'] = explode(',', $template->tag);
+		} else {
+			$args['tag'] = array($setting['default']);
+		}
+
 		$this->load->view('header', $args);
 		$this->load->view('template/copy');
 		$this->load->view('footer');
