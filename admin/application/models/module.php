@@ -489,11 +489,16 @@ class Module extends CI_Model {
 			$data['css'] = @file_get_contents($file);
 		}
 
-		// 读取脚本、模拟数据、源代码
+		// 读取脚本、模拟数据
 		$data['js'] = @file_get_contents($name . '.js');
 		$data['json'] = $name . '.json';
+
+		// 读取源代码
 		$data['php'] = @file_get_contents($name . '.php');
-		$data['php'] = @iconv('GBK', 'UTF-8//IGNORE', $data['php']);
+		if (@mb_detect_encoding($data['php']) !== 'UTF-8') {
+			$encoding = array('ASCII', 'GB2312', 'GBK', 'UTF-8');
+			$data['php'] = @mb_convert_encoding($data['php'], 'UTF-8', $encoding);
+		}
 		return $data;
 	}
 
