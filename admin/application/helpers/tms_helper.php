@@ -26,6 +26,11 @@ defined('_TMS_IMAGE') or define('_TMS_IMAGE', 'http://img.f2e.taobao.net/img.png
 defined('_TMS_LINK') or define('_TMS_LINK', 'http://www.taobao.com/');
 defined('_TMS_TEXT') or define('_TMS_TEXT', 'string');
 
+/* = 全局数据堆栈
+----------------------------------------------- */
+$GLOBALS['_tms_import'] = array();
+$GLOBALS['_tms_export'] = array();
+
 /* = 基础函数
 ----------------------------------------------- */
 /**
@@ -93,26 +98,6 @@ if (!function_exists('_tms_encode')) {
 }
 
 /**
- * 标签数据导入导出控制器
- * @param string $filename
- * @param string $action
- * @return void
- */
-if (!function_exists('_tms_data')) {
-
-	function _tms_data ($filename, $action) {
-
-		$data = @file_get_contents($filename);
-		$data = _tms_encode($data);
-		$data = json_decode($data, true);
-		$data = $data ? $data : array();
-		$GLOBALS['_tms_' . $action] = array_merge($GLOBALS['_tms_' . $action], $data);
-
-	}
-
-}
-
-/**
  * 导入标签数据文件
  * @param string $filename
  * @return void
@@ -122,11 +107,14 @@ if (!function_exists('_tms_import')) {
 	function _tms_import ($filename) {
 
 		$GLOBALS['_tms_file'] = substr($filename, 0, -5) . '.php';
-		$GLOBALS['_tms_import'] = array();
 
 		// 从指定文件导入数据
 		if (file_exists($filename)) {
-			_tms_data($filename, 'import');
+			$data = @file_get_contents($filename);
+			$data = _tms_encode($data);
+			$data = json_decode($data, true);
+			$data = $data ? $data : array();
+			$GLOBALS['_tms_import'] = array_merge($GLOBALS['_tms_import'], $data);
 		}
 
 	}
@@ -142,18 +130,21 @@ if (!function_exists('_tms_export')) {
 
 	function _tms_export ($filename) {
 
-		$GLOBALS['_tms_export'] = array();
-
 		// 预读并保留原始数据
+		$buffer = '';
 		if (file_exists($filename)) {
-			_tms_data($filename, 'export');
+			$buffer = @file_get_contents($filename);
+			$data = _tms_encode($buffer);
+			$data = json_decode($data, true);
+			$data = $data ? $data : array();
+			$GLOBALS['_tms_export'] = array_merge($GLOBALS['_tms_export'], $data);
 		}
 
 		// 导出数据到指定文件
 		$data = json_encode($GLOBALS['_tms_export']);
 		$data = preg_replace('#\\\u([0-9a-f]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $data);
 		$data = _tms_format($data);
-		if ($data !== @file_get_contents($filename)) {
+		if ($data !== $buffer) {
 			@file_put_contents($filename, $data);
 			@chmod($filename, 0777);
 		}
