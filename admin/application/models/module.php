@@ -297,7 +297,7 @@ class Module extends CI_Model {
 	// 上传模块
 	function upload ($url, $args) {
 
-		$this->load->library(array('dir', 'json', 'zip', 'snoopy'));
+		$this->load->library(array('dir', 'json', 'lessc', 'zip', 'snoopy'));
 
 		// 配置基础路径
 		$module_dir = $this->_base_dir($args);
@@ -307,6 +307,16 @@ class Module extends CI_Model {
 		// 配置操作目录
 		$cache_dir = $db_dir . '/' . md5(time()) . '/';
 		@mkdir($cache_dir, 0777);
+
+		// 编译 LESS 模板
+		$name = $module_dir . $args['name'];
+		$less = $name . '.less';
+		$css = $name . '.css';
+		if (file_exists($less)) {
+			$less = @file_get_contents($less);
+			@file_put_contents($css, $this->lessc->parse($less));
+			@chmod($css, 0777);
+		}
 
 		// 拷贝到缓存目录
 		$cache_dir .= $args['name'] . '/';

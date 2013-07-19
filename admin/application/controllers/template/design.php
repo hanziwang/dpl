@@ -43,8 +43,8 @@ class Design extends CI_Controller {
 		));
 
 		// 解析模板结构数据
-		if ($attribute = $defaults->attribute) {
-			foreach ($attribute as $layout) {
+		if (isset($defaults->attribute)) {
+			foreach ($defaults->attribute as $layout) {
 				$template = $this->grid->template($layout->grid);
 				foreach ($layout->region as $region) {
 					$replace = "\r\n";
