@@ -210,6 +210,13 @@ if (!function_exists('_tms_common')) {
 		$keys = array('name', 'title', 'group');
 		$args = _tms_parse_args($args, $keys);
 
+		// 追加图片尺寸
+		if (preg_match('/\[(\d+x\d+)\]$/', $args['title'], $match)) {
+			if (isset($attributes['img'])) {
+				$attributes['img'] .= '?x=' . $match[1];
+			}
+		}
+
 		// 读取自定义数据
 		$name = $args['name'];
 		if (isset($GLOBALS['_tms_import'][$name])) {
@@ -344,7 +351,7 @@ if (!function_exists('_tms_custom')) {
 		foreach ($fields as $v) {
 			$field = explode(':', $v);
 			$attributes[$field[0]] = $field[2];
-			if (preg_match('/\[(\d+x\d+)]\:img$/', $v, $match)) {
+			if (preg_match('/\[(\d+x\d+)\]\:img$/', $v, $match)) {
 				$sizes[$field[0]] = $match[1];
 			}
 		}
