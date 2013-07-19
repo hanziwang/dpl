@@ -46,7 +46,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 					filter: self.__filter,
 					market: press.market,
 					template: press.name,
-					index: parseInt(list.attr('data-index')) + 1
+					index: parseInt(list.attr('data-index'))
 				},
 				beforeSend: function () {
 					self.__loading = true;
