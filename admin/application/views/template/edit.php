@@ -86,6 +86,13 @@
 	// 编辑模板
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
+		$('.tag').val(function () {
+			var tags = [];
+			$('.tag-selectable a.selected').each(function (k, v) {
+				tags.push($(v).attr('data-id'));
+			});
+			return tags.join(',') || $('.tag').val();
+		});
 		$.ajax({
 			type: 'post',
 			url: '<?= base_url('api/template_edit') ?>',

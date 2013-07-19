@@ -89,7 +89,7 @@ if (!function_exists('_tms_encode')) {
 	function _tms_encode ($str) {
 
 		if (@mb_detect_encoding($str) !== 'UTF-8') {
-			$str = @mb_convert_encoding($str, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
+			$str = @mb_convert_encoding($str, 'UTF-8', 'GBK');
 		}
 		return $str;
 

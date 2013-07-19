@@ -16,7 +16,7 @@ class Json {
 	function decode ($json, $assoc = false) {
 
 		if (@mb_detect_encoding($json) !== 'UTF-8') {
-			$json = @mb_convert_encoding($json, 'UTF-8', array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
+			$json = @mb_convert_encoding($json, 'UTF-8', 'GBK');
 		}
 		return json_decode($json, $assoc);
 
