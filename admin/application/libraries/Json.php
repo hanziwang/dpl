@@ -15,9 +15,6 @@ class Json {
 	// 将字符串解码为数组
 	function decode ($json, $assoc = false) {
 
-		if (@mb_detect_encoding($json) !== 'UTF-8') {
-			$json = @mb_convert_encoding($json, 'UTF-8', 'GBK');
-		}
 		return json_decode($json, $assoc);
 
 	}

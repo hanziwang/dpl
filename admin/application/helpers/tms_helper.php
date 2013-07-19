@@ -79,25 +79,6 @@ if (!function_exists('_tms_format')) {
 }
 
 /**
- * 将字符串编码为 utf-8 格式
- * @param string $args
- * @return array
- * @private
- */
-if (!function_exists('_tms_encode')) {
-
-	function _tms_encode ($str) {
-
-		if (@mb_detect_encoding($str) !== 'UTF-8') {
-			$str = @mb_convert_encoding($str, 'UTF-8', 'GBK');
-		}
-		return $str;
-
-	}
-
-}
-
-/**
  * 导入标签数据文件
  * @param string $filename
  * @return void
@@ -111,7 +92,6 @@ if (!function_exists('_tms_import')) {
 		// 从指定文件导入数据
 		if (file_exists($filename)) {
 			$data = @file_get_contents($filename);
-			$data = _tms_encode($data);
 			$data = json_decode($data, true);
 			$data = $data ? $data : array();
 			$GLOBALS['_tms_import'] = array_merge($GLOBALS['_tms_import'], $data);
@@ -134,8 +114,7 @@ if (!function_exists('_tms_export')) {
 		$buffer = '';
 		if (file_exists($filename)) {
 			$buffer = @file_get_contents($filename);
-			$data = _tms_encode($buffer);
-			$data = json_decode($data, true);
+			$data = json_decode($buffer, true);
 			$data = $data ? $data : array();
 			$GLOBALS['_tms_export'] = array_merge($GLOBALS['_tms_export'], $data);
 		}
@@ -182,15 +161,16 @@ if (!function_exists('_tms_error')) {
 }
 
 /**
- * 检查标签参数语法
- * @param array $args
- * @param array $keys
- * @return string
+ * 将标签参数解析为数组
+ * @param string $args
+ * @return array
  * @private
  */
-if (!function_exists('_tms_syntax')) {
+if (!function_exists('_tms_parse_args')) {
 
-	function _tms_syntax ($args, $keys) {
+	function _tms_parse_args ($args, $keys) {
+
+		$args = json_decode($args, true);
 
 		// 检查参数
 		if (empty($args)) {
@@ -209,31 +189,7 @@ if (!function_exists('_tms_syntax')) {
 				}
 			}
 		}
-
-		// 校验通过
-		return true;
-
-	}
-
-}
-
-/**
- * 将标签参数解析为数组
- * @param string $args
- * @return array
- * @private
- */
-if (!function_exists('_tms_parse_args')) {
-
-	function _tms_parse_args ($args, $keys) {
-
-		$args = _tms_encode($args);
-		$args = json_decode($args, true);
-
-		// 标签语法校验
-		if (_tms_syntax($args, $keys)) {
-			return $args;
-		}
+		return $args;
 
 	}
 
