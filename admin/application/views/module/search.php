@@ -78,7 +78,7 @@
 	$('.my').on('click', '.upload', function () {
 		var target = $(this),
 			name = target.attr('data-name');
-		$.ajax({
+		confirm('确定要上传模块吗？') && $.ajax({
 			dataType: 'json',
 			url: '<?= base_url('api/module_upload') ?>?name=' + name,
 			beforeSend: page.loading,

@@ -303,6 +303,7 @@ class Template extends CI_Model {
 
 		// 服务器接口错误
 		$result = $this->snoopy->results;
+		$result = @iconv('GBK', 'UTF-8//IGNORE', $result);
 		$result = $this->json->decode($result);
 		if ($result->status !== '200') {
 			return array(

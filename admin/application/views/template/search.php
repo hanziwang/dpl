@@ -72,7 +72,7 @@
 		var target = $(this),
 			market = target.attr('data-market'),
 			name = target.attr('data-name');
-		$.ajax({
+		confirm('确定要上传模板吗？') && $.ajax({
 			dataType: 'json',
 			url: '<?= base_url('api/template_upload') ?>?market=' + market + '&name=' + name,
 			beforeSend: page.loading,
