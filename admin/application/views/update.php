@@ -4,7 +4,7 @@
 		<div class="bd">
 			<form class="form" method="get" action="<?= base_url('api/setting') ?>">
 				<input type="hidden" name="ref" value="update">
-				<input type="hidden" name="id" value="1">
+				<input type="hidden" name="id" value="<?= $config ?>">
 				<div class="hint">提示信息：请确认数据目录可写</div>
 				<div class="progress"><span></span></div>
 				<div class="submit">
