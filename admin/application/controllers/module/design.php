@@ -24,6 +24,10 @@ class Design extends CI_Controller {
 			$args['market'] = $markets[array_rand($markets)]->id;
 		}
 
+		// 读取栅格类型
+		$module = $this->module->select($args);
+		$args['grid'] = intval($module->width) === 0 ? 'grid-m' : 'grid-m0';
+
 		// 读取页头、模块
 		$market = $this->market->read(array(
 			'id' => $args['market']

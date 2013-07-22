@@ -5,7 +5,7 @@
 <body>
 <div id="page">
 	<div id="content">
-		<div class="layout grid-m0">
+		<div class="layout <?= $grid ?>">
 <!-- 模块开始 -->
 <style>
 <?= $module['css'] ?>
