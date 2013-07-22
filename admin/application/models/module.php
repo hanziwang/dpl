@@ -49,7 +49,7 @@ class Module extends CI_Model {
 		$data_dir = dirname(BASEPATH) . '/data/module/' . $config_module . '/';
 		$this->dir->copy($data_dir, $module_dir);
 		$this->dir->chmod($module_dir, 0777);
-		foreach (array('.css', '.js', '.php', '.less') as $v) {
+		foreach (array('.css', '.js', '.php') as $v) {
 			@rename($module_dir . $v, $module_dir . $args['name'] . $v);
 		}
 
@@ -72,7 +72,6 @@ class Module extends CI_Model {
 		// 替换模块占位符
 		$module_files = array(
 			$args['name'] . '.css',
-			$args['name'] . '.less',
 			$args['name'] . '.js',
 			$args['name'] . '.php',
 			'skin/default.less'
@@ -509,6 +508,7 @@ class Module extends CI_Model {
 		$encode = @mb_detect_encoding($data['php'], array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
 		$data['php'] = @iconv($encode, 'UTF-8//IGNORE', $data['php']);
 		return $data;
+
 	}
 
 }

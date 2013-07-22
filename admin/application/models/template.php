@@ -41,7 +41,7 @@ class Template extends CI_Model {
 		$data_dir = dirname(BASEPATH) . '/data/template/';
 		$this->dir->copy($data_dir, $template_dir);
 		$this->dir->chmod($template_dir, 0777);
-		foreach (array('.css', '.js', '.less') as $v) {
+		foreach (array('.css', '.js') as $v) {
 			@rename($template_dir . $v, $template_dir . $args['name'] . $v);
 		}
 
