@@ -226,7 +226,8 @@ if (!function_exists('_tms_common')) {
 		// 填充默认数据
 		$defaults = array();
 		$row = isset($args['row']) ? $args['row'] : 1;
-		for ($i = 0; $i < $row; $i++) {
+		$row = isset($args['defaultRow']) ? $args['defaultRow'] : $row;
+		for ($i = 0; $i < intval($row); $i++) {
 			$defaults[] = $attributes;
 		}
 		return $GLOBALS['_tms_export'][$name] = $defaults;
