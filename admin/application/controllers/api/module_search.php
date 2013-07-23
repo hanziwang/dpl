@@ -7,6 +7,7 @@ class Module_search extends CI_Controller {
 
 	function index () {
 
+		$this->load->library('json');
 		$args = array(
 			'filter' => $this->input->get('filter'),
 			'author' => $this->input->get('author'),
@@ -24,7 +25,6 @@ class Module_search extends CI_Controller {
 			$args['template'] = $this->input->get('template');
 		}
 
-		$this->load->library('json');
 		$this->load->model('get');
 		$data = $this->get->module($args);
 		echo $this->json->encode($data);

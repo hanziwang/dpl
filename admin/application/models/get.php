@@ -43,7 +43,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询全部模板、我的模板
-	function _template_common ($args) {
+	function template_common ($args) {
 
 		$this->load->library(array('dir', 'json'));
 
@@ -110,7 +110,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询更多模板
-	function _template_more ($args) {
+	function template_more ($args) {
 
 		$this->load->library('json');
 
@@ -185,15 +185,15 @@ class Get extends CI_Model {
 		switch ($args['filter']) {
 			case 'my' :
 			case 'all' :
-				return $this->_template_common($args);
+				return $this->template_common($args);
 			case 'more' :
-				return $this->_template_more($args);
+				return $this->template_more($args);
 		}
 
 	}
 
 	// 查询全部模块、我的模块
-	function _module_common ($args) {
+	function module_common ($args) {
 
 		$this->load->library(array('dir', 'json'));
 
@@ -235,7 +235,8 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (trim($args['width']) !== '') {
-				if (intval($args['width']) !== intval($data->width)) {
+				$width = explode(',', $args['width']);
+				if (!in_array(strval($data->width), $width)) {
 					continue;
 				}
 			}
@@ -265,7 +266,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询更多模块
-	function _module_more ($args) {
+	function module_more ($args) {
 
 		$this->load->library('json');
 
@@ -296,7 +297,8 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (trim($args['width']) !== '') {
-				if (intval($args['width']) !== intval($v['width'])) {
+				$width = explode(',', $args['width']);
+				if (!in_array(strval($v['width']), $width)) {
 					continue;
 				}
 			}
@@ -342,7 +344,7 @@ class Get extends CI_Model {
 	}
 
 	// 查询私有模块
-	function _module_private ($args) {
+	function module_private ($args) {
 
 		$this->load->library('json');
 
@@ -372,7 +374,8 @@ class Get extends CI_Model {
 
 			// 模块宽度查询
 			if (trim($args['width']) !== '') {
-				if (intval($args['width']) !== intval($v['width'])) {
+				$width = explode(',', $args['width']);
+				if (!in_array(strval($v['width']), $width)) {
 					continue;
 				}
 			}
@@ -407,11 +410,11 @@ class Get extends CI_Model {
 		switch ($args['filter']) {
 			case 'my' :
 			case 'all' :
-				return $this->_module_common($args);
+				return $this->module_common($args);
 			case 'more' :
-				return $this->_module_more($args);
+				return $this->module_more($args);
 			case 'private' :
-				return $this->_module_private($args);
+				return $this->module_private($args);
 		}
 
 	}
