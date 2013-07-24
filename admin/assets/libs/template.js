@@ -121,7 +121,7 @@ press.define('template', [], function () {
 			'		<select class="press-form-select press-form-select-disabled" disabled="disabled">' +
 			'			<option>{{width}}</option>' +
 			'		</select>' +
-			'		<input type="hidden" name="width" value="{{width}}">' +
+			'		<input type="hidden" name="width" value="{{widths}}">' +
 			'		<select class="press-form-select press-module-add-authors" name="author">' +
 			'			<option value="">创建者</option>' +
 			'			{{#authors}}' +

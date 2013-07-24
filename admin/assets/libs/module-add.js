@@ -209,7 +209,8 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 			return $(mustache.render(template.TEMPLATE_MODULE_ADD, {
 				market: press.market,
 				template: press.name,
-				width: '0,' + config.width,
+				width: config.width,
+				widths: '0,' + config.width,
 				authors: $.parseJSON(press.authors)
 			}));
 
