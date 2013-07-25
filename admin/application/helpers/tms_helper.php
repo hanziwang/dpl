@@ -553,7 +553,7 @@ if (!function_exists('_tms_repeat_begin')) {
 		// 导出标签数据
 		$row = $args['row'];
 		$data = array();
-		for ($i = 1; $i < $row; $i++) {
+		for ($i = 0; $i < intval($row); $i++) {
 			$data[] = array(
 				'text' => 'true'
 			);
