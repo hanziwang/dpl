@@ -9,16 +9,11 @@
  *                             |___/
  * tms 标签解析函数集
  * @see http://wiki.tms.taobao.net/syntax:php:start
- * @version 0.9.2
  */
 
-/* = 错误报告模式
+/* = 打开错误报告
 ----------------------------------------------- */
-if (isset($_REQUEST['debug'])) {
-	error_reporting(E_ALL);
-} else {
-	error_reporting(0);
-}
+error_reporting(E_ALL);
 
 /* = 定义默认数据
 ----------------------------------------------- */
@@ -173,7 +168,7 @@ if (!function_exists('_tms_parse_args')) {
 
 		// 检查字段
 		foreach ($keys as $v) {
-			if ($v === 'name') {
+			if (in_array($v, array('name', 'row', 'defaultRow'))) {
 				if (!isset($args[$v]) || empty($args[$v])) {
 					_tms_error('参数字段 ' . $v . ' 未设置或为空');
 				}
