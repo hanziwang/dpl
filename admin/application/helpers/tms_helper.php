@@ -500,6 +500,44 @@ if (!function_exists('_tms_autoExtract')) {
 
 }
 
+/**
+ * 动态标签
+ * @params string $args 标签参数
+ * @return array
+ */
+if (!function_exists('_tms_dynamic')) {
+
+	function _tms_dynamic ($args) {
+
+		// 默认字段
+		$defaults = array(
+			// 请求地址
+			'dataUrl' => '',
+			// 字段解析路径
+			'dataPath' => '',
+			// 业务类型
+			'dataType' => 'static',
+			// 参数列表
+			'dataPara' => '',
+			// 字段映射
+			'dataMap' => '',
+			// 是否请求服务器（1 代表 true，0 代表 false）
+			'dataServer' => '',
+			// 取 cookie 字段值
+			'dataCookie' => '',
+			// 容灾数据
+			'dataStatic' => ''
+		);
+
+		$data['dynamic'] = $defaults;
+		$data['custom'] = _tms_custom($args);
+		$data['stringify'] = json_encode($data);
+		return $data;
+
+	}
+
+}
+
 /* = 容器标签
 ----------------------------------------------- */
 
