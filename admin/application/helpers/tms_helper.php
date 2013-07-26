@@ -7,7 +7,7 @@
  * | |_| | | | | \__ \ || (_| | (_| |
  *  \__|_| |_| |_|___/\__\__,_|\__, |
  *                             |___/
- * tms 标签解析函数集
+ * tms 标签函数集
  * @see http://wiki.tms.taobao.net/syntax:php:start
  */
 
@@ -554,7 +554,7 @@ if (!function_exists('_tms_module_begin')) {
 		_tms_parse_args($args, $keys);
 
 		// 线上模块标签会输出 spm 埋点容器
-		echo '<div class="module">';
+		echo '<div class="module">' . "\r\n";
 
 	}
 
@@ -564,7 +564,7 @@ if (!function_exists('_tms_module_end')) {
 
 	function _tms_module_end () {
 
-		echo '</div>';
+		echo '</div>' . "\r\n";
 
 	}
 
@@ -605,7 +605,7 @@ if (!function_exists('_tms_repeat_end')) {
 
 		$row = $GLOBALS['_tms_repeat_row'];
 		$buffer = ob_get_contents();
-		for ($i = 1; $i < $row; $i++) {
+		for ($i = 0; $i < $row; $i++) {
 			echo $buffer;
 		}
 		unset($GLOBALS['_tms_repeat_row']);
