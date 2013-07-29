@@ -605,7 +605,7 @@ if (!function_exists('_tms_repeat_end')) {
 
 		$row = $GLOBALS['_tms_repeat_row'];
 		$buffer = ob_get_contents();
-		for ($i = 0; $i < $row; $i++) {
+		for ($i = 1; $i < $row; $i++) {
 			echo $buffer;
 		}
 		unset($GLOBALS['_tms_repeat_row']);
