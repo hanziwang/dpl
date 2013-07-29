@@ -15,7 +15,7 @@ $config['tms_type'] = $tms . 'client/getModuleTypes.htm';
 $config['tms_author'] = $tms . 'client/getModuleAuthors.htm';
 
 // 配置系统参数
-$config['version'] = '20130725';
+$config['version'] = '20130729';
 
 // 配置系统路径
 $home = dirname(dirname(BASEPATH));

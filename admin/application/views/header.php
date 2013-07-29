@@ -24,7 +24,6 @@
 				<li><a href="<?= base_url('template/create') ?>">新建模板</a></li>
 				<li><a href="<?= base_url('template/search?filter=all') ?>">所有模板</a></li>
 				<li><a href="<?= base_url('template/search?filter=my') ?>">我的模板</a></li>
-				<li><a href="<?= base_url('template/search?filter=more') ?>">更多模板</a></li>
 			</ul>
 		</li>
 		<li class="item parent">
@@ -33,7 +32,6 @@
 				<li><a href="<?= base_url('module/create') ?>">新建公共模块</a></li>
 				<li><a href="<?= base_url('module/search?filter=all') ?>">所有模块</a></li>
 				<li><a href="<?= base_url('module/search?filter=my') ?>">我的模块</a></li>
-				<li><a href="<?= base_url('module/search?filter=more') ?>">更多模块</a></li>
 			</ul>
 		</li>
 		<li class="item">
