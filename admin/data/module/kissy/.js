@@ -7,7 +7,8 @@ KISSY.add('{{module}}', function (S) {
 
 	}
 
-	return X;
+	S.dpl = S.dpl || {};
+	return S.dpl['{{module}}'] = X;
 
 }, {
 	requires: []
