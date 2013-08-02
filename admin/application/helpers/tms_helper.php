@@ -206,17 +206,43 @@ if (!function_exists('_tms_common')) {
 			}
 		}
 
-		// 读取自定义数据
+		// 读取参数信息
 		$name = $args['name'];
+		$row = isset($args['row']) ? intval($args['row']) : 1;
+		$row = isset($args['defaultRow']) ? intval($args['defaultRow']) : $row;
+
+		// 填充文件数据
 		if (isset($GLOBALS['_tms_import'][$name])) {
-			return $GLOBALS['_tms_import'][$name];
+			$data = $GLOBALS['_tms_import'][$name];
+
+			// 行数修正
+			$count = count($data);
+			if ($count > $row) {
+				$data = array_slice($data, 0, $row);
+			} elseif ($count < $row) {
+				for ($i = 0; $i < $row - $count; $i++) {
+					$data[] = $attributes;
+				}
+			}
+
+			// 字段修正
+			if (isset($args['fields'])) {
+				foreach ($data as &$r) {
+					$r1 = $attributes;
+					foreach ($attributes as $k => $v) {
+						$r1[$k] = isset($r[$k]) ? $r[$k] : $v;
+					}
+					$r = $r1;
+				}
+			}
+			unset($GLOBALS['_tms_import'][$name]);
+			$GLOBALS['_tms_export'][$name] = $data;
+			return $data;
 		}
 
 		// 填充默认数据
 		$defaults = array();
-		$row = isset($args['row']) ? $args['row'] : 1;
-		$row = isset($args['defaultRow']) ? $args['defaultRow'] : $row;
-		for ($i = 0; $i < intval($row); $i++) {
+		for ($i = 0; $i < $row; $i++) {
 			$defaults[] = $attributes;
 		}
 		$GLOBALS['_tms_export'][$name] = $defaults;
