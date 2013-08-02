@@ -610,9 +610,9 @@ if (!function_exists('_tms_repeat_begin')) {
 		$args = _tms_parse_args($args, $keys);
 
 		// 导出标签数据
-		$row = $args['row'];
+		$row = intval($args['row']);
 		$data = array();
-		for ($i = 0; $i < intval($row); $i++) {
+		for ($i = 1; $i <= $row; $i++) {
 			$data[] = array(
 				'text' => 'true'
 			);
