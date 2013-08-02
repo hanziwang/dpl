@@ -10,6 +10,12 @@
 	top: 0;
 	padding: 20px;
 	z-index: 2147483647;
+	pointer-events: none;
+}
+
+.press-admin-menu .press-button,
+.press-admin-action .press-button {
+	pointer-events: auto;
 }
 
 .press-admin-menu {

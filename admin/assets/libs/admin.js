@@ -22,6 +22,11 @@ press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (requ
 				url: press.base + 'template/design?market=' + press.market + '&name=' + press.name
 			}));
 
+			// 防止工具条被遮挡
+			if ($('#page').offset().top <= 61) {
+				$('#page').addClass('press-page');
+			}
+
 		},
 
 		// 私有模块管理
