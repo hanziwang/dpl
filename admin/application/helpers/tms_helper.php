@@ -79,6 +79,23 @@ if (!function_exists('_tms_import')) {
 
 		$GLOBALS['_tms_file'] = substr($filename, 0, -5) . '.php';
 
+		// 补全标签分号
+		$code = @file_get_contents($GLOBALS['_tms_file']);
+		$hash = md5($code);
+		$rules = array("\"}')", "_end()");
+		foreach ($rules as $rule) {
+			$code = explode($rule, $code);
+			$prev = array_shift($code) . $rule;
+			foreach ($code as &$v) {
+				$v = strpos($v, ';') !== 0 ? ';' . $v : $v;
+			}
+			$code = $prev . implode($rule, $code);
+		}
+		if ($hash !== md5($code)) {
+			@file_put_contents($GLOBALS['_tms_file'], $code);
+			@chmod($GLOBALS['_tms_file'], 0777);
+		}
+
 		// 清空数据堆栈
 		$GLOBALS['_tms_import'] = array();
 		$GLOBALS['_tms_export'] = array();
