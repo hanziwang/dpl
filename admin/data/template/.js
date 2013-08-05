@@ -1,1 +1,1 @@
-/* code here */
+/*!YUI-Compressor */
