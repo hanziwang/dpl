@@ -211,7 +211,7 @@ if (!function_exists('_tms_common')) {
 		$row = isset($args['row']) ? intval($args['row']) : 1;
 		$row = isset($args['defaultRow']) ? intval($args['defaultRow']) : $row;
 
-		// 填充标签数据
+		// 填充文件数据
 		if (isset($GLOBALS['_tms_import'][$name])) {
 			$data = $GLOBALS['_tms_import'][$name];
 
