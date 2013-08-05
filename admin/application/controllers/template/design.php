@@ -18,6 +18,8 @@ class Design extends CI_Controller {
 			'name' => $this->input->get('name'),
 			'content' => "\r\n",
 			'modules' => array(),
+			'modules_css' => '',
+			'modules_js' => '',
 			'authors' => $this->json->encode($authors),
 			'grids' => $this->json->encode(array_keys($grids))
 		);
@@ -68,9 +70,9 @@ class Design extends CI_Controller {
 						}
 
 						// 读取模块样式、脚本
-						$args['css'] .= $data['css'];
-						$args['css'] .= $data['skin/' . $module['skin']];
-						$args['js'] .= $data['js'];
+						$args['modules_css'] .= $data['css'];
+						$args['modules_css'] .= $data['skin/' . $module['skin']];
+						$args['modules_js'] .= $data['js'];
 
 						$args['modules'][] = array_merge($module, $data);
 						$replace .= "{" . $module['guid'] . "}\r\n";

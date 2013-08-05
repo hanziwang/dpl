@@ -4,6 +4,9 @@
 <?= $nav ?>
 <!-- 模板开始 -->
 <style>
+<?= $modules_css ?>
+</style>
+<style>
 <?= $css ?>
 </style>
 <div id="page">
@@ -29,9 +32,12 @@ endforeach;
 	</div>
 </div>
 <script>
-<?= $js ?>
+<?= $modules_js ?>
 </script>
 <script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
+<script>
+<?= $js ?>
+</script>
 <!-- 模板结束 -->
 <?php if (isset($_REQUEST['debug'])) : ?>
 <script>
