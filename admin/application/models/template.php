@@ -268,14 +268,15 @@ class Template extends CI_Model {
 		$cache_dir = $db_dir . '/' . md5(time()) . '/';
 		@mkdir($cache_dir, 0777);
 
-		// 编译 LESS 模板
-		$name = $template_dir . $args['name'];
-		$less = $name . '.less';
-		$css = $name . '.css';
-		if (file_exists($less)) {
-			$less = @file_get_contents($less);
-			@file_put_contents($css, $this->lessc->parse($less));
-			@chmod($css, 0777);
+		// 编译 Less 模板
+		$file1 = glob($template_dir . '*.less');
+		$file2 = glob($template_dir . 'modules/*/*.less');
+		$files = array_merge($file1, $file2);
+		foreach ($files as $v) {
+			$file = substr($v, 0, -5) . '.css';
+			$data = @file_get_contents($v);
+			@file_put_contents($file, $this->lessc->parse($data));
+			@chmod($file, 0777);
 		}
 
 		// 拷贝到缓存目录
