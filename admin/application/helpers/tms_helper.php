@@ -211,7 +211,7 @@ if (!function_exists('_tms_common')) {
 		$row = isset($args['row']) ? intval($args['row']) : 1;
 		$row = isset($args['defaultRow']) ? intval($args['defaultRow']) : $row;
 
-		// 填充文件数据
+		// 填充标签数据
 		if (isset($GLOBALS['_tms_import'][$name])) {
 			$data = $GLOBALS['_tms_import'][$name];
 
@@ -236,17 +236,14 @@ if (!function_exists('_tms_common')) {
 				}
 			}
 			unset($GLOBALS['_tms_import'][$name]);
-			$GLOBALS['_tms_export'][$name] = $data;
-			return $data;
+		} else {
+			$data = array();
+			for ($i = 0; $i < $row; $i++) {
+				$data[] = $attributes;
+			}
 		}
-
-		// 填充默认数据
-		$defaults = array();
-		for ($i = 0; $i < $row; $i++) {
-			$defaults[] = $attributes;
-		}
-		$GLOBALS['_tms_export'][$name] = $defaults;
-		return $defaults;
+		$GLOBALS['_tms_export'][$name] = $data;
+		return $data;
 
 	}
 
@@ -609,16 +606,35 @@ if (!function_exists('_tms_repeat_begin')) {
 		$keys = array('name', 'title', 'group', 'row');
 		$args = _tms_parse_args($args, $keys);
 
-		// 导出标签数据
+		// 读取参数信息
+		$name = $args['name'];
 		$row = intval($args['row']);
-		$data = array();
-		for ($i = 1; $i <= $row; $i++) {
-			$data[] = array(
-				'text' => 'true'
-			);
+		$attributes = array(
+			'text' => 'true'
+		);
+
+		// 填充标签数据
+		if (isset($GLOBALS['_tms_import'][$name])) {
+			$data = $GLOBALS['_tms_import'][$name];
+
+			// 行数修正
+			$count = count($data);
+			if ($count > $row) {
+				$data = array_slice($data, 0, $row);
+			} elseif ($count < $row) {
+				for ($i = 0; $i < $row - $count; $i++) {
+					$data[] = $attributes;
+				}
+			}
+			unset($GLOBALS['_tms_import'][$name]);
+		} else {
+			$data = array();
+			for ($i = 1; $i <= $row; $i++) {
+				$data[] = $attributes;
+			}
 		}
 		$GLOBALS['_tms_repeat_row'] = $row;
-		$GLOBALS['_tms_export'][$args['name']] = $data;
+		$GLOBALS['_tms_export'][$name] = $data;
 		ob_start();
 
 	}
