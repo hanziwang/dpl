@@ -5,8 +5,6 @@
 <!-- 模板开始 -->
 <style>
 <?= $modules_css ?>
-</style>
-<style>
 <?= $css ?>
 </style>
 <div id="page">
