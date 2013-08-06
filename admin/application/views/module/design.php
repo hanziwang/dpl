@@ -13,6 +13,7 @@
 </style>
 <div class="J_Module skin-default" data-name="<?= $name ?>">
 <?php
+_tms_syntax($module['file'], $module['php']);
 _tms_import($module['json']);
 eval(' ?>' . $module['php'] . '<?php ');
 _tms_export($module['json']);

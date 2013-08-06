@@ -471,8 +471,10 @@ class Module extends CI_Model {
 
 		// 配置基础路径、参数
 		$module_dir = $this->_base_dir($args);
-		$data = array();
 		$name = $module_dir . $args['name'];
+		$data = array(
+			'file' => $name . '.php'
+		);
 
 		// 读取默认皮肤
 		$market = $this->market->select(array(
@@ -503,7 +505,7 @@ class Module extends CI_Model {
 		$data['json'] = $name . '.json';
 
 		// 读取源代码
-		$data['php'] = @file_get_contents($name . '.php');
+		$data['php'] = @file_get_contents($data['file']);
 		$encode = @mb_detect_encoding($data['php'], array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
 		$data['php'] = @iconv($encode, 'UTF-8//IGNORE', $data['php']);
 		return $data;

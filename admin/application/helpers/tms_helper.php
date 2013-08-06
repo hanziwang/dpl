@@ -27,6 +27,7 @@ defined('_TMS_TEXT') or define('_TMS_TEXT', 'string');
  * 将 JSON 字符串转换为可读格式
  * @param string $json
  * @return string
+ * @private
  */
 if (!function_exists('_tms_format')) {
 
@@ -72,29 +73,13 @@ if (!function_exists('_tms_format')) {
  * 导入标签数据文件
  * @param string $filename
  * @return void
+ * @private
  */
 if (!function_exists('_tms_import')) {
 
 	function _tms_import ($filename) {
 
 		$GLOBALS['_tms_file'] = substr($filename, 0, -5) . '.php';
-
-		// 补全标签分号
-		$code = @file_get_contents($GLOBALS['_tms_file']);
-		$hash = md5($code);
-		$rules = array("\"}')", "_end()");
-		foreach ($rules as $rule) {
-			$code = explode($rule, $code);
-			$prev = array_shift($code) . $rule;
-			foreach ($code as &$v) {
-				$v = strpos($v, ';') !== 0 ? ';' . $v : $v;
-			}
-			$code = $prev . implode($rule, $code);
-		}
-		if ($hash !== md5($code)) {
-			@file_put_contents($GLOBALS['_tms_file'], $code);
-			@chmod($GLOBALS['_tms_file'], 0777);
-		}
 
 		// 清空数据堆栈
 		$GLOBALS['_tms_import'] = array();
@@ -115,6 +100,7 @@ if (!function_exists('_tms_import')) {
  * 导出标签数据文件
  * @param string $filename
  * @return void
+ * @private
  */
 if (!function_exists('_tms_export')) {
 
@@ -139,6 +125,38 @@ if (!function_exists('_tms_export')) {
 }
 
 /**
+ * 校验标签语法格式
+ * @param string $code
+ * @return void
+ * @private
+ */
+if (!function_exists('_tms_syntax')) {
+
+	function _tms_syntax ($file, &$code) {
+
+		// 补全标签分号
+		$_code = $code;
+		$rules = array("\"}')", "_end()", ".php')", ".php\")");
+		foreach ($rules as $rule) {
+			if (strpos($code, $rule) !== false) {
+				$code = explode($rule, $code);
+				$prev = array_shift($code) . $rule;
+				foreach ($code as &$v) {
+					$v = strpos($v, ';') !== 0 ? ';' . $v : $v;
+				}
+				$code = $prev . implode($rule, $code);
+			}
+		}
+		if ($_code !== $code) {
+			@file_put_contents($file, $code);
+			@chmod($file, 0777);
+		}
+
+	}
+
+}
+
+/**
  * 抛出标签错误信息
  * @param string $error_msg
  * @return string
@@ -152,7 +170,7 @@ if (!function_exists('_tms_error')) {
 			throw new Exception($error_msg);
 		} catch (Exception $e) {
 			$trace = $e->getTrace();
-			$trace = $trace[4];
+			$trace = $trace[3];
 			$file = $GLOBALS['_tms_file'];
 			$line = $trace['line'];
 			$function = $trace['function'];
@@ -179,20 +197,18 @@ if (!function_exists('_tms_parse_args')) {
 		$args = json_decode($args, true);
 
 		// 检查参数
-		if (empty($args)) {
-			_tms_error('参数为空');
+		if (is_null($args) || empty($args)) {
+			_tms_error('参数为空或格式错误');
 		}
 
 		// 检查字段
 		foreach ($keys as $v) {
-			if (in_array($v, array('name', 'row', 'defaultRow'))) {
-				if (!isset($args[$v]) || empty($args[$v])) {
-					_tms_error('参数字段 ' . $v . ' 未设置或为空');
-				}
-			} else {
-				if (!isset($args[$v])) {
-					_tms_error('参数字段 ' . $v . ' 未设置');
-				}
+			if (!isset($args[$v])) {
+				_tms_error('参数属性 ' . $v . ' 未设置');
+			} elseif (in_array($v, array('name', 'row', 'defaultRow')) && empty($args[$v])) {
+				_tms_error('参数属性 ' . $v . ' 为空');
+			} elseif (strpos($args[$v], '(') !== false || strpos($args[$v], ')') !== false) {
+				_tms_error('参数属性 ' . $v . ' 不能包含 "(" 或 ")" 符号');
 			}
 		}
 		return $args;

@@ -15,6 +15,7 @@ ob_start();
 ?>
 <div class="J_Module skin-<?= $module['skin'] ?>" id="guid-<?= $module['guid'] ?>" data-name="<?= $module['name'] ?>" data-skin="<?= $module['skin'] ?>" data-guid="<?= $module['guid'] ?>">
 <?php
+_tms_syntax($module['file'], $module['php']);
 _tms_import($module['json']);
 eval(' ?>' . $module['php'] . '<?php ');
 _tms_export($module['json']);
