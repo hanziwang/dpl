@@ -3,9 +3,9 @@
 		<form class="form form-mini clearfix" method="get" action="<?= base_url('module/search') ?>">
 			<input type="hidden" name="filter" value="<?= $filter ?>">
 			<span class="toggle clearfix">
-				<a href="<?= base_url('module/search?filter=my' . $query_string) ?>"<?= $filter === 'my' ? ' class="selected"' : '' ?>>我的模块</a>
-				<a href="<?= base_url('module/search?filter=all' . $query_string) ?>"<?= $filter === 'all' ? ' class="selected"' : '' ?>>所有模块</a>
-				<a href="<?= base_url('module/search?filter=more' . $query_string) ?>"<?= $filter === 'more' ? ' class="selected"' : '' ?>>更多模块</a>
+				<a href="<?= base_url('module/search?filter=my') ?>"<?= $filter === 'my' ? ' class="selected"' : '' ?>>我的模块</a>
+				<a href="<?= base_url('module/search?filter=all') ?>"<?= $filter === 'all' ? ' class="selected"' : '' ?>>所有模块</a>
+				<a href="<?= base_url('module/search?filter=more') ?>"<?= $filter === 'more' ? ' class="selected"' : '' ?>>更多模块</a>
 			</span>
 			<select class="select" name="author">
 				<option value="">所有作者</option>
@@ -84,7 +84,7 @@
 			beforeSend: page.loading,
 			complete: page.unloading,
 			success: function (d) {
-				d.code === 200 ? location.href = '<?= base_url('module/search?filter=all&q=') ?>' + name : alert(d.data ? d.data.msg : d.message);
+				d.code === 200 ? target.parents('.item').fadeOut('slow') : alert(d.data ? d.data.msg : d.message);
 			}
 		});
 	});

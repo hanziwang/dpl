@@ -29,9 +29,9 @@ class Search extends CI_Controller {
 		}
 
 		// 设置查询参数
-		$args['query_string'] = $args['author'] ? '&author=' . $args['author'] : '';
-		$args['query_string'] .= $args['width'] !== '' ? '&width=' . $args['width'] : '';
-		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
+//		$args['query_string'] = $args['author'] ? '&author=' . $args['author'] : '';
+//		$args['query_string'] .= $args['width'] !== '' ? '&width=' . $args['width'] : '';
+//		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
 
 		// 读取模块作者、宽度列表
 		$args['authors'] = $this->get->author();

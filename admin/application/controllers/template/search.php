@@ -28,8 +28,8 @@ class Search extends CI_Controller {
 		}
 
 		// 设置查询参数
-		$args['query_string'] = $args['market'] ? '&market=' . $args['market'] : '';
-		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
+//		$args['query_string'] = $args['market'] ? '&market=' . $args['market'] : '';
+//		$args['query_string'] .= $args['q'] ? '&q=' . $args['q'] : '';
 
 		// 读取市场列表
 		$args['markets'] = $this->get->market();
