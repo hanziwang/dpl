@@ -88,4 +88,4 @@ endforeach;
 
 </script>
 <?php endif; ?>
-<?= $footer ?>
+<?php eval(' ?>' . $footer . '<?php '); ?>
