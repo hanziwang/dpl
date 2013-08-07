@@ -325,7 +325,7 @@ class Module extends CI_Model {
 		$file = $cache_dir . 'data.json';
 		$data = $this->json->decode(@file_get_contents($file));
 		$data->modify_time = date('Y-m-d H:i:s');
-		$data->configid = $config_id;
+		$data->configid = strval($config_id);
 		@file_put_contents($file, $this->json->encode($data));
 
 		// 打包到缓存目录
