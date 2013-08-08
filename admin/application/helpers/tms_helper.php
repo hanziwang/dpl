@@ -194,6 +194,7 @@ if (!function_exists('_tms_error')) {
 					$args = $trace['args'][0];
 					$message = $e->getMessage();
 					include APPPATH . 'errors/error_tms.php';
+					break;
 				}
 			}
 		}
