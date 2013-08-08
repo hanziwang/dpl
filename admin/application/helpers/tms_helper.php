@@ -183,15 +183,19 @@ if (!function_exists('_tms_error')) {
 		try {
 			throw new Exception($error_msg);
 		} catch (Exception $e) {
+			$tms = include APPPATH . 'config/tms.php';
 			$trace = $e->getTrace();
-			$trace = $trace[3];
-			$file = $GLOBALS['_tms_file'];
-			$line = $trace['line'];
-			$function = $trace['function'];
-			$args = $trace['args'][0];
-			$message = $e->getMessage();
-			include APPPATH . 'errors/error_tms.php';
-
+			foreach ($trace as $v) {
+				if (in_array($v['function'], $tms)) {
+					$trace = $v;
+					$file = $GLOBALS['_tms_file'];
+					$line = $trace['line'];
+					$function = $trace['function'];
+					$args = $trace['args'][0];
+					$message = $e->getMessage();
+					include APPPATH . 'errors/error_tms.php';
+				}
+			}
 		}
 
 	}
