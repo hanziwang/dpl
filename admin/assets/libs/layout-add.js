@@ -17,13 +17,14 @@ press.define('layout-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 			// 栅格公式
 			var rules = {
-					990: { n: 20, c: 50, g: 10 },
-					950: { n: 24, c: 40, g: 10 },
-					940: { n: 19, c: 50, g: 10 },
-					320: { n: 1, c: 320, g: 0 }
+					'990-20-50-10': { n: 20, c: 50, g: 10 },
+					'990-34-30-30': { n: 34, c: 30, g: 30 },
+					'950-24-40-10': { n: 24, c: 40, g: 10 },
+					'940-19-50-10': { n: 19, c: 50, g: 10 },
+					'320-1-320-0': { n: 1, c: 320, g: 0 }
 				},
 				type = {}, count = 0,
-				rule = rules[press.width];
+				rule = rules[press.feature];
 
 			// 循环格式化
 			grid.replace(/[a-z][0-9]+/g, function (match) {
@@ -62,7 +63,7 @@ press.define('layout-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 				types = [];
 
 			return $(mustache.render(template.TEMPLATE_LAYOUT_ADD, {
-				width: press.width,
+				feature: press.feature,
 				types: function () {
 					$.each(grids, function (k, v) {
 						types.push({

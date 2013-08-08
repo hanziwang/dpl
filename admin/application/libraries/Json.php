@@ -5,21 +5,30 @@
  */
 class Json {
 
-	// 将数组编码为字符串
-	function encode ($value) {
+	// 将 Unicode 转换为中文字符
+	function _replace_callback ($str) {
 
-		return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
+		$str = strtr($str[0], array('\\u' => ''));
+		return iconv('UCS-2', 'UTF-8', pack('H*', $str));
 
 	}
 
-	// 将字符串解码为数组
+	// 将数组转换为 Json 字符串
+	function encode ($value) {
+
+		//return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
+		return preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', array('Json', '_replace_callback'), json_encode($value));
+
+	}
+
+	// 将 Json 字符串转换为数组
 	function decode ($json, $assoc = false) {
 
 		return json_decode($json, $assoc);
 
 	}
 
-	// 格式化字符串
+	// 格式化 Json 字符串
 	function format ($json) {
 
 		$result = '';

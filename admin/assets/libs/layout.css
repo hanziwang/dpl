@@ -52,109 +52,161 @@
 	background-image: url(http://img02.taobaocdn.com/tps/i2/T1gXx4XAJXXXbz59Tx-300-37.png) !important;
 }
 
-/* = 宽度适配
+/* = 990-20-50-10
 ----------------------------------------------- */
-.press-layout-990 .press-grid {
+.press-layout-990-20-50-10 .press-grid {
 	background-image: url(http://img04.taobaocdn.com/tps/i4/T1f.d5FaNXXXbI7cfT-300-757.png);
 }
 
-.press-layout-990 .press-grid-m0 {
+.press-layout-990-20-50-10 .press-grid-m0 {
 	background-position: 0 0;
 }
 
-.press-layout-990 .press-grid-s4m0 {
+.press-layout-990-20-50-10 .press-grid-s4m0 {
 	background-position: 0 -40px;
 }
 
-.press-layout-990 .press-grid-m0s4 {
+.press-layout-990-20-50-10 .press-grid-m0s4 {
 	background-position: 0 -80px;
 }
 
-.press-layout-990 .press-grid-s5m0 {
+.press-layout-990-20-50-10 .press-grid-s5m0 {
 	background-position: 0 -120px;
 }
 
-.press-layout-990 .press-grid-m0s5 {
+.press-layout-990-20-50-10 .press-grid-m0s5 {
 	background-position: 0 -160px;
 }
 
-.press-layout-990 .press-grid-s6m0 {
+.press-layout-990-20-50-10 .press-grid-s6m0 {
 	background-position: 0 -200px;
 }
 
-.press-layout-990 .press-grid-m0s6 {
+.press-layout-990-20-50-10 .press-grid-m0s6 {
 	background-position: 0 -240px;
 }
 
-.press-layout-990 .press-grid-s7m0 {
+.press-layout-990-20-50-10 .press-grid-s7m0 {
 	background-position: 0 -280px;
 }
 
-.press-layout-990 .press-grid-m0s7 {
+.press-layout-990-20-50-10 .press-grid-m0s7 {
 	background-position: 0 -320px;
 }
 
-.press-layout-990 .press-grid-s8m0 {
+.press-layout-990-20-50-10 .press-grid-s8m0 {
 	background-position: 0 -360px;
 }
 
-.press-layout-990 .press-grid-m0s8 {
+.press-layout-990-20-50-10 .press-grid-m0s8 {
 	background-position: 0 -400px;
 }
 
-.press-layout-990 .press-grid-s9m0 {
+.press-layout-990-20-50-10 .press-grid-s9m0 {
 	background-position: 0 -440px;
 }
 
-.press-layout-990 .press-grid-m0s9 {
+.press-layout-990-20-50-10 .press-grid-m0s9 {
 	background-position: 0 -480px;
 }
 
-.press-layout-990 .press-grid-s5m0e4 {
+.press-layout-990-20-50-10 .press-grid-s5m0e4 {
 	background-position: 0 -520px;
 }
 
-.press-layout-990 .press-grid-s5e4m0 {
+.press-layout-990-20-50-10 .press-grid-s5e4m0 {
 	background-position: 0 -560px;
 }
 
-.press-layout-990 .press-grid-e4m0s5 {
+.press-layout-990-20-50-10 .press-grid-e4m0s5 {
 	background-position: 0 -600px;
 }
 
-.press-layout-990 .press-grid-e4s5m0 {
+.press-layout-990-20-50-10 .press-grid-e4s5m0 {
 	background-position: 0 -640px;
 }
 
-.press-layout-990 .press-grid-m0s5e4 {
+.press-layout-990-20-50-10 .press-grid-m0s5e4 {
 	background-position: 0 -680px;
 }
 
-.press-layout-990 .press-grid-m0e4s5 {
+.press-layout-990-20-50-10 .press-grid-m0e4s5 {
 	background-position: 0 -720px;
 }
 
-.press-layout-950 .press-grid {
+/* = 990-34-30-30
+----------------------------------------------- */
+.press-layout-990-34-30-30 .press-grid {
+	background-image: url(http://img02.taobaocdn.com/tps/i2/T1ktp_FX0eXXXk1VzT-300-397.png);
+}
+
+.press-layout-990-34-30-30 .press-grid-m0 {
+	background-position: 0 0;
+}
+
+.press-layout-990-34-30-30 .press-grid-s8m0 {
+	background-position: 0 -40px;
+}
+
+.press-layout-990-34-30-30 .press-grid-m0s8 {
+	background-position: 0 -80px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s7m0e8 {
+	background-position: 0 -120px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s7m0e10 {
+	background-position: 0 -160px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s8m0e7 {
+	background-position: 0 -200px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s8m0e8 {
+	background-position: 0 -240px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s8m0e9 {
+	background-position: 0 -280px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s9m0e8 {
+	background-position: 0 -320px;
+}
+
+.press-layout-990-34-30-30 .press-grid-s10m0e7 {
+	background-position: 0 -360px;
+}
+
+/* = 950-24-40-10
+----------------------------------------------- */
+.press-layout-950-24-40-10 .press-grid {
 	background-image: url(http://img01.taobaocdn.com/tps/i1/T12RRlFalbXXbz59Tx-300-37.png);
 }
 
-.press-layout-950 .press-grid-m0 {
+.press-layout-950-24-40-10 .press-grid-m0 {
 	background-position: 0 0;
 }
 
-.press-layout-940 .press-grid {
+/* = 940-19-50-10
+----------------------------------------------- */
+.press-layout-940-19-50-10 .press-grid {
 	background-image: url(http://img04.taobaocdn.com/tps/i4/T1ebJlFjxbXXbz59Tx-300-37.png);
 }
 
-.press-layout-940 .press-grid-m0 {
+.press-layout-940-19-50-10 .press-grid-m0 {
 	background-position: 0 0;
 }
 
-.press-layout-320 .press-grid {
+/* = 320-1-320-0
+----------------------------------------------- */
+.press-layout-320-1-320-0 .press-grid {
 	background-image: url(http://img04.taobaocdn.com/tps/i4/T1ElBqFjNdXXbz59Tx-300-37.png);
 }
 
-.press-layout-320 .press-grid-m0 {
+.press-layout-320-1-320-0 .press-grid-m0 {
 	background-position: 0 0;
 }
 

@@ -48,7 +48,7 @@ endforeach;
 		base: '<?= base_url() ?>',
 		grids: <?= $grids ?>,
 		authors: '<?= $authors ?>',
-		width: <?= $setting['width'] ?>,
+		feature: '<?= $setting['feature'] ?>',
 		market: '<?= $market ?>',
 		name: '<?= $name ?>',
 		version:'<?= $version ?>',

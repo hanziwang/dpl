@@ -99,7 +99,7 @@ press.define('template', [], function () {
 		// 添加布局模板
 		TEMPLATE_LAYOUT_ADD: '<div class="press-layout-add-selectable press-overlay-scroll">' +
 			'	<strong>可选布局列表</strong>' +
-			'	<ul class="press-clearfix press-layout-{{width}}">' +
+			'	<ul class="press-clearfix press-layout-{{feature}}">' +
 			'		{{#types}}' +
 			'		<li class="press-grid press-{{grid}}" data-grid="{{grid}}"><i></i></li>' +
 			'		{{/types}}' +
@@ -107,7 +107,7 @@ press.define('template', [], function () {
 			'</div>' +
 			'<div class="press-layout-add-selected press-overlay-scroll">' +
 			'	<strong>当前已选布局</strong>' +
-			'	<ul class="press-clearfix press-layout-{{width}}"></ul>' +
+			'	<ul class="press-clearfix press-layout-{{feature}}"></ul>' +
 			'</div>',
 
 		// 添加模块模板

@@ -506,8 +506,9 @@ class Module extends CI_Model {
 
 		// 读取源代码
 		$data['php'] = @file_get_contents($data['file']);
-		$encode = @mb_detect_encoding($data['php'], array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
-		$data['php'] = @iconv($encode, 'UTF-8//IGNORE', $data['php']);
+		if ($data['php'] !== @iconv('UTF-8', 'UTF-8//IGNORE', $data['php'])) {
+			$data['php'] = @iconv('GBK', 'UTF-8//IGNORE', $data['php']);
+		}
 		return $data;
 
 	}

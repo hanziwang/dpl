@@ -70,6 +70,23 @@ if (!function_exists('_tms_format')) {
 }
 
 /**
+ * 将 Unicode 转换为中文字符
+ * @param string $str
+ * @return string
+ * @private
+ */
+if (!function_exists('_tms_replace_callback')) {
+
+	function _tms_replace_callback ($str) {
+
+		$str = strtr($str[0], array('\\u' => ''));
+		return iconv('UCS-2', 'UTF-8', pack('H*', $str));
+
+	}
+
+}
+
+/**
  * 导入标签数据文件
  * @param string $filename
  * @return void
@@ -79,8 +96,6 @@ if (!function_exists('_tms_import')) {
 
 	function _tms_import ($filename) {
 
-		$GLOBALS['_tms_file'] = substr($filename, 0, -5) . '.php';
-
 		// 清空数据堆栈
 		$GLOBALS['_tms_import'] = array();
 		$GLOBALS['_tms_export'] = array();
@@ -89,7 +104,7 @@ if (!function_exists('_tms_import')) {
 		if (file_exists($filename)) {
 			$data = @file_get_contents($filename);
 			$data = json_decode($data, true);
-			$GLOBALS['_tms_import'] = $data ? $data : array();
+			$GLOBALS['_tms_import'] = is_null($data) ? array() : $data;
 		}
 
 	}
@@ -106,15 +121,12 @@ if (!function_exists('_tms_export')) {
 
 	function _tms_export ($filename) {
 
-		// 合并原始数据
+		// 导出数据到指定文件
 		$import = $GLOBALS['_tms_import'];
 		$export = $GLOBALS['_tms_export'];
-		$export = array_merge($export, $import);
-
-		// 导出数据到指定文件
 		if (serialize($export) !== serialize($import)) {
 			$data = json_encode($export);
-			$data = preg_replace('#\\\u([0-9a-f]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $data);
+			$data = preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', array('Json', '_replace_callback'), $data);
 			$data = _tms_format($data);
 			@file_put_contents($filename, $data);
 			@chmod($filename, 0777);
@@ -133,6 +145,8 @@ if (!function_exists('_tms_export')) {
 if (!function_exists('_tms_syntax')) {
 
 	function _tms_syntax ($file, &$code) {
+
+		$GLOBALS['_tms_file'] = $file;
 
 		// 补全标签分号
 		$_code = $code;
@@ -268,7 +282,7 @@ if (!function_exists('_tms_common')) {
 					$r = $r1;
 				}
 			}
-			unset($GLOBALS['_tms_import'][$name]);
+			//unset($GLOBALS['_tms_import'][$name]);
 		} else {
 			$data = array();
 			for ($i = 0; $i < $row; $i++) {
@@ -659,7 +673,7 @@ if (!function_exists('_tms_repeat_begin')) {
 					$data[] = $attributes;
 				}
 			}
-			unset($GLOBALS['_tms_import'][$name]);
+			//unset($GLOBALS['_tms_import'][$name]);
 		} else {
 			$data = array();
 			for ($i = 1; $i <= $row; $i++) {
@@ -683,7 +697,7 @@ if (!function_exists('_tms_repeat_end')) {
 		for ($i = 1; $i < $row; $i++) {
 			echo $buffer;
 		}
-		unset($GLOBALS['_tms_repeat_row']);
+		//unset($GLOBALS['_tms_repeat_row']);
 		ob_end_flush();
 
 	}
