@@ -183,20 +183,14 @@ if (!function_exists('_tms_error')) {
 		try {
 			throw new Exception($error_msg);
 		} catch (Exception $e) {
-			$tms = include APPPATH . 'config/tms.php';
 			$trace = $e->getTrace();
-			foreach ($trace as $v) {
-				if (in_array($v['function'], $tms)) {
-					$trace = $v;
-					$file = $GLOBALS['_tms_file'];
-					$line = $trace['line'];
-					$function = $trace['function'];
-					$args = $trace['args'][0];
-					$message = $e->getMessage();
-					include APPPATH . 'errors/error_tms.php';
-					break;
-				}
-			}
+			$trace = $trace[2]['function'] === '_tms_common' ? $trace[3] : $trace[2];
+			$file = $GLOBALS['_tms_file'];
+			$line = $trace['line'];
+			$function = $trace['function'];
+			$args = $trace['args'][0];
+			$message = $e->getMessage();
+			include APPPATH . 'errors/error_tms.php';
 		}
 
 	}
@@ -215,19 +209,18 @@ if (!function_exists('_tms_parse_args')) {
 
 		$args = json_decode($args, true);
 
-		// 检查参数
+		// 检查参数和属性
 		if (is_null($args) || empty($args)) {
 			_tms_error('参数为空或格式错误');
-		}
-
-		// 检查字段
-		foreach ($keys as $v) {
-			if (!isset($args[$v])) {
-				_tms_error('参数属性 ' . $v . ' 未设置');
-			} elseif (in_array($v, array('name', 'row', 'defaultRow')) && empty($args[$v])) {
-				_tms_error('参数属性 ' . $v . ' 为空');
-			} elseif (strpos($args[$v], '(') !== false || strpos($args[$v], ')') !== false) {
-				_tms_error('参数属性 ' . $v . ' 不能包含 "(" 或 ")" 符号');
+		} else {
+			foreach ($keys as $v) {
+				if (!isset($args[$v])) {
+					_tms_error('参数属性 ' . $v . ' 未设置');
+				} elseif (in_array($v, array('name', 'row', 'defaultRow')) && empty($args[$v])) {
+					_tms_error('参数属性 ' . $v . ' 为空');
+				} elseif (strpos($args[$v], '(') !== false || strpos($args[$v], ')') !== false) {
+					_tms_error('参数属性 ' . $v . ' 不能包含 "(" 或 ")" 符号');
+				}
 			}
 		}
 		return $args;
@@ -287,7 +280,6 @@ if (!function_exists('_tms_common')) {
 					$r = $r1;
 				}
 			}
-			//unset($GLOBALS['_tms_import'][$name]);
 		} else {
 			$data = array();
 			for ($i = 0; $i < $row; $i++) {
@@ -678,7 +670,6 @@ if (!function_exists('_tms_repeat_begin')) {
 					$data[] = $attributes;
 				}
 			}
-			//unset($GLOBALS['_tms_import'][$name]);
 		} else {
 			$data = array();
 			for ($i = 1; $i <= $row; $i++) {
@@ -702,7 +693,6 @@ if (!function_exists('_tms_repeat_end')) {
 		for ($i = 1; $i < $row; $i++) {
 			echo $buffer;
 		}
-		//unset($GLOBALS['_tms_repeat_row']);
 		ob_end_flush();
 
 	}
