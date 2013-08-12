@@ -38,12 +38,11 @@ class Json {
 		$newLine = "\n";
 		$prevChar = '';
 		$outOfQuotes = true;
+
 		for ($i = 0; $i <= $strLen; $i++) {
 			$char = substr($json, $i, 1);
 			if ($char == '"' && $prevChar != '\\') {
 				$outOfQuotes = !$outOfQuotes;
-			} elseif ($char == ':') {
-				$char .= ' ';
 			} elseif (($char == '}' || $char == ']') && $outOfQuotes) {
 				$result .= $newLine;
 				$pos--;

@@ -65,6 +65,7 @@ if (!function_exists('_tms_format')) {
 			$prevChar = $char;
 		}
 		return $result;
+
 	}
 
 }
