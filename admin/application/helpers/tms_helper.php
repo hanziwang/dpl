@@ -125,7 +125,7 @@ if (!function_exists('_tms_export')) {
 		// 导出数据到指定文件
 		$import = $GLOBALS['_tms_import'];
 		$export = $GLOBALS['_tms_export'];
-		if (serialize($export) !== serialize($import)) {
+		if (var_export($export, true) !== var_export($import, true)) {
 			$data = json_encode($export);
 			$data = preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', array('Json', '_replace_callback'), $data);
 			$data = _tms_format($data);
@@ -274,8 +274,8 @@ if (!function_exists('_tms_common')) {
 			// 字段修正
 			if (isset($args['fields'])) {
 				foreach ($data as &$r) {
-					$r1 = $attributes;
-					foreach ($attributes as $k => $v) {
+					$r1 = array();
+					foreach ($attributes as $k => &$v) {
 						$r1[$k] = isset($r[$k]) ? $r[$k] : $v;
 					}
 					$r = $r1;
