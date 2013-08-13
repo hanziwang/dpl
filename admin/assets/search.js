@@ -66,12 +66,16 @@ var search = {
 				load.addClass('loaded').html('没有了');
 			},
 			success: function (d) {
+				self.index = d.code;
 				if (d.data.length === 0) {
 					load.attr('data-load', 'false');
 				} else {
 					list.append(self.substitute(self.render(d.data)));
 				}
-				self.index = d.code;
+				if ($(document).height() === $(window).height()) {
+					self.loading = false;
+					self.load(url, args);
+				}
 			},
 			dataType: 'json'
 		});
