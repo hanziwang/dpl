@@ -1,3 +1,4 @@
+<?php $id = md5($name); ?>
 <?php header('Content-type:text/html;charset=UTF-8'); ?>
 <?= $header ?>
 <link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
@@ -27,7 +28,6 @@ _tms_export($module['json']);
 	</div>
 </div>
 <script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
-<?php $id = md5($name); ?>
 <style>
 #page {
 	padding-top: 69px;
