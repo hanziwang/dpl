@@ -242,7 +242,7 @@ if (!function_exists('_tms_common')) {
 	function _tms_common ($args = '{}', $attributes) {
 
 		// 校验标签参数
-		$keys = array('name', 'title', 'group');
+		$keys = array('name', 'title', 'group', 'row', 'defaultRow');
 		$args = _tms_parse_args($args, $keys);
 
 		// 追加图片尺寸
