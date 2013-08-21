@@ -1,6 +1,6 @@
 <?php header('Content-type:text/html;charset=UTF-8'); ?>
 <?php eval(' ?>' . $header . '<?php '); ?>
-<link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
+<link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['feature'] ?>.css?v=<?= $version ?>">
 <?= $nav ?>
 <!-- 模板开始 -->
 <style>
@@ -31,12 +31,12 @@ endforeach;
 	</div>
 </div>
 <script>
+<?= $js ?>
+</script>
+<script>
 <?= $modules_js ?>
 </script>
 <script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
-<script>
-<?= $js ?>
-</script>
 <!-- 模板结束 -->
 <?php if (isset($_REQUEST['debug'])) : ?>
 <script>
