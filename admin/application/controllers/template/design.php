@@ -57,24 +57,24 @@ class Design extends CI_Controller {
 					}
 					foreach ($region as $module) {
 						$module = get_object_vars($module);
-						$data = $this->module->read(array(
+						$read = $this->module->read(array(
 							'market' => $args['market'],
 							'template' => $args['name'],
 							'name' => $module['name']
 						));
 
 						// 读取模块数据
-						$json = dirname($data['json']) . '/' . $module['guid'] . '.json';
+						$json = dirname($read['json']) . '/' . $module['guid'] . '.json';
 						if (file_exists($json)) {
-							$data['json'] = $json;
+							$read['json'] = $json;
 						}
 
 						// 读取模块样式、脚本
-						$args['modules_css'] .= $data['css'];
-						$args['modules_css'] .= $data['skin/' . $module['skin']];
-						$args['modules_js'] .= $data['js'];
+						$args['modules_css'] .= $read['css'];
+						$args['modules_css'] .= $read['skin/' . $module['skin']];
+						$args['modules_js'] .= $read['js'];
 
-						$args['modules'][] = array_merge($module, $data);
+						$args['modules'][] = array_merge($module, $read);
 						$replace .= "{" . $module['guid'] . "}\r\n";
 					}
 					$start = strpos($template, '{module}');

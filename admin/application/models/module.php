@@ -504,11 +504,14 @@ class Module extends CI_Model {
 		$data['js'] = @file_get_contents($name . '.js');
 		$data['json'] = $name . '.json';
 
-		// 读取源代码
-		$data['php'] = @file_get_contents($data['file']);
-		if ($data['php'] !== @iconv('UTF-8', 'UTF-8//IGNORE', $data['php'])) {
-			$data['php'] = @iconv('GBK', 'UTF-8//IGNORE', $data['php']);
+		// 读取源代码、替换重复标签
+		$code = @file_get_contents($data['file']);
+		if ($code !== @iconv('UTF-8', 'UTF-8//IGNORE', $code)) {
+			$code = @iconv('GBK', 'UTF-8//IGNORE', $code);
 		}
+		$code = preg_replace('/_tms_repeat_begin\((?:.+?)row["\']\s*\:\s*[\'"]([^\'"]+)[\'"]?(?:[^\)]+)\)\s*\;?/', "$0for(\$_tms_i=0;\$_tms_i<$1;\$_tms_i++) {", $code);
+		$code = preg_replace('/_tms_repeat_end\(\s*\)\;?/i', "}$0", $code);
+		$data['php'] = $code;
 		return $data;
 
 	}

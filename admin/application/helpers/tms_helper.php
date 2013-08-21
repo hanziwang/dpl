@@ -677,9 +677,9 @@ if (!function_exists('_tms_repeat_begin')) {
 				$data[] = $attributes;
 			}
 		}
-		$GLOBALS['_tms_repeat_row'] = $row;
+//		$GLOBALS['_tms_repeat_row'] = $row;
 		$GLOBALS['_tms_export'][$name] = $data;
-		ob_start();
+//		ob_start();
 
 	}
 
@@ -689,12 +689,12 @@ if (!function_exists('_tms_repeat_end')) {
 
 	function _tms_repeat_end () {
 
-		$row = $GLOBALS['_tms_repeat_row'];
-		$buffer = ob_get_contents();
-		for ($i = 1; $i < $row; $i++) {
-			echo $buffer;
-		}
-		ob_end_flush();
+//		$row = $GLOBALS['_tms_repeat_row'];
+//		$buffer = ob_get_contents();
+//		for ($i = 1; $i < $row; $i++) {
+//			echo $buffer;
+//		}
+//		ob_end_flush();
 
 	}
 
