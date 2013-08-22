@@ -36,9 +36,9 @@
 			<img src="{imgurl}_250x250.jpg" alt="">
 		</a>
 		<ul class="action clearfix">
+			<li><a href="<?= base_url('module/design' . $query_string . '&name={name}&debug') ?>" target="_blank">调试</a></li>
 			<li><a href="<?= base_url('template/module/edit' . $query_string . '&name={name}') ?>">编辑</a></li>
 			<li><a href="<?= base_url('template/module/copy' . $query_string . '&name={name}') ?>">拷贝</a></li>
-			<li><a href="<?= base_url('module/design' . $query_string . '&name={name}&debug') ?>" target="_blank">调试</a></li>
 		</ul>
 	</li>
 </script>

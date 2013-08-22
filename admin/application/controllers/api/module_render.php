@@ -29,7 +29,8 @@ class Module_render extends CI_Controller {
 		$read['php'] = ob_get_contents();
 		ob_end_clean();
 
-		echo $this->json->encode($read);
+		// 必须按照 unicode 方式输出
+		echo json_encode($read);
 
 	}
 
