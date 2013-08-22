@@ -9,14 +9,14 @@ class Json {
 	function _replace_callback ($str) {
 
 		$str = strtr($str[0], array('\\u' => ''));
-		return iconv('UCS-2', 'UTF-8', pack('H*', $str));
+		return iconv('UCS-2BE', 'UTF-8', pack('H*', $str));
 
 	}
 
 	// 将数组转换为 Json 字符串
 	function encode ($value) {
 
-		//return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
+		//return preg_replace('#\\\u([0-9a-fA-F]{4})#ie', "iconv('UCS-2BE', 'UTF-8', pack('H4', '\\1'))", json_encode($value));
 		return preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', array('Json', '_replace_callback'), json_encode($value));
 
 	}
