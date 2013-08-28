@@ -7,6 +7,11 @@ class Grid extends CI_Model {
 
 	// 栅格公式
 	private $rules = array(
+		'1190' => array(
+			'n' => 24,
+			'c' => 50,
+			'g' => 10
+		),
 		'990' => array(
 			'n' => 20,
 			'c' => 50,

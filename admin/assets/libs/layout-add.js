@@ -17,6 +17,7 @@ press.define('layout-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 			// 栅格公式
 			var rules = {
+					'1190-24-50-10': { n: 24, c: 50, g: 10 },
 					'990-20-50-10': { n: 20, c: 50, g: 10 },
 					'990-34-30-30': { n: 34, c: 30, g: 30 },
 					'950-24-40-10': { n: 24, c: 40, g: 10 },
