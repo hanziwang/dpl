@@ -1,7 +1,7 @@
 <?php $id = md5($name); ?>
 <?php header('Content-type:text/html;charset=UTF-8'); ?>
 <?= $header ?>
-<link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['width'] ?>.css?v=<?= $version ?>">
+<link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['feature'] ?>.css?v=<?= $version ?>">
 </head>
 <body>
 <div id="page">
