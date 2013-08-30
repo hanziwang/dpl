@@ -36,11 +36,6 @@ endforeach;
 <script>
 <?= $modules_js ?>
 </script>
-<?php if ($setting['module'] === 'kissy' && $setting['width'] === '1190') : ?>
-<script>
-(function(b){function c(){var a=b.one(window).width(),a=1189<a?"":989<a?"w990":"w740";b.one(document.body).removeClass("w990 w740").addClass(a)}c();b.one(window).on("resize",c)})(KISSY);
-</script>
-<?php endif; ?>
 <?= $setting['renderCallback'] ?>
 <!-- 模板结束 -->
 <?php if (isset($_REQUEST['debug'])) : ?>
