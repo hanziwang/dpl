@@ -27,7 +27,7 @@ _tms_export($module['json']);
 		</div>
 	</div>
 </div>
-<script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
+<?= $setting['renderCallback'] ?>
 <style>
 #page {
 	padding-top: 69px;

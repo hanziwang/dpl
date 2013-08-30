@@ -41,7 +41,7 @@ endforeach;
 (function(b){function c(){var a=b.one(window).width(),a=1189<a?"":989<a?"w990":"w740";b.one(document.body).removeClass("w990 w740").addClass(a)}c();b.one(window).on("resize",c)})(KISSY);
 </script>
 <?php endif; ?>
-<script charset="utf-8" src="http://a.tbcdn.cn/apps/tms/press/js/<?= $setting['module'] ?>.js?v=<?= $version ?>"></script>
+<?= $setting['renderCallback'] ?>
 <!-- 模板结束 -->
 <?php if (isset($_REQUEST['debug'])) : ?>
 <script>
