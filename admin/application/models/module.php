@@ -310,9 +310,9 @@ class Module extends CI_Model {
 		// 编译 Less 模板
 		$files = glob($module_dir . '*.less');
 		foreach ($files as $v) {
+			$this->lessc->importDir = dirname($v);
 			$file = substr($v, 0, -5) . '.css';
 			$data = @file_get_contents($v);
-			$this->lessc->importDir = dirname($v);
 			@file_put_contents($file, $this->lessc->parse($data));
 			@chmod($file, 0777);
 		}
@@ -484,19 +484,19 @@ class Module extends CI_Model {
 		$color = $market->color;
 		$skins = glob($module_dir . 'skin/*.less');
 		foreach ($skins as $v) {
+			$this->lessc->importDir = dirname($v);
 			$filename = explode('/', $v);
 			$filename = array_pop($filename);
 			$filename = str_replace('.less', '', $filename);
 			$skin = $color . @file_get_contents($v);
-			$this->lessc->importDir = dirname($v);
 			$data['skin/' . $filename] = $this->lessc->parse($skin);
 		}
 
 		// 读取样式
 		$file = $name . '.less';
 		if (file_exists($file)) {
-			$data['css'] = @file_get_contents($file);
 			$this->lessc->importDir = dirname($file);
+			$data['css'] = @file_get_contents($file);
 			$data['css'] = $this->lessc->parse($data['css']);
 		} else {
 			$file = $name . '.css';
