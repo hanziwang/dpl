@@ -20,6 +20,7 @@ class Template extends CI_Model {
 		if (!file_exists($www_dir)) {
 			@mkdir($www_dir, 0777);
 		}
+
 		// 创建市场目录
 		if (!file_exists($market_dir)) {
 			@mkdir($market_dir, 0777);
@@ -434,43 +435,27 @@ class Template extends CI_Model {
 	// 读取模板文件
 	function read ($args) {
 
+		$this->load->library('lessc');
+
 		// 配置基础路径
 		$www_dir = $this->config->item('www');
 		$market_dir = $www_dir . '/' . $args['market'] . '/';
 		$template_dir = $market_dir . '/' . $args['name'] . '/';
 
 		// 读取样式、脚本
-		// $data = array('css' => '', 'js' => '');
-		// foreach ($data as $k => &$v) {
-		// 	$file = $args['name'] . '.' . $k;
-		// 	$v = @file_get_contents($template_dir . $file);
-		// 	$v = $v ? $v : '';
-		// }
-    //
 		$data = array();
-		// js
-		$v = @file_get_contents($template_dir, $file);
-		$data['js'] = ($v ? $v : '');
-		// css
-		$cssNamePrefix = $template_dir . $args['name'];
-		$lessFileName =  $cssNamePrefix . '.less';
-		if (file_exists($lessFileName)) {
-			$content = @file_get_contents($lessFileName);
-			if ($content) {
-				$this->load->library('lessc');
-				$this->lessc->importDir = dirname($lessFileName);
-				$content = $this->lessc->parse($content);
-			} else {
-				$content = '';
-			}
+		$prefix = $template_dir . $args['name'];
+		$file = $prefix . '.less';
+		if (file_exists($file)) {
+			$this->lessc->importDir = dirname($file);
+			$data['css'] = trim(@file_get_contents($file));
+			$data['css'] = $this->lessc->parse($data['css']);
 		} else {
-			$content = @file_get_contents($cssNamePrefix . '.css');
+			$file = $prefix . '.css';
+			$data['css'] = trim(@file_get_contents($file));
 		}
-
-		if ($content) {
-			$data['css'] = $content;
-		}
-
+		$file = $prefix . '.js';
+		$data['js'] = trim(@file_get_contents($file));
 		return $data;
 
 	}

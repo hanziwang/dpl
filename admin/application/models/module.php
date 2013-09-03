@@ -472,9 +472,9 @@ class Module extends CI_Model {
 
 		// 配置基础路径、参数
 		$module_dir = $this->_base_dir($args);
-		$name = $module_dir . $args['name'];
+		$prefix = $module_dir . $args['name'];
 		$data = array(
-			'file' => $name . '.php'
+			'file' => $prefix . '.php'
 		);
 
 		// 读取默认皮肤
@@ -493,19 +493,19 @@ class Module extends CI_Model {
 		}
 
 		// 读取样式
-		$file = $name . '.less';
+		$file = $prefix . '.less';
 		if (file_exists($file)) {
 			$this->lessc->importDir = dirname($file);
-			$data['css'] = @file_get_contents($file);
+			$data['css'] = trim(@file_get_contents($file));
 			$data['css'] = $this->lessc->parse($data['css']);
 		} else {
-			$file = $name . '.css';
-			$data['css'] = @file_get_contents($file);
+			$file = $prefix . '.css';
+			$data['css'] = trim(@file_get_contents($file));
 		}
 
 		// 读取脚本、模拟数据
-		$data['js'] = @file_get_contents($name . '.js');
-		$data['json'] = $name . '.json';
+		$data['js'] = trim(@file_get_contents($prefix . '.js'));
+		$data['json'] = $prefix . '.json';
 
 		// 读取源代码、替换重复标签
 		$code = @file_get_contents($data['file']);
