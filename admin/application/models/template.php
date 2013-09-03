@@ -20,7 +20,6 @@ class Template extends CI_Model {
 		if (!file_exists($www_dir)) {
 			@mkdir($www_dir, 0777);
 		}
-
 		// 创建市场目录
 		if (!file_exists($market_dir)) {
 			@mkdir($market_dir, 0777);
@@ -441,12 +440,37 @@ class Template extends CI_Model {
 		$template_dir = $market_dir . '/' . $args['name'] . '/';
 
 		// 读取样式、脚本
-		$data = array('css' => '', 'js' => '');
-		foreach ($data as $k => &$v) {
-			$file = $args['name'] . '.' . $k;
-			$v = @file_get_contents($template_dir . $file);
-			$v = $v ? $v : '';
+		// $data = array('css' => '', 'js' => '');
+		// foreach ($data as $k => &$v) {
+		// 	$file = $args['name'] . '.' . $k;
+		// 	$v = @file_get_contents($template_dir . $file);
+		// 	$v = $v ? $v : '';
+		// }
+    //
+		$data = array();
+		// js
+		$v = @file_get_contents($template_dir, $file);
+		$data['js'] = ($v ? $v : '');
+		// css
+		$cssNamePrefix = $template_dir . $args['name'];
+		$lessFileName =  $cssNamePrefix . '.less';
+		if (file_exists($lessFileName)) {
+			$content = @file_get_contents($lessFileName);
+			if ($content) {
+				$this->load->library('lessc');
+				$this->lessc->importDir = dirname($lessFileName);
+				$content = $this->lessc->parse($content);
+			} else {
+				$content = '';
+			}
+		} else {
+			$content = @file_get_contents($cssNamePrefix . '.css');
 		}
+
+		if ($content) {
+			$data['css'] = $content;
+		}
+
 		return $data;
 
 	}

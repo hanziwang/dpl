@@ -312,6 +312,7 @@ class Module extends CI_Model {
 		foreach ($files as $v) {
 			$file = substr($v, 0, -5) . '.css';
 			$data = @file_get_contents($v);
+			$this->lessc->importDir = dirname($v);
 			@file_put_contents($file, $this->lessc->parse($data));
 			@chmod($file, 0777);
 		}
@@ -487,6 +488,7 @@ class Module extends CI_Model {
 			$filename = array_pop($filename);
 			$filename = str_replace('.less', '', $filename);
 			$skin = $color . @file_get_contents($v);
+			$this->lessc->importDir = dirname($v);
 			$data['skin/' . $filename] = $this->lessc->parse($skin);
 		}
 
@@ -494,6 +496,7 @@ class Module extends CI_Model {
 		$file = $name . '.less';
 		if (file_exists($file)) {
 			$data['css'] = @file_get_contents($file);
+			$this->lessc->importDir = dirname($file);
 			$data['css'] = $this->lessc->parse($data['css']);
 		} else {
 			$file = $name . '.css';
