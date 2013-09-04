@@ -474,7 +474,8 @@ class Module extends CI_Model {
 		$module_dir = $this->_base_dir($args);
 		$prefix = $module_dir . $args['name'];
 		$data = array(
-			'file' => $prefix . '.php'
+			'file' => $prefix . '.php',
+			'skin/default' => ''
 		);
 
 		// 读取默认皮肤
