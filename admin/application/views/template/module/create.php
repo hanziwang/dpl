@@ -73,6 +73,9 @@
 			$('.imgurl .text').val(url);
 		});
 	});
+	$('.imgurl .text').on('change', function (e) {
+		!$(this).val() && $('.file input').val('');
+	});
 
 	// 新建模块
 	$('.form').on('submit', function (e) {
