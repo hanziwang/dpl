@@ -273,6 +273,7 @@ class Template extends CI_Model {
 		$file2 = glob($template_dir . 'modules/*/*.less');
 		$files = array_merge($file1, $file2);
 		foreach ($files as $v) {
+			$this->lessc->importDir = dirname($v);
 			$file = substr($v, 0, -5) . '.css';
 			$data = @file_get_contents($v);
 			@file_put_contents($file, $this->lessc->parse($data));
