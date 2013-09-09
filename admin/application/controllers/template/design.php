@@ -70,9 +70,9 @@ class Design extends CI_Controller {
 						}
 
 						// 读取模块样式、脚本
-						$args['modules_css'] .= $read['css'];
-						$args['modules_css'] .= $read['skin/' . $module['skin']];
-						$args['modules_js'] .= $read['js'];
+						$args['modules_css'] .= $read['css'] . "\n";
+						$args['modules_css'] .= $read['skin/' . $module['skin']] . "\n";
+						$args['modules_js'] .= $read['js'] . "\n";
 
 						$args['modules'][] = array_merge($module, $read);
 						$replace .= "{" . $module['guid'] . "}\r\n";
