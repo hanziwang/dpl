@@ -262,6 +262,7 @@ class Template extends CI_Model {
 		$www_dir = $this->config->item('www');
 		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('id', 'setting');
+		$lessc = $this->config->item('lessc');
 
 		// 配置操作目录
 		$template_dir = $www_dir . '/' . $args['market'] . '/' . $args['name'] . '/';
@@ -269,15 +270,17 @@ class Template extends CI_Model {
 		@mkdir($cache_dir, 0777);
 
 		// 编译 Less 模板
-		$file1 = glob($template_dir . '*.less');
-		$file2 = glob($template_dir . 'modules/*/*.less');
-		$files = array_merge($file1, $file2);
-		foreach ($files as $v) {
-			$this->lessc->importDir = dirname($v);
-			$file = substr($v, 0, -5) . '.css';
-			$data = @file_get_contents($v);
-			@file_put_contents($file, $this->lessc->parse($data));
-			@chmod($file, 0777);
+		if ($lessc) {
+			$file1 = glob($template_dir . '*.less');
+			$file2 = glob($template_dir . 'modules/*/*.less');
+			$files = array_merge($file1, $file2);
+			foreach ($files as $v) {
+				$this->lessc->importDir = dirname($v);
+				$file = substr($v, 0, -5) . '.css';
+				$data = @file_get_contents($v);
+				@file_put_contents($file, $this->lessc->parse($data));
+				@chmod($file, 0777);
+			}
 		}
 
 		// 拷贝到缓存目录
@@ -442,12 +445,13 @@ class Template extends CI_Model {
 		$www_dir = $this->config->item('www');
 		$market_dir = $www_dir . '/' . $args['market'] . '/';
 		$template_dir = $market_dir . '/' . $args['name'] . '/';
+		$lessc = $this->config->item('lessc');
 
 		// 读取样式、脚本
 		$data = array();
 		$prefix = $template_dir . $args['name'];
 		$file = $prefix . '.less';
-		if (file_exists($file)) {
+		if (file_exists($file) && $lessc) {
 			$this->lessc->importDir = dirname($file);
 			$data['css'] = trim(@file_get_contents($file));
 			$data['css'] = $this->lessc->parse($data['css']);

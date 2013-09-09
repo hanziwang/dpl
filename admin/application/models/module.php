@@ -302,19 +302,22 @@ class Module extends CI_Model {
 		$module_dir = $this->_base_dir($args);
 		$db_dir = $this->config->item('db');
 		$config_id = $this->config->item('id', 'setting');
+		$lessc = $this->config->item('lessc');
 
 		// 配置操作目录
 		$cache_dir = $db_dir . '/' . md5(time()) . '/';
 		@mkdir($cache_dir, 0777);
 
 		// 编译 Less 模板
-		$files = glob($module_dir . '*.less');
-		foreach ($files as $v) {
-			$this->lessc->importDir = dirname($v);
-			$file = substr($v, 0, -5) . '.css';
-			$data = @file_get_contents($v);
-			@file_put_contents($file, $this->lessc->parse($data));
-			@chmod($file, 0777);
+		if ($lessc) {
+			$files = glob($module_dir . '*.less');
+			foreach ($files as $v) {
+				$this->lessc->importDir = dirname($v);
+				$file = substr($v, 0, -5) . '.css';
+				$data = @file_get_contents($v);
+				@file_put_contents($file, $this->lessc->parse($data));
+				@chmod($file, 0777);
+			}
 		}
 
 		// 拷贝到缓存目录
@@ -473,6 +476,7 @@ class Module extends CI_Model {
 		// 配置基础路径、参数
 		$module_dir = $this->_base_dir($args);
 		$prefix = $module_dir . $args['name'];
+		$lessc = $this->config->item('lessc');
 		$data = array(
 			'file' => $prefix . '.php',
 			'skin/default' => ''
@@ -483,19 +487,20 @@ class Module extends CI_Model {
 			'id' => $args['market']
 		));
 		$color = $market->color;
-		$skins = glob($module_dir . 'skin/*.less');
+		$ext = $lessc ? '.less' : '.css';
+		$skins = glob($module_dir . 'skin/*' . $ext);
 		foreach ($skins as $v) {
 			$this->lessc->importDir = dirname($v);
 			$filename = explode('/', $v);
 			$filename = array_pop($filename);
-			$filename = str_replace('.less', '', $filename);
-			$skin = $color . @file_get_contents($v);
+			$filename = str_replace($ext, '', $filename);
+			$skin = $color . trim(@file_get_contents($v));
 			$data['skin/' . $filename] = $this->lessc->parse($skin);
 		}
 
 		// 读取样式
 		$file = $prefix . '.less';
-		if (file_exists($file)) {
+		if (file_exists($file) && $lessc) {
 			$this->lessc->importDir = dirname($file);
 			$data['css'] = trim(@file_get_contents($file));
 			$data['css'] = $this->lessc->parse($data['css']);
