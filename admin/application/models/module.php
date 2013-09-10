@@ -487,13 +487,12 @@ class Module extends CI_Model {
 			'id' => $args['market']
 		));
 		$color = $market->color;
-		$ext = $lessc ? '.less' : '.css';
-		$skins = glob($module_dir . 'skin/*' . $ext);
+		$skins = glob($module_dir . 'skin/*.less');
 		foreach ($skins as $v) {
 			$this->lessc->importDir = dirname($v);
 			$filename = explode('/', $v);
 			$filename = array_pop($filename);
-			$filename = str_replace($ext, '', $filename);
+			$filename = str_replace('.less', '', $filename);
 			$skin = $color . trim(@file_get_contents($v));
 			$data['skin/' . $filename] = $this->lessc->parse($skin);
 		}
