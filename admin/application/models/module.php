@@ -420,6 +420,13 @@ class Module extends CI_Model {
 		$cache_data = $this->json->decode($cache_data);
 		$cache_version = intval($cache_data->version);
 
+		// 编码源代码文件
+		$cache_file = $cache_dir . $module_name . '.php';
+		$cache_code = @file_get_contents($cache_file);
+		$cache_code = @iconv('GBK', 'UTF-8//IGNORE', $cache_code);
+		@file_put_contents($cache_file, $cache_code);
+		@chmod($cache_file, 0777);
+
 		// 创建模块根目录
 		if (!file_exists($modules_dir)) {
 			@mkdir($modules_dir, 0777);
