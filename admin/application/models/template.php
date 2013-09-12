@@ -383,6 +383,15 @@ class Template extends CI_Model {
 		$cache_data = $this->json->decode($cache_data);
 		$cache_version = intval($cache_data->version);
 
+		// 编码源代码文件
+		$cache_files = glob($cache_dir . 'modules/*/*.php');
+		foreach ($cache_files as $v) {
+			$cache_code = @file_get_contents($v);
+			$cache_code = @iconv('GBK', 'UTF-8//IGNORE', $cache_code);
+			@file_put_contents($v, $cache_code);
+			@chmod($v, 0777);
+		}
+
 		// 创建市场根目录
 		if (!file_exists($www_dir)) {
 			@mkdir($www_dir, 0777);
