@@ -5,10 +5,10 @@
 			<form class="form" method="get" action="<?= base_url('api/setting') ?>">
 				<input type="hidden" name="ref" value="update">
 				<input type="hidden" name="id" value="<?= $config ?>">
-				<div class="hint">提示信息：请确认数据目录可写</div>
+				<div class="hint">提示信息：请确认目录【db】和【src】可写</div>
 				<div class="progress"><span></span></div>
 				<div class="submit">
-					<button type="button" class="button">下载业务数据</button>
+					<button type="button" class="button">猛击这里更新</button>
 				</div>
 			</form>
 		</div>
