@@ -8,7 +8,7 @@ class Design extends CI_Controller {
 	function index () {
 
 		$this->load->helper('tms');
-		$this->load->library('json');
+		$this->load->library(array('_tms', 'json'));
 		$this->load->model(array('get', 'market', 'grid', 'template', 'module'));
 		$authors = $this->get->author();
 		$grids = $this->grid->grid();
