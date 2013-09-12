@@ -81,7 +81,7 @@ if (!function_exists('_tms_replace_callback')) {
 	function _tms_replace_callback ($str) {
 
 		$str = strtr($str[0], array('\\u' => ''));
-		return iconv('UCS-2', 'UTF-8', pack('H*', $str));
+		return iconv('UCS-2BE', 'UTF-8', pack('H*', $str));
 
 	}
 
@@ -208,6 +208,9 @@ if (!function_exists('_tms_parse_args')) {
 
 	function _tms_parse_args ($args, $keys) {
 
+		if ($args !== @iconv('UTF-8', 'UTF-8//IGNORE', $args)) {
+			$args = @iconv('GBK', 'UTF-8//IGNORE', $args);
+		}
 		$args = json_decode($args, true);
 
 		// 检查参数和属性

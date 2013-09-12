@@ -46,13 +46,13 @@ class Market extends CI_Model {
 	}
 
 	// 查询市场
-	function select ($args) {
+	function select ($args, $assoc = false) {
 
 		$this->load->model('get');
 		$markets = $this->get->market();
 		foreach ($markets as $v) {
 			if (intval($v->id) === intval($args['id'])) {
-				return $v;
+				return $assoc ? get_object_vars($v) : $v;
 			}
 		}
 
