@@ -631,9 +631,26 @@ if (!function_exists('_tms_module_begin')) {
 if (!function_exists('_tms_module_end')) {
 
 	function _tms_module_end () {
-
 		echo '</div>' . "\r\n";
+	}
 
+}
+
+/**
+ * 业务模块标签
+ */
+if (!function_exists('_tms_biz_module_begin')) {
+
+	function _tms_biz_module_begin () {
+		echo '<div class="bizModule">' . "\r\n";
+	}
+
+}
+
+if (!function_exists('_tms_biz_module_end')) {
+
+	function _tms_biz_module_end () {
+		echo '</div>' . "\r\n";
 	}
 
 }
