@@ -641,7 +641,7 @@ if (!function_exists('_tms_module_end')) {
  */
 if (!function_exists('_tms_biz_module_begin')) {
 
-	function _tms_biz_module_begin () {
+	function _tms_biz_module_begin ($args = '{}') {
 		echo '<div class="bizModule">' . "\r\n";
 	}
 
