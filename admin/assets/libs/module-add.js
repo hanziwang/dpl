@@ -157,9 +157,9 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 
 				// 插入页面指定位置
 				if (config.module) {
-					config.module.after(box);
+					try { config.module.after(box); } catch (e) {}
 				} else {
-					config.region.append(box);
+					try { config.region.append(box); } catch (e) {}
 					config.region.find('.press-region-admin').remove();
 				}
 

@@ -16,7 +16,7 @@ $config['tms_author'] = $tms . 'client/getModuleAuthors.htm';
 
 // 配置系统参数
 $config['lessc'] = true;
-$config['version'] = '20130912';
+$config['version'] = '20130922';
 
 // 配置系统路径
 $home = dirname(dirname(BASEPATH));
