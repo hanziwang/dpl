@@ -27,10 +27,10 @@
 					</div>
 				</div>
 				<div class="field clearfix">
-					<label class="label">所属市场：</label>
+					<label class="label">所属站点：</label>
 					<div class="clearfix">
 						<select class="select" name="market" required="required">
-							<option value="">选择市场</option>
+							<option value="">选择站点</option>
 <?php foreach ($markets as $v) : ?>
 							<option value="<?= $v->id ?>"><?= $v->fullName ?></option>
 <?php endforeach; ?>

@@ -602,12 +602,27 @@ a.button-small {
 	padding-bottom: 16px;
 }
 
+.update .hint code {
+	background: #aaa;
+	color: white;
+	font-family: arial;
+	padding: 0 3px;
+}
+
+.update .hint code.green {
+	background: green;
+}
+
+.update .hint code.red {
+	background: red;
+}
+
 .update .progress {
 	border: 1px solid #ddd;
 	padding: 1px;
 	width: 300px;
 	height: 26px;
-	margin-bottom: 18px;
+	margin: 8px 0 18px;
 	display: none;
 }
 

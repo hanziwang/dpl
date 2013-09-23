@@ -1,11 +1,11 @@
 <div class="content market">
 	<div class="fieldset">
-		<div class="hd"><span>所有市场</span></div>
+		<div class="hd"><span>所有站点</span></div>
 		<div class="bd">
 			<table>
 				<tr>
 					<th width="10%">编号</th>
-					<th width="30%">市场名称</th>
+					<th width="30%">站点名称</th>
 					<th width="20%">皮肤色卡</th>
 					<th width="20%">基础组件</th>
 					<th width="20%">操作</th>

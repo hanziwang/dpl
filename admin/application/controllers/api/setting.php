@@ -13,8 +13,8 @@ class setting extends CI_Controller {
 			'id' => $this->input->get('id')
 		);
 		$this->api->setting($args);
-		$ref = $this->input->get('ref');
-		header('Location:' . base_url('api/setting/download?ref=' . $ref));
+		$refer = $this->input->get('refer');
+		header('Location:' . base_url('api/setting/download?refer=' . $refer));
 
 	}
 
@@ -22,7 +22,7 @@ class setting extends CI_Controller {
 	function download () {
 
 		$this->load->model(array('get', 'market'));
-		$ref = $this->input->get('ref');
+		$refer = $this->input->get('refer');
 
 		// 写入市场数据
 		$markets = $this->get->market();
@@ -33,10 +33,10 @@ class setting extends CI_Controller {
 		}
 
 		// 来路判断
-		if ($ref === 'setting') {
+		if ($refer === 'setting') {
 			header('Location: ' . base_url('setting'));
 		}
-		if ($ref === 'update') {
+		if ($refer === 'update') {
 			header('Location: ' . base_url());
 		}
 
