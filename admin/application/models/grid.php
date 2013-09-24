@@ -7,27 +7,32 @@ class Grid extends CI_Model {
 
 	// 栅格公式
 	private $rules = array(
-		'1190' => array(
+		'1190-24-50-10' => array(
 			'n' => 24,
 			'c' => 50,
 			'g' => 10
 		),
-		'990' => array(
+		'990-20-50-10' => array(
 			'n' => 20,
 			'c' => 50,
 			'g' => 10
 		),
-		'950' => array(
+		'990-34-30-30' => array(
+			'n' => 34,
+			'c' => 30,
+			'g' => 30
+		),
+		'950-24-40-10' => array(
 			'n' => 24,
 			'c' => 40,
 			'g' => 10
 		),
-		'940' => array(
+		'940-19-50-10' => array(
 			'n' => 19,
 			'c' => 50,
 			'g' => 10
 		),
-		'320' => array(
+		'320-1-320-0' => array(
 			'n' => 1,
 			'c' => 320,
 			'g' => 0
@@ -39,7 +44,7 @@ class Grid extends CI_Model {
 
 		$setting = $this->config->item('setting');
 		$layout = explode(',', $setting['layout']);
-		$rule = $this->rules[$setting['width']];
+		$rule = $this->rules[$setting['feature']];
 		$data = array();
 		foreach ($layout as $v1) {
 			$r = array();

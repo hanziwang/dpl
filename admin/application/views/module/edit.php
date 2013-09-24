@@ -50,7 +50,7 @@
 							<option value="">选择宽度</option>
 <?php foreach ($widths as $v) : ?>
 							<option value="<?= $v ?>"<?= intval($v) === intval($width) ? ' selected="selected"' : ''?>><?= $v === 0 ? '100%' : $v ?></option>
-<?php endforeach; ?>>
+<?php endforeach; ?>
 						</select>
 					</div>
 				</div>
