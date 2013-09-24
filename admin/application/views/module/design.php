@@ -37,8 +37,8 @@ _tms_export($module['json']);
 <style>
 #span-<?= $id ?> {
 	position: fixed;
-	top: 20px;
-	left: 20px;
+	top: 0;
+	left: 0;
 	padding: 20px;
 }
 #select-<?= $id ?> {
