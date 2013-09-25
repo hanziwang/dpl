@@ -48,7 +48,7 @@
 			<img src="{imgurl}_250x250.jpg" alt="">
 		</a>
 		<ul class="action clearfix">
-			<li><a href="javascript:;" class="download" data-id="{id}" data-name="{name}">下载</a></li>
+			<li><a href="javascript:;" class="download" data-id="{id}" data-name="{name}">下载 v{version}</a></li>
 		</ul>
 	</li>
 </script>

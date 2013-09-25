@@ -87,5 +87,47 @@ endforeach;
 	press.init();
 
 </script>
+<?php $md5 = md5($name); ?>
+<style>
+#v<?= $md5 ?> {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	font-size: 12px;
+	font-family: arial;
+	background: #dd4b39;
+	color: #fff;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 8px;
+	visibility: hidden;
+}
+#v<?= $md5 ?> a {
+	color: #fff !important;
+}
+.v<?= $md5 ?> {
+	visibility: visible !important;
+}
+</style>
+<span id="v<?= $md5 ?>"></span>
+<script>
+(function (xhr, id, version, eid) {
+
+	if (!id) return;
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status === 200) {
+			if (id && JSON.parse(xhr.responseText).version !== version) {
+				var el = document.getElementById(eid);
+				el.innerHTML = '版本已过期，<a href="<?= base_url('template/search?filter=more&q=' . $name) ?>">点此查看最新版本</a>';
+				el.className = eid;
+			}
+		}
+	};
+	xhr.open('get', '<?= base_url('api/tms_version?id=') ?>' + id, true);
+	xhr.timeout = 5000;
+	xhr.send(null);
+
+})(new XMLHttpRequest(), '<?= $tms_id ?>', <?= $tms_version ?>, 'v<?= $md5 ?>');
+</script>
 <?php endif; ?>
 <?php eval(' ?>' . $footer . '<?php '); ?>

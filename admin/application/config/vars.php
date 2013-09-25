@@ -13,10 +13,11 @@ $config['tms_template'] = $tms . 'client/getTemplateList.htm';
 $config['tms_module'] = $tms . 'client/getModuleList.htm';
 $config['tms_type'] = $tms . 'client/getModuleTypes.htm';
 $config['tms_author'] = $tms . 'client/getModuleAuthors.htm';
+$config['tms_prototype'] = $tms . 'client/getPrototypeInfo.htm';
 
 // 配置系统参数
 $config['lessc'] = true;
-$config['version'] = '20130922';
+$config['version'] = '20130925';
 
 // 配置系统路径
 $home = dirname(dirname(BASEPATH));

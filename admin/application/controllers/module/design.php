@@ -26,8 +26,8 @@ class Design extends CI_Controller {
 		}
 
 		// 读取栅格类型
-		$module = $this->module->select($args);
-		$args['grid'] = intval($module->width) === 0 ? 'grid-m' : 'grid-m0';
+		$defaults = $this->module->select($args);
+		$args['grid'] = intval($defaults->width) === 0 ? 'grid-m' : 'grid-m0';
 
 		// 读取页头、模块
 		$market = $this->market->read(array(
@@ -36,6 +36,10 @@ class Design extends CI_Controller {
 		$header = $market['header'];
 		$args['header'] = substr($header, 0, strpos($header, '</head>'));
 		$args['module'] = $this->module->read($args);
+
+		// 读取版本相关字段
+		$args['tms_id'] = $defaults->id;
+		$args['tms_version'] = intval($defaults->version);
 
 		$this->load->view('module/design', $args);
 

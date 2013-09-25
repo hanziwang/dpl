@@ -84,6 +84,10 @@ class Design extends CI_Controller {
 			}
 		}
 
+		// 读取版本相关字段
+		$args['tms_id'] = $defaults->id;
+		$args['tms_version'] = intval($defaults->version);
+
 		$this->load->view('template/design', $args);
 
 	}

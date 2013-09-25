@@ -610,11 +610,11 @@ a.button-small {
 }
 
 .update .hint code.green {
-	background: green;
+	background: #1aa95c;
 }
 
 .update .hint code.red {
-	background: red;
+	background: #dd4b39;
 }
 
 .update .progress {
