@@ -127,7 +127,7 @@ if (!function_exists('_tms_export')) {
 		$export = $GLOBALS['_tms_export'];
 		if (var_export($export, true) !== var_export($import, true)) {
 			$data = json_encode($export);
-			$data = preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', array('Json', '_replace_callback'), $data);
+			$data = preg_replace_callback('/\\\\u[0-9a-fA-Z]{4}/', '_tms_replace_callback', $data);
 			$data = _tms_format($data);
 			@file_put_contents($filename, $data);
 			@chmod($filename, 0777);

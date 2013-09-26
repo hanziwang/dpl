@@ -1,5 +1,8 @@
-<?php header('Content-type:text/html;charset=UTF-8'); ?>
-<?php eval(' ?>' . $header . '<?php '); ?>
+<?php
+@include APPPATH . 'libraries/Tms.php';
+header('Content-type:text/html;charset=UTF-8');
+eval(' ?>' . $header . '<?php ');
+?>
 <link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['feature'] ?>.css?v=<?= $version ?>">
 <?= $nav ?>
 <!-- 模板开始 -->
@@ -87,7 +90,7 @@ endforeach;
 	press.init();
 
 </script>
-<?php $md5 = md5($name); ?>
+<?php $md5 = md5(var_export($name, true)); ?>
 <style>
 #v<?= $md5 ?> {
 	position: fixed;

@@ -1,6 +1,8 @@
-<?php $md5 = md5($name); ?>
-<?php header('Content-type:text/html;charset=UTF-8'); ?>
-<?= $header ?>
+<?php
+@include APPPATH . 'libraries/Tms.php';
+header('Content-type:text/html;charset=UTF-8');
+eval(' ?>' . $header . '<?php ');
+?>
 <link rel="stylesheet" href="http://a.tbcdn.cn/apps/tms/press/css/<?= $setting['feature'] ?>.css?v=<?= $version ?>">
 </head>
 <body>
@@ -33,7 +35,7 @@ _tms_export($module['json']);
 	padding-top: 69px;
 }
 </style>
-<?php if (isset($_REQUEST['debug'])) : ?>
+<?php if (isset($_REQUEST['debug'])) : $md5 = md5(var_export($name, true)); ?>
 <style>
 #s1<?= $md5 ?> {
 	position: fixed;

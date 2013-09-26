@@ -8,7 +8,6 @@ class Design extends CI_Controller {
 	function index () {
 
 		$this->load->helper('tms');
-		$this->load->library('_tms');
 		$this->load->model(array('get', 'market', 'module'));
 		$args = array(
 			'version' => $this->config->item('version'),
