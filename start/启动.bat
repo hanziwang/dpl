@@ -1,3 +1,5 @@
+cd %~dp0
+cls
 httpd -k install -n "DPL"
 httpd -k start -n "DPL"
 pause
