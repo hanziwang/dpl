@@ -1,5 +1,6 @@
 cd %~dp0
 cls
+@start "" "ApacheMonitor.exe"
 httpd -k install -n "DPL"
 httpd -k start -n "DPL"
 pause
