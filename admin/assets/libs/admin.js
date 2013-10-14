@@ -23,7 +23,7 @@ press.define('admin', ['jquery', 'mustache', 'template', 'page'], function (requ
 			}));
 
 			// 防止工具条被遮挡
-			if ($('#page').offset().top <= 61) {
+			if ($('#page').length !== 0 && $('#page').offset().top <= 61) {
 				$('#page').addClass('press-page');
 			}
 
