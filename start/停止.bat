@@ -1,6 +1,6 @@
 cd %~dp0
-cls
 @taskkill /f /im "ApacheMonitor.exe"
+cls
 httpd -k stop -n "DPL"
 httpd -k uninstall -n "DPL"
 pause
