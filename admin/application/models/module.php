@@ -48,10 +48,10 @@ class Module extends CI_Model {
 		$config_module = $this->config->item('module', 'setting');
 		$data_dir = dirname(BASEPATH) . '/data/module/' . $config_module . '/';
 		$this->dir->copy($data_dir, $module_dir);
-		$this->dir->chmod($module_dir, 0777);
 		foreach (array('.css', '.js', '.php') as $v) {
 			@rename($module_dir . $v, $module_dir . $args['name'] . $v);
 		}
+		$this->dir->chmod($module_dir, 0777);
 
 		// 默认配置信息
 		$defaults = array(
