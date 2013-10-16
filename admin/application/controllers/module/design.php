@@ -13,7 +13,8 @@ class Design extends CI_Controller {
 			'version' => $this->config->item('version'),
 			'market' => $this->input->get('market'),
 			'template' => $this->input->get('template'),
-			'name' => $this->input->get('name')
+			'name' => $this->input->get('name'),
+			'skin' => $this->input->get('skin')
 		);
 
 		// 读取业务规范、市场

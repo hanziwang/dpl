@@ -12,9 +12,12 @@ eval(' ?>' . $header . '<?php ');
 <!-- 模块开始 -->
 <style>
 <?= $module['css'] ?>
-<?= $module['skin/default'] ?>
+
+<?= $module['skin/'.$skin] ?>
 </style>
-<div class="J_Module skin-default" data-name="<?= $name ?>">
+
+
+<div class="J_Module skin-<?= $skin ?>" data-name="<?= $name ?>">
 <?php
 _tms_syntax($module['file'], $module['php']);
 _tms_import($module['json']);
