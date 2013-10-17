@@ -17,6 +17,11 @@ class Design extends CI_Controller {
 			'skin' => $this->input->get('skin')
 		);
 
+		// 设置默认皮肤
+		if (empty($args['skin'])) {
+			$args['skin'] = 'default';
+		}
+
 		// 读取业务规范、市场
 		$args['setting'] = $this->config->item('setting');
 		$args['markets'] = $this->get->market();
