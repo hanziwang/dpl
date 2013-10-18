@@ -40,10 +40,10 @@ class Template extends CI_Model {
 		@mkdir($template_dir . 'modules', 0777);
 		$data_dir = dirname(BASEPATH) . '/data/template/';
 		$this->dir->copy($data_dir, $template_dir);
-		$this->dir->chmod($template_dir, 0777);
 		foreach (array('.css', '.js') as $v) {
 			@rename($template_dir . $v, $template_dir . $args['name'] . $v);
 		}
+		$this->dir->chmod($template_dir, 0777);
 
 		// 默认配置信息
 		$defaults = array(

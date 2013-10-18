@@ -66,7 +66,7 @@ press.define('module-add', ['jquery', 'mustache', 'template', 'overlay', 'page']
 									v.url += '&market=' + press.market + '&template=' + press.name;
 								}
 							});
-							return $(mustache.render(template.TEMPLATE_MODULE_ADD_LIST, d)).fadeIn('fast');
+							return $(mustache.render(template.TEMPLATE_MODULE_ADD_LIST, d)).fadeIn(100);
 						});
 					}
 				}
