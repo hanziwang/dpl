@@ -148,6 +148,30 @@ if (!function_exists('_tms_syntax')) {
 	function _tms_syntax ($file, &$code) {
 
 		$GLOBALS['_tms_file'] = $file;
+		$need = false;
+
+		// 处理标签名称
+		if (preg_match_all('/("name":"(.*?))"/i', $code, $match)) {
+
+			// 补全标签名称
+			$name = substr(md5(mt_rand()), 8, 16);
+			$code = str_replace('"name":""', '"name":"' . $name . '"', $code);
+
+			// 防止名称重复
+			$keys = array_unique($match[1]);
+			$keys = array_diff_assoc($match[1], $keys);
+			$keys = array_unique($keys);
+			if (!empty($keys)) {
+				foreach ($keys as $key) {
+					$arr = explode($key, $code);
+					foreach ($arr as $k => &$v) {
+						$v = $k > 1 ? ($k - 1) . $v : $v;
+					}
+					$code = implode($key, $arr);
+				}
+			}
+			$need = true;
+		}
 
 		// 补全标签分号
 		$_code = $code;
@@ -162,7 +186,9 @@ if (!function_exists('_tms_syntax')) {
 				$code = $prev . implode($rule, $code);
 			}
 		}
-		if ($_code !== $code) {
+
+		// 写入代码到文件
+		if ($need || $_code !== $code) {
 			@file_put_contents($file, $code);
 			@chmod($file, 0777);
 		}
