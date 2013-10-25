@@ -187,11 +187,15 @@ if (!function_exists('_tms_syntax')) {
 			}
 		}
 
-		// 写入代码到文件
+		// 写入源码文件
 		if ($need || $_code !== $code) {
 			@file_put_contents($file, $code);
 			@chmod($file, 0777);
 		}
+
+		// 处理重复标签
+		$code = preg_replace('/_tms_repeat_begin\((?:.+?)row["\']\s*\:\s*[\'"]([^\'"]+)[\'"]?(?:[^\)]+)\)\s*\;?/', "$0for(\$_tms_i=0;\$_tms_i<$1;\$_tms_i++) {", $code);
+		$code = preg_replace('/_tms_repeat_end\(\s*\)\;?/i', "}$0", $code);
 
 	}
 
