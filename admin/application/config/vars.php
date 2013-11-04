@@ -17,7 +17,7 @@ $config['tms_prototype'] = $tms . 'client/getPrototypeInfo.htm';
 
 // 配置系统参数
 $config['lessc'] = true;
-$config['version'] = '20131024';
+$config['version'] = '20131104';
 
 // 配置系统路径
 $home = dirname(dirname(BASEPATH));
