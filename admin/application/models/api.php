@@ -58,7 +58,7 @@ class Api extends CI_Model {
 					@mkdir($src . '/modules', 0777);
 					@mkdir($src . '/www', 0777);
 				}
-				$v = $this->json->encode($v);
+				$v = json_encode($v);
 				@file_put_contents($db_dir . '/setting.json', $v);
 				break;
 			}
